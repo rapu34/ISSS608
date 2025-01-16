@@ -17,12 +17,12 @@ title: "Hands-on_Ex1"
 > ## **1.2.2 Importing Data**
 >
 > ```{r}
-> exam_data <- read_csv("/Users/jay/ISSS608-VAA/Exam_data.csv")
+> exam_data <- read_csv("/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex01/data/Exam_data.csv")
 > ```
 >
 > # **1.3 Introducing ggplot**
 >
-> ![](images/image5.png)
+> ![](images/clipboard-1653607258.png)
 
 It is also part of the tidyverse family specially designed for visual exploration and communication.
 
