@@ -36,8 +36,6 @@ First, let us compare how R Graphics, the core graphical functions of Base R and
 hist(exam_data$MATHS)
 ```
 
-![](images/clipboard-3327068640.png)
-
 ### **ggplot**
 
 ```{r}
@@ -49,7 +47,7 @@ ggplot(data=exam_data, aes(x = MATHS)) +
   ggtitle("Distribution of Maths scores")
 ```
 
-![](images/clipboard-3411315237.png)\
+\
 As you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended?
 
 # **1.4 Grammar of Graphics**
