@@ -2,9 +2,24 @@ project:
   type: website
 
 website:
-  title: "ISSS608-VAA"
+  title: "ISSS608 Coursework"
   navbar:
-    left:
+    left: 
+    - text: "Hands-on Exercise"
+      menu:
+      - text: "Hands-on Exercise 0"
+        href: Hands-on_Exercise/Hands-on_Ex00/Hands-on_Ex00.html
+      - text: "Hands-on Exercise 1"
+        href: Hands-on_Exercise/Hands_on_Ex01/Hands-On_Ex01.qmd
+    - text: "In-class Exercise"
+      menu:
+      - text: "In-class Exercise 1"
+        href: In-class_Ex1.html
+    - text: "Take-home Exercise"
+      menu:
+      - text: "Take-home Exercise 1"
+        href: Take-home_Ex1.html
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
