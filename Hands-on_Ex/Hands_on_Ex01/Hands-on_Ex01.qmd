@@ -98,8 +98,6 @@ Let us call the `ggplot()` function using the code chunk on the right.
 ggplot(data=exam_data)
 ```
 
-![](images/clipboard-1352910701.png)
-
 # **1.6 Essential Grammatical Elements in ggplot2: [Aesthetic mappings](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)**
 
 The aesthetic mappings take attributes of the data and and use them to influence visual characteristics, such as position, colour, size, shape, or transparency. Each visual characteristic can thus encode an aspect of the data and be used to convey information.
@@ -112,8 +110,6 @@ Code chunk below adds the aesthetic element into the plot.
 ggplot(data=exam_data, 
        aes(x= MATHS))
 ```
-
-![](images/clipboard-3454160554.png)
 
 # **1.7 Essential Grammatical Elements in ggplot2: geom**
 
@@ -149,8 +145,6 @@ ggplot(data=exam_data,
   geom_bar()
 ```
 
-![](images/clipboard-1956133968.png)
-
 ## **1.7.2 Geometric Objects: geom_dotplot**
 
 In a dot plot, the width of a dot corresponds to the bin width (or maximum width, depending on the binning algorithm), and dots are stacked, with each dot representing one observation.
@@ -162,8 +156,6 @@ ggplot(data=exam_data,
        aes(x = MATHS)) +
   geom_dotplot(dotsize = 0.5)
 ```
-
-![](images/clipboard-930187201.png)
 
 ```{r}
 ggplot(data=exam_data, 
@@ -184,8 +176,6 @@ ggplot(data=exam_data,
   geom_histogram()
 ```
 
-![](images/clipboard-1489342458.png)
-
 ## **1.7.4 Modifying a geometric object by changing `geom()`**
 
 In the code chunk below,
@@ -204,8 +194,6 @@ ggplot(data=exam_data,
                  fill="light blue")
 ```
 
-![](images/clipboard-3466420321.png)
-
 ## **1.7.5 Modifying a geometric object by changing *aes()***
 
 -   The code chunk below changes the interior colour of the histogram (i.e. *fill*) by using sub-group of *aesthetic()*.
@@ -217,8 +205,6 @@ ggplot(data=exam_data,
   geom_histogram(bins=20, 
                  color="grey30")
 ```
-
-![](images/clipboard-3252210802.png)
 
 ## **1.7.6 Geometric Objects: geom-density()**
 
@@ -233,8 +219,6 @@ ggplot(data=exam_data,
        aes(x = MATHS)) +
   geom_density() 
 ```
-
-![](images/clipboard-4268385372.png)
 
 The code chunk below plots two kernel density lines by using *colour* or *fill*arguments of *aes()*
 
@@ -258,8 +242,6 @@ ggplot(data=exam_data,
   geom_boxplot()            
 ```
 
-![](images/clipboard-1948888543.png)
-
 [**Notches**](https://sites.google.com/site/davidsstatistics/home/notched-box-plots) are used in box plots to help visually assess whether the medians of distributions differ. If the notches do not overlap, this is evidence that the medians are different.
 
 The code chunk below plots the distribution of Maths scores by gender in notched plot instead of boxplot.
@@ -270,8 +252,6 @@ ggplot(data=exam_data,
            x= GENDER)) +
   geom_boxplot(notch=TRUE)
 ```
-
-![](images/clipboard-163289709.png)
 
 ## **1.7.8 Geometric Objects: geom_violin**
 
@@ -286,8 +266,6 @@ ggplot(data=exam_data,
   geom_violin()
 ```
 
-![](images/clipboard-570949128.png)
-
 ## **1.7.9 Geometric Objects: geom_point()**
 
 [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html) is especially useful for creating scatterplot.
@@ -301,8 +279,6 @@ ggplot(data=exam_data,
   geom_point()            
 ```
 
-![](images/clipboard-1070702104.png)
-
 ## **1.7.10 *geom* objects can be combined**
 
 The code chunk below plots the data points on the boxplots by using both `geom_boxplot()` and `geom_point()`.
@@ -315,8 +291,6 @@ ggplot(data=exam_data,
   geom_point(position="jitter", 
              size = 0.5)    
 ```
-
-![](images/clipboard-2324088742.png)
 
 # **1.8 Essential Grammatical Elements in ggplot2: stat**
 
@@ -344,8 +318,6 @@ ggplot(data=exam_data,
   geom_boxplot()
 ```
 
-![](images/clipboard-1948888543.png)
-
 ## **1.8.2 Working with stat - the *stat_summary()*method**
 
 The code chunk below adds mean values by using [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) function and overriding the default geom.
@@ -360,8 +332,6 @@ ggplot(data=exam_data,
                size=4)               
 ```
 
-![](images/clipboard-4064207143.png)
-
 ## **1.8.3 Working with stat - the `geom()` method**
 
 The code chunk below adding mean values by using `geom_()` function and overriding the default stat.
@@ -375,8 +345,6 @@ ggplot(data=exam_data,
              colour="red",          
              size=4)          
 ```
-
-![](images/clipboard-4064207143.png)
 
 ## **1.8.4 Adding a best fit curve on a scatterplot?**
 
@@ -393,8 +361,6 @@ ggplot(data=exam_data,
   geom_smooth(size=0.5)
 ```
 
-![](images/clipboard-3601550326.png)
-
 The default smoothing method can be overridden as shown below.
 
 ```{r}
@@ -405,8 +371,6 @@ ggplot(data=exam_data,
   geom_smooth(method=lm, 
               linewidth=0.5)
 ```
-
-![](images/clipboard-2822321237.png)
 
 # **1.9 Essential Grammatical Elements in ggplot2: Facets**
 
@@ -425,8 +389,6 @@ ggplot(data=exam_data,
     facet_wrap(~ CLASS)
 ```
 
-![](images/clipboard-1130177433.png)
-
 ## **1.9.2 `facet_grid()` function**
 
 [`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html) forms a matrix of panels defined by row and column facetting variables. It is most useful when you have two discrete variables, and all combinations of the variables exist in the data.
@@ -439,8 +401,6 @@ ggplot(data=exam_data,
   geom_histogram(bins=20) +
     facet_grid(~ CLASS)
 ```
-
-![](images/clipboard-2765524846.png)
 
 # **1.10 Essential Grammatical Elements in ggplot2: Coordinates**
 
@@ -463,8 +423,6 @@ ggplot(data=exam_data,
   geom_bar()
 ```
 
-![](images/clipboard-1956133968.png)
-
 The code chunk below flips the horizontal bar chart into vertical bar chart by using `coord_flip()`.
 
 ```{r}
@@ -473,8 +431,6 @@ ggplot(data=exam_data,
   geom_bar() +
   coord_flip()
 ```
-
-![](images/clipboard-1752330952.png)
 
 ## **1.10.2 Changing the y- and x-axis range**
 
@@ -487,8 +443,6 @@ ggplot(data=exam_data,
   geom_smooth(method=lm, size=0.5)
 ```
 
-![](images/clipboard-2822321237.png)
-
 The code chunk below fixed both the y-axis and x-axis range from 0-100.
 
 ```{r}
@@ -500,8 +454,6 @@ ggplot(data=exam_data,
   coord_cartesian(xlim=c(0,100),
                   ylim=c(0,100))
 ```
-
-![](images/clipboard-1936385433.png)
 
 # **1.11 Essential Grammatical Elements in ggplot2: themes**
 
@@ -531,8 +483,6 @@ ggplot(data=exam_data,
   theme_gray()
 ```
 
-![](images/clipboard-1752330952.png)
-
 A horizontal bar chart plotted using `theme_classic()`.
 
 ```{r}
@@ -543,8 +493,6 @@ ggplot(data=exam_data,
   theme_classic()
 ```
 
-![](images/clipboard-1647012290.png)
-
 A horizontal bar chart plotted using `theme_minimal()`.
 
 ```{r}
@@ -554,8 +502,6 @@ ggplot(data=exam_data,
   coord_flip() +
   theme_minimal()
 ```
-
-![](images/clipboard-2987217381.png)
 
 > > > /usr/bin/git push origin HEAD:refs/heads/main error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400 send-pack: unexpected disconnect while reading sideband packet fatal: the remote end hung up unexpectedly Everything up-to-date
 
