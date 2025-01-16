@@ -24,9 +24,7 @@ title: "Hands-on_Ex1"
 >
 > ![](images/clipboard-1653607258.png)
 
-It is also part of the tidyverse family specially designed for visual exploration and communication.
-
-![](images/image6.png)
+It is also part of the tidyverse family specially designed for visual exploration and communication.![](images/clipboard-1351143069.png)
 
 ## **1.3.1 R Graphics VS ggplot**
 
@@ -38,7 +36,7 @@ First, let us compare how R Graphics, the core graphical functions of Base R and
 hist(exam_data$MATHS)
 ```
 
-![](images/clipboard-805497673.png)
+![](images/clipboard-3327068640.png)
 
 ### **ggplot**
 
@@ -51,7 +49,7 @@ ggplot(data=exam_data, aes(x = MATHS)) +
   ggtitle("Distribution of Maths scores")
 ```
 
-![](images/clipboard-3265911560.png)\
+![](images/clipboard-3411315237.png)\
 As you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended?
 
 # **1.4 Grammar of Graphics**
@@ -102,7 +100,7 @@ Let us call the `ggplot()` function using the code chunk on the right.
 ggplot(data=exam_data)
 ```
 
-![](images/clipboard-3349112468.png)
+![](images/clipboard-1352910701.png)
 
 ## **1.6 Essential Grammatical Elements in ggplot2: [Aesthetic mappings](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)**
 
@@ -116,6 +114,8 @@ Code chunk below adds the aesthetic element into the plot.
 ggplot(data=exam_data, 
        aes(x= MATHS))
 ```
+
+![](images/clipboard-3454160554.png)
 
 ## **1.7 Essential Grammatical Elements in ggplot2: geom**
 
@@ -151,6 +151,8 @@ ggplot(data=exam_data,
   geom_bar()
 ```
 
+![](images/clipboard-1956133968.png)
+
 ### **1.7.2 Geometric Objects: geom_dotplot**
 
 In a dot plot, the width of a dot corresponds to the bin width (or maximum width, depending on the binning algorithm), and dots are stacked, with each dot representing one observation.
@@ -163,7 +165,7 @@ ggplot(data=exam_data,
   geom_dotplot(dotsize = 0.5)
 ```
 
-![](images/clipboard-3759714875.png)
+![](images/clipboard-930187201.png)
 
 ```{r}
 ggplot(data=exam_data, 
@@ -173,6 +175,8 @@ ggplot(data=exam_data,
   scale_y_continuous(NULL,           
                      breaks = NULL)  
 ```
+
+![](images/clipboard-834096270.png)
 
 ## **1.7.3 Geometric Objects: geom_histogram()**
 
