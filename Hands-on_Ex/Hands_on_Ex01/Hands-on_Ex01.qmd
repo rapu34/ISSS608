@@ -1,5 +1,12 @@
 ---
 title: "Hands-on_Ex1"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
 ---
 
 # **1.1 Learning Outcome**
