@@ -302,6 +302,8 @@ p1 <- ggplot(data=exam_data,
                  fill="grey90") + 
   coord_cartesian(xlim=c(0,100)) +
   ggtitle("Distribution of Maths scores")
+
+print(p1)
 ```
 
 ## The Code
@@ -333,6 +335,8 @@ p2 <- ggplot(data=exam_data,
                  fill="grey90") +
   coord_cartesian(xlim=c(0,100)) +
   ggtitle("Distribution of English scores")
+
+print(p2)
 ```
 
 ## The Code
@@ -361,10 +365,12 @@ p3 <- ggplot(data=exam_data,
                  y=ENGLISH)) +
   geom_point() +
   geom_smooth(method=lm, 
-              size=0.5) +  
+              linewidth=0.5) +  
   coord_cartesian(xlim=c(0,100),
                   ylim=c(0,100)) +
   ggtitle("English scores versus Maths scores for Primary 3")
+
+print(p3)
 ```
 
 ## The Code
