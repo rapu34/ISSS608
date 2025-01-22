@@ -37,7 +37,7 @@ In this exercise, beside tidyverse, four R packages will be used. They are:
 
 Code chunk below will be used to check if these packages have been installed and also will load them onto your working R environment.
 
-``` r
+```{r}
 pacman::p_load(ggrepel, patchwork, 
                ggthemes, hrbrthemes,
                tidyverse)
@@ -49,7 +49,7 @@ For the purpose of this exercise, a data file called *Exam_data* will be used.
 
 The code chunk below imports *exam_data.csv* into R environment by using [*read_csv()*](https://readr.tidyverse.org/reference/read_delim.html) function of [**readr**](https://readr.tidyverse.org/) package. **readr** is one of the tidyverse package.
 
-``` r
+```{r}
 exam_data <- read.csv("/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex02/Exam_data.csv")
 ```
 
@@ -63,9 +63,11 @@ There are a total of seven attributes in the exam_data tibble data frame. Four o
 
 One of the challenge in plotting statistical graph is annotation, especially with large number of data points.
 
-![](images/clipboard-62246502.png)
+::: panel-tabset
+## The Code
 
-```         
+```{r}
+#| echo: false
 ggplot(data=exam_data, 
        aes(x= MATHS, 
            y=ENGLISH)) +
@@ -79,6 +81,26 @@ ggplot(data=exam_data,
                   ylim=c(0,100)) +
   ggtitle("English scores versus Maths scores for Primary 3")
 ```
+
+## The plot
+
+```{r}
+#| eval: false
+#| include: false
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) + 
+  geom_label(aes(label = ID), 
+             hjust = .5, 
+             vjust = -.5) +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100)) +
+  ggtitle("English scores versus Maths scores for Primary 3")
+```
+:::
 
 [**ggrepel**](https://ggrepel.slowkow.com/) ![](https://r4va.netlify.app/chap02/img/image3.jpg){width="32" height="36"} is an extension of **ggplot2** package which provides `geoms` for **ggplot2** to repel overlapping text as in our examples on the right.
 

@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html",
+    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html",
+    "title": "Hands-on_Ex02",
+    "section": "",
+    "text": "In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be able to:\n\ncontrol the placement of annotation on a graph by using functions provided in ggrepel package,\ncreate professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,\nplot composite figure by combining ggplot2 graphs by using patchwork package.\n\n\n\n\n\n\nIn this exercise, beside tidyverse, four R packages will be used. They are:\n\nggrepel: an R package provides geoms for ggplot2 to repel overlapping text labels.\nggthemes: an R package provides some extra themes, geoms, and scales for ‘ggplot2’.\nhrbrthemes: an R package provides typography-centric themes and theme components for ggplot2.\npatchwork: an R package for preparing composite figure created using ggplot2.\n\nCode chunk below will be used to check if these packages have been installed and also will load them onto your working R environment.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)\n\n\n\n\nFor the purpose of this exercise, a data file called Exam_data will be used. It consists of year end examination grades of a cohort of primary 3 students from a local school. It is in csv file format.\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.\n\nexam_data &lt;- read.csv(\"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex02/Exam_data.csv\")\n\nThere are a total of seven attributes in the exam_data tibble data frame. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE.\n\n\n\n\n\nOne of the challenge in plotting statistical graph is annotation, especially with large number of data points.\n\nThe CodeThe plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggrepel  is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text as in our examples on the right.\n\nWe simply replace geom_text() by geom_text_repel() and geom_label()by geom_label_repel."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#overview",
+    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#overview",
+    "title": "Hands-on_Ex02",
+    "section": "",
+    "text": "In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be able to:\n\ncontrol the placement of annotation on a graph by using functions provided in ggrepel package,\ncreate professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,\nplot composite figure by combining ggplot2 graphs by using patchwork package."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#getting-started",
+    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#getting-started",
+    "title": "Hands-on_Ex02",
+    "section": "",
+    "text": "In this exercise, beside tidyverse, four R packages will be used. They are:\n\nggrepel: an R package provides geoms for ggplot2 to repel overlapping text labels.\nggthemes: an R package provides some extra themes, geoms, and scales for ‘ggplot2’.\nhrbrthemes: an R package provides typography-centric themes and theme components for ggplot2.\npatchwork: an R package for preparing composite figure created using ggplot2.\n\nCode chunk below will be used to check if these packages have been installed and also will load them onto your working R environment.\n\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)\n\n\n\n\nFor the purpose of this exercise, a data file called Exam_data will be used. It consists of year end examination grades of a cohort of primary 3 students from a local school. It is in csv file format.\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.\n\nexam_data &lt;- read.csv(\"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex02/Exam_data.csv\")\n\nThere are a total of seven attributes in the exam_data tibble data frame. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#beyond-ggplot2-annotation-ggrepel",
+    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#beyond-ggplot2-annotation-ggrepel",
+    "title": "Hands-on_Ex02",
+    "section": "",
+    "text": "One of the challenge in plotting statistical graph is annotation, especially with large number of data points.\n\nThe CodeThe plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nggrepel  is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text as in our examples on the right.\n\nWe simply replace geom_text() by geom_text_repel() and geom_label()by geom_label_repel."
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -173,40 +201,5 @@
     "title": "Hands-on_Ex1",
     "section": "1.11.1 Working with theme",
     "text": "1.11.1 Working with theme\nThe code chunk below plot a horizontal bar chart using theme_gray().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_gray()\n\n\n\n\n\n\n\n\nA horizontal bar chart plotted using theme_classic().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_classic()\n\n\n\n\n\n\n\n\nA horizontal bar chart plotted using theme_minimal().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n/usr/bin/git push origin HEAD:refs/heads/main error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400 send-pack: unexpected disconnect while reading sideband packet fatal: the remote end hung up unexpectedly Everything up-to-date\n\n\n\n\nHadley Wickham (2023) ggplot2: Elegant Graphics for Data Analysis. Online 3rd edition.\nWinston Chang (2013) R Graphics Cookbook 2nd edition. Online version.\nHealy, Kieran (2019) Data Visualization: A practical introduction. Online version\nLearning ggplot2 on Paper – Components\nLearning ggplot2 on Paper – Layer\nLearning ggplot2 on Paper – Scale"
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html",
-    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html",
-    "title": "Hands-on_Ex02",
-    "section": "",
-    "text": "In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be able to:\n\ncontrol the placement of annotation on a graph by using functions provided in ggrepel package,\ncreate professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,\nplot composite figure by combining ggplot2 graphs by using patchwork package.\n\n\n\n\n\n\nIn this exercise, beside tidyverse, four R packages will be used. They are:\n\nggrepel: an R package provides geoms for ggplot2 to repel overlapping text labels.\nggthemes: an R package provides some extra themes, geoms, and scales for ‘ggplot2’.\nhrbrthemes: an R package provides typography-centric themes and theme components for ggplot2.\npatchwork: an R package for preparing composite figure created using ggplot2.\n\nCode chunk below will be used to check if these packages have been installed and also will load them onto your working R environment.\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)\n\n\n\nFor the purpose of this exercise, a data file called Exam_data will be used. It consists of year end examination grades of a cohort of primary 3 students from a local school. It is in csv file format.\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.\nexam_data &lt;- read.csv(\"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex02/Exam_data.csv\")\nThere are a total of seven attributes in the exam_data tibble data frame. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE.\n\n\n\n\n\nOne of the challenge in plotting statistical graph is annotation, especially with large number of data points.\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  geom_label(aes(label = ID), \n             hjust = .5, \n             vjust = -.5) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  ggtitle(\"English scores versus Maths scores for Primary 3\")\nggrepel  is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text as in our examples on the right.\n\nWe simply replace geom_text() by geom_text_repel() and geom_label()by geom_label_repel."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#overview",
-    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#overview",
-    "title": "Hands-on_Ex02",
-    "section": "",
-    "text": "In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be able to:\n\ncontrol the placement of annotation on a graph by using functions provided in ggrepel package,\ncreate professional publication quality figure by using functions provided in ggthemes and hrbrthemes packages,\nplot composite figure by combining ggplot2 graphs by using patchwork package."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#getting-started",
-    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#getting-started",
-    "title": "Hands-on_Ex02",
-    "section": "",
-    "text": "In this exercise, beside tidyverse, four R packages will be used. They are:\n\nggrepel: an R package provides geoms for ggplot2 to repel overlapping text labels.\nggthemes: an R package provides some extra themes, geoms, and scales for ‘ggplot2’.\nhrbrthemes: an R package provides typography-centric themes and theme components for ggplot2.\npatchwork: an R package for preparing composite figure created using ggplot2.\n\nCode chunk below will be used to check if these packages have been installed and also will load them onto your working R environment.\npacman::p_load(ggrepel, patchwork, \n               ggthemes, hrbrthemes,\n               tidyverse)\n\n\n\nFor the purpose of this exercise, a data file called Exam_data will be used. It consists of year end examination grades of a cohort of primary 3 students from a local school. It is in csv file format.\nThe code chunk below imports exam_data.csv into R environment by using read_csv() function of readr package. readr is one of the tidyverse package.\nexam_data &lt;- read.csv(\"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex02/Exam_data.csv\")\nThere are a total of seven attributes in the exam_data tibble data frame. Four of them are categorical data type and the other three are in continuous data type.\n\nThe categorical attributes are: ID, CLASS, GENDER and RACE.\nThe continuous attributes are: MATHS, ENGLISH and SCIENCE."
-  },
-  {
-    "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#beyond-ggplot2-annotation-ggrepel",
-    "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html#beyond-ggplot2-annotation-ggrepel",
-    "title": "Hands-on_Ex02",
-    "section": "",
-    "text": "One of the challenge in plotting statistical graph is annotation, especially with large number of data points.\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  geom_label(aes(label = ID), \n             hjust = .5, \n             vjust = -.5) +\n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100)) +\n  ggtitle(\"English scores versus Maths scores for Primary 3\")\nggrepel  is an extension of ggplot2 package which provides geoms for ggplot2 to repel overlapping text as in our examples on the right.\n\nWe simply replace geom_text() by geom_text_repel() and geom_label()by geom_label_repel."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ISSS608-VAA",
-    "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications. In this website, you will find my coursework prepared for this course."
   }
 ]
