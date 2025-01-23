@@ -1,5 +1,5 @@
 ---
-title: "Hands-on_Ex1"
+title: "Hands-on_Ex01"
 author: "Jeounghyun Kim"
 date-modified: "last-modified" 
 execute:
