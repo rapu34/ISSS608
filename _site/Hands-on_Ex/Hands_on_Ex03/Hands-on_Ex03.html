@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jeounghyun Kim">
 
-<title>ISSS608-VAA – ISSS608 Coursework</title>
+<title>Hands-on_Ex03 – ISSS608 Coursework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,9 +101,18 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="../../site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="../../site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<script src="../../site_libs/flatbush-4.4.0/flatbush.min.js"></script>
+<link href="../../site_libs/ggiraphjs-0.8.10/ggiraphjs.min.css" rel="stylesheet">
+<script src="../../site_libs/ggiraphjs-0.8.10/ggiraphjs.min.js"></script>
+<script src="../../site_libs/girafe-binding-0.8.12/girafe.js"></script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">ISSS608 Coursework</span>
     </a>
   </div>
@@ -94,15 +138,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
         <li>
-    <a class="dropdown-item" href="./Hands-on_Ex/Hands_on_Ex01/Hands-On_Ex01.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex01/Hands-On_Ex01.html">
  <span class="dropdown-text">Hands-on Exercise 1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-on_Ex/Hands_on_Ex02/Hands-On_Ex02.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex02/Hands-On_Ex02.html">
  <span class="dropdown-text">Hands-on Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Hands-on_Ex/Hands_on_Ex02/Hands-On_Ex03.html">
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex02/Hands-On_Ex03.html">
  <span class="dropdown-text">Hands-on Exercise 3</span></a>
   </li>  
     </ul>
@@ -113,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
         <li>
-    <a class="dropdown-item" href="./In-class_Ex1.html">
+    <a class="dropdown-item" href="../../In-class_Ex1.html">
  <span class="dropdown-text">In-class Exercise 1</span></a>
   </li>  
     </ul>
@@ -124,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="./Take-home_Ex1.html">
+    <a class="dropdown-item" href="../../Take-home_Ex1.html">
  <span class="dropdown-text">Take-home Exercise 1</span></a>
   </li>  
     </ul>
@@ -132,11 +176,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -150,23 +194,54 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#programming-interactive-data-visualisation-with-r" id="toc-programming-interactive-data-visualisation-with-r" class="nav-link active" data-scroll-target="#programming-interactive-data-visualisation-with-r"><strong>3&nbsp;&nbsp;Programming Interactive Data Visualisation with R</strong></a>
+  <ul class="collapse">
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link" data-scroll-target="#learning-outcome"><strong>3.1&nbsp;Learning Outcome</strong></a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><strong>3.2&nbsp;Getting Started</strong></a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data"><strong>3.3&nbsp;Importing Data</strong></a></li>
+  <li><a href="#interactive-data-visualisation---ggiraph-methods" id="toc-interactive-data-visualisation---ggiraph-methods" class="nav-link" data-scroll-target="#interactive-data-visualisation---ggiraph-methods"><strong>3.4&nbsp;Interactive Data Visualisation - ggiraph methods</strong></a>
+  <ul class="collapse">
+  <li><a href="#tooltip-effect-with-tooltip-aesthetic" id="toc-tooltip-effect-with-tooltip-aesthetic" class="nav-link" data-scroll-target="#tooltip-effect-with-tooltip-aesthetic"><strong>3.4.1&nbsp;Tooltip effect with&nbsp;<em>tooltip</em>&nbsp;aesthetic</strong></a></li>
+  </ul></li>
+  <li><a href="#interactivity" id="toc-interactivity" class="nav-link" data-scroll-target="#interactivity"><strong>3.5&nbsp;Interactivity</strong></a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ISSS608-VAA</h1>
+<h1 class="title">Hands-on_Ex03</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeounghyun Kim </p>
+          </div>
+  </div>
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">January 29, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -175,10 +250,68 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to <strong>ISSS608 Visual Analytics and Applications</strong>. In this website, you will find my coursework prepared for this course.</p>
-<p><img src="images/Data-in-Business-Statistics-scaled.jpg" class="img-fluid"></p>
+<section id="programming-interactive-data-visualisation-with-r" class="level1">
+<h1><strong>3&nbsp;&nbsp;Programming Interactive Data Visualisation with R</strong></h1>
+<section id="learning-outcome" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcome"><strong>3.1&nbsp;Learning Outcome</strong></h2>
+<p>In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by&nbsp;<strong>ggiraph</strong>&nbsp;and&nbsp;<strong>plotlyr</strong>&nbsp;packages.</p>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started"><strong>3.2&nbsp;Getting Started</strong></h2>
+<p>First, write a code chunk to check, install and launch the following R packages:</p>
+<ul>
+<li><p><a href="https://davidgohel.github.io/ggiraph/"><strong>ggiraph</strong></a>&nbsp;for making ‘ggplot’ graphics interactive.</p></li>
+<li><p><a href="https://plotly.com/r/"><strong>plotly</strong></a>, R library for plotting interactive statistical graphs.</p></li>
+<li><p><a href="https://rstudio.github.io/DT/"><strong>DT</strong></a>&nbsp;provides an R interface to the JavaScript library&nbsp;<a href="https://datatables.net/">DataTables</a>&nbsp;that create interactive table on html page.</p></li>
+<li><p><a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a>, a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.</p></li>
+<li><p><a href="https://patchwork.data-imaginist.com/"><strong>patchwork</strong></a>&nbsp;for combining multiple ggplot2 graphs into one figure.</p></li>
+</ul>
+<p>The code chunk below will be used to accomplish the task.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggiraph, plotly, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               patchwork, DT, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data"><strong>3.3&nbsp;Importing Data</strong></h2>
+<p>In this section,&nbsp;<em>Exam_data.csv</em>&nbsp;provided will be used. Using&nbsp;<a href="https://readr.tidyverse.org/reference/read_delim.html"><em>read_csv()</em></a>&nbsp;of&nbsp;<strong>readr</strong>package, import&nbsp;<em>Exam_data.csv</em>&nbsp;into R.</p>
+<p>The code chunk below&nbsp;<code>read_csv()</code>&nbsp;of&nbsp;<strong>readr</strong>&nbsp;package is used to import&nbsp;<em>Exam_data.csv</em>&nbsp;data file into R and save it as an tibble data frame called&nbsp;<code>exam_data</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex03/data/Exam_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="interactive-data-visualisation---ggiraph-methods" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-data-visualisation---ggiraph-methods"><strong>3.4&nbsp;Interactive Data Visualisation - ggiraph methods</strong></h2>
+<p><a href="https://davidgohel.github.io/ggiraph/index.html">ggiraph</a>&nbsp;<img src="https://r4va.netlify.app/chap03/img/image1.jpg" class="img-fluid" width="32">&nbsp;is an htmlwidget and a ggplot2 extension. It allows ggplot graphics to be interactive.</p>
+<p>Interactive is made with&nbsp;<a href="https://davidgohel.github.io/ggiraph/reference/index.html#section-interactive-geometries"><strong>ggplot geometries</strong></a>&nbsp;that can understand three arguments:</p>
+<ul>
+<li><p><strong>Tooltip</strong>: a column of data-sets that contain tooltips to be displayed when the mouse is over elements.</p></li>
+<li><p><strong>Onclick</strong>: a column of data-sets that contain a JavaScript function to be executed when elements are clicked.</p></li>
+<li><p><strong>Data_id</strong>: a column of data-sets that contain an id to be associated with elements.</p></li>
+</ul>
+<p>If it used within a shiny application, elements associated with an id (data_id) can be selected and manipulated on client and server sides. Refer to this&nbsp;<a href="https://www.ardata.fr/ggiraph-book/selections.html">article</a>&nbsp;for more detail explanation.</p>
+<section id="tooltip-effect-with-tooltip-aesthetic" class="level3">
+<h3 class="anchored" data-anchor-id="tooltip-effect-with-tooltip-aesthetic"><strong>3.4.1&nbsp;Tooltip effect with&nbsp;<em>tooltip</em>&nbsp;aesthetic</strong></h3>
+<p>Below shows a typical code chunk to plot an interactive statistical graph by using&nbsp;<strong>ggiraph</strong>&nbsp;package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next,&nbsp;<a href="https://davidgohel.github.io/ggiraph/reference/girafe.html"><code>girafe()</code></a>&nbsp;of&nbsp;<strong>ggiraph</strong>&nbsp;will be used to create an interactive svg object.</p>
+<p>Notice that two steps are involved. First, an interactive version of ggplot2 geom (i.e.&nbsp;<a href="https://davidgohel.github.io/ggiraph/reference/geom_dotplot_interactive.html"><code>geom_dotplot_interactive()</code></a>) will be used to create the basic graph. Then,&nbsp;<a href="https://davidgohel.github.io/ggiraph/reference/girafe.html"><code>girafe()</code></a>&nbsp;will be used to generate an svg object to be displayed on an html page.</p>
+</section>
+</section>
+<section id="interactivity" class="level2">
+<h2 class="anchored" data-anchor-id="interactivity"><strong>3.5&nbsp;Interactivity</strong></h2>
+<p>By hovering the mouse pointer on an data point of interest, the student’s ID will be displayed.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"></ul>
+<div class="tab-content">
+
+</div>
+</div>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

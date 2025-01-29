@@ -175,6 +175,48 @@
     "text": "1.11.1 Working with theme\nThe code chunk below plot a horizontal bar chart using theme_gray().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_gray()\n\n\n\n\n\n\n\n\nA horizontal bar chart plotted using theme_classic().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_classic()\n\n\n\n\n\n\n\n\nA horizontal bar chart plotted using theme_minimal().\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n/usr/bin/git push origin HEAD:refs/heads/main error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400 send-pack: unexpected disconnect while reading sideband packet fatal: the remote end hung up unexpectedly Everything up-to-date\n\n\n\n\nHadley Wickham (2023) ggplot2: Elegant Graphics for Data Analysis. Online 3rd edition.\nWinston Chang (2013) R Graphics Cookbook 2nd edition. Online version.\nHealy, Kieran (2019) Data Visualization: A practical introduction. Online version\nLearning ggplot2 on Paper – Components\nLearning ggplot2 on Paper – Layer\nLearning ggplot2 on Paper – Scale"
   },
   {
+    "objectID": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html",
+    "href": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html",
+    "title": "Hands-on_Ex03",
+    "section": "",
+    "text": "In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by ggiraph and plotlyr packages.\n\n\n\nFirst, write a code chunk to check, install and launch the following R packages:\n\nggiraph for making ‘ggplot’ graphics interactive.\nplotly, R library for plotting interactive statistical graphs.\nDT provides an R interface to the JavaScript library DataTables that create interactive table on html page.\ntidyverse, a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.\npatchwork for combining multiple ggplot2 graphs into one figure.\n\nThe code chunk below will be used to accomplish the task.\n\npacman::p_load(ggiraph, plotly, \n               patchwork, DT, tidyverse)\n\n\n\n\nIn this section, Exam_data.csv provided will be used. Using read_csv() of readrpackage, import Exam_data.csv into R.\nThe code chunk below read_csv() of readr package is used to import Exam_data.csv data file into R and save it as an tibble data frame called exam_data.\n\nexam_data &lt;- read_csv(\"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex03/data/Exam_data.csv\")\n\n\n\n\nggiraph  is an htmlwidget and a ggplot2 extension. It allows ggplot graphics to be interactive.\nInteractive is made with ggplot geometries that can understand three arguments:\n\nTooltip: a column of data-sets that contain tooltips to be displayed when the mouse is over elements.\nOnclick: a column of data-sets that contain a JavaScript function to be executed when elements are clicked.\nData_id: a column of data-sets that contain an id to be associated with elements.\n\nIf it used within a shiny application, elements associated with an id (data_id) can be selected and manipulated on client and server sides. Refer to this article for more detail explanation.\n\n\nBelow shows a typical code chunk to plot an interactive statistical graph by using ggiraph package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next, girafe() of ggiraph will be used to create an interactive svg object.\nNotice that two steps are involved. First, an interactive version of ggplot2 geom (i.e. geom_dotplot_interactive()) will be used to create the basic graph. Then, girafe() will be used to generate an svg object to be displayed on an html page.\n\n\n\n\nBy hovering the mouse pointer on an data point of interest, the student’s ID will be displayed."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#learning-outcome",
+    "href": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#learning-outcome",
+    "title": "Hands-on_Ex03",
+    "section": "",
+    "text": "In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by ggiraph and plotlyr packages."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#getting-started",
+    "href": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#getting-started",
+    "title": "Hands-on_Ex03",
+    "section": "",
+    "text": "First, write a code chunk to check, install and launch the following R packages:\n\nggiraph for making ‘ggplot’ graphics interactive.\nplotly, R library for plotting interactive statistical graphs.\nDT provides an R interface to the JavaScript library DataTables that create interactive table on html page.\ntidyverse, a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.\npatchwork for combining multiple ggplot2 graphs into one figure.\n\nThe code chunk below will be used to accomplish the task.\n\npacman::p_load(ggiraph, plotly, \n               patchwork, DT, tidyverse)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#importing-data",
+    "href": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#importing-data",
+    "title": "Hands-on_Ex03",
+    "section": "",
+    "text": "In this section, Exam_data.csv provided will be used. Using read_csv() of readrpackage, import Exam_data.csv into R.\nThe code chunk below read_csv() of readr package is used to import Exam_data.csv data file into R and save it as an tibble data frame called exam_data.\n\nexam_data &lt;- read_csv(\"/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex03/data/Exam_data.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#interactive-data-visualisation---ggiraph-methods",
+    "href": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#interactive-data-visualisation---ggiraph-methods",
+    "title": "Hands-on_Ex03",
+    "section": "",
+    "text": "ggiraph  is an htmlwidget and a ggplot2 extension. It allows ggplot graphics to be interactive.\nInteractive is made with ggplot geometries that can understand three arguments:\n\nTooltip: a column of data-sets that contain tooltips to be displayed when the mouse is over elements.\nOnclick: a column of data-sets that contain a JavaScript function to be executed when elements are clicked.\nData_id: a column of data-sets that contain an id to be associated with elements.\n\nIf it used within a shiny application, elements associated with an id (data_id) can be selected and manipulated on client and server sides. Refer to this article for more detail explanation.\n\n\nBelow shows a typical code chunk to plot an interactive statistical graph by using ggiraph package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next, girafe() of ggiraph will be used to create an interactive svg object.\nNotice that two steps are involved. First, an interactive version of ggplot2 geom (i.e. geom_dotplot_interactive()) will be used to create the basic graph. Then, girafe() will be used to generate an svg object to be displayed on an html page."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#interactivity",
+    "href": "Hands-on_Ex/Hands_on_Ex03/Hands-on_Ex03.html#interactivity",
+    "title": "Hands-on_Ex03",
+    "section": "",
+    "text": "By hovering the mouse pointer on an data point of interest, the student’s ID will be displayed."
+  },
+  {
     "objectID": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html",
     "href": "Hands-on_Ex/Hands_on_Ex02/Hands-on_Ex02.html",
     "title": "Hands-on_Ex02",

@@ -1,0 +1,111 @@
+---
+title: "Hands-on_Ex03"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# **3  Programming Interactive Data Visualisation with R**
+
+## **3.1 Learning Outcome**
+
+In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by **ggiraph** and **plotlyr** packages.
+
+## **3.2 Getting Started**
+
+First, write a code chunk to check, install and launch the following R packages:
+
+-   [**ggiraph**](https://davidgohel.github.io/ggiraph/) for making ‘ggplot’ graphics interactive.
+
+-   [**plotly**](https://plotly.com/r/), R library for plotting interactive statistical graphs.
+
+-   [**DT**](https://rstudio.github.io/DT/) provides an R interface to the JavaScript library [DataTables](https://datatables.net/) that create interactive table on html page.
+
+-   [**tidyverse**](https://www.tidyverse.org/), a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.
+
+-   [**patchwork**](https://patchwork.data-imaginist.com/) for combining multiple ggplot2 graphs into one figure.
+
+The code chunk below will be used to accomplish the task.
+
+```{r}
+pacman::p_load(ggiraph, plotly, 
+               patchwork, DT, tidyverse)
+```
+
+## **3.3 Importing Data**
+
+In this section, *Exam_data.csv* provided will be used. Using [*read_csv()*](https://readr.tidyverse.org/reference/read_delim.html) of **readr**package, import *Exam_data.csv* into R.
+
+The code chunk below `read_csv()` of **readr** package is used to import *Exam_data.csv* data file into R and save it as an tibble data frame called `exam_data`.
+
+```{r}
+exam_data <- read_csv("/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex03/data/Exam_data.csv")
+```
+
+## **3.4 Interactive Data Visualisation - ggiraph methods**
+
+[ggiraph](https://davidgohel.github.io/ggiraph/index.html) ![](https://r4va.netlify.app/chap03/img/image1.jpg){width="32"} is an htmlwidget and a ggplot2 extension. It allows ggplot graphics to be interactive.
+
+Interactive is made with [**ggplot geometries**](https://davidgohel.github.io/ggiraph/reference/index.html#section-interactive-geometries) that can understand three arguments:
+
+-   **Tooltip**: a column of data-sets that contain tooltips to be displayed when the mouse is over elements.
+
+-   **Onclick**: a column of data-sets that contain a JavaScript function to be executed when elements are clicked.
+
+-   **Data_id**: a column of data-sets that contain an id to be associated with elements.
+
+If it used within a shiny application, elements associated with an id (data_id) can be selected and manipulated on client and server sides. Refer to this [article](https://www.ardata.fr/ggiraph-book/selections.html) for more detail explanation.
+
+### **3.4.1 Tooltip effect with *tooltip* aesthetic**
+
+Below shows a typical code chunk to plot an interactive statistical graph by using **ggiraph** package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next, [`girafe()`](https://davidgohel.github.io/ggiraph/reference/girafe.html) of **ggiraph** will be used to create an interactive svg object.
+
+```{r}
+#| eval: false
+#| include: false
+p <- ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot_interactive(
+    aes(tooltip = ID),
+    stackgroups = TRUE, 
+    binwidth = 1, 
+    method = "histodot") +
+  scale_y_continuous(NULL, 
+                     breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
+```
+
+Notice that two steps are involved. First, an interactive version of ggplot2 geom (i.e. [`geom_dotplot_interactive()`](https://davidgohel.github.io/ggiraph/reference/geom_dotplot_interactive.html)) will be used to create the basic graph. Then, [`girafe()`](https://davidgohel.github.io/ggiraph/reference/girafe.html) will be used to generate an svg object to be displayed on an html page.
+
+## **3.5 Interactivity**
+
+By hovering the mouse pointer on an data point of interest, the student’s ID will be displayed.
+
+::: panel-tabset
+```{r}
+p <- ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot_interactive(
+    aes(tooltip = ID),
+    stackgroups = TRUE, 
+    binwidth = 1, 
+    method = "histodot") +
+  scale_y_continuous(NULL, 
+                     breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
+```
+:::
+
+### 
