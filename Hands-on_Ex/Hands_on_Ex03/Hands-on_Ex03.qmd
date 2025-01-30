@@ -64,9 +64,7 @@ If it used within a shiny application, elements associated with an id (data_id) 
 
 Below shows a typical code chunk to plot an interactive statistical graph by using **ggiraph** package. Notice that the code chunk consists of two parts. First, an ggplot object will be created. Next, [`girafe()`](https://davidgohel.github.io/ggiraph/reference/girafe.html) of **ggiraph** will be used to create an interactive svg object.
 
-```{r}
-#| eval: false
-#| include: false
+```{r, echo=TRUE, eval=FALSE}
 p <- ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_dotplot_interactive(
@@ -90,6 +88,9 @@ Notice that two steps are involved. First, an interactive version of ggplot2 geo
 By hovering the mouse pointer on an data point of interest, the student’s ID will be displayed.
 
 ```{r}
+#| echo: false
+#| message: false
+#| warning: false
 exam_data$tooltip <- c(paste0(     
   "Name = ", exam_data$ID,         
   "\n Class = ", exam_data$CLASS)) 
@@ -342,6 +343,8 @@ girafe(
 )                                        
 ```
 
+Note: Different from previous example, in this example the ccs customisation request are encoded directly.
+
 ### **3.6.5 Combining tooltip and hover effect**
 
 There are time that we want to combine tooltip and hover effect on the interactive statistical graph as shown in the code chunk below.
@@ -523,9 +526,11 @@ girafe(code = print(p1 + p2),
 
 ## **3.7 Interactive Data Visualisation - plotly methods!**
 
-Plotly’s R graphing library create interactive web graphics from **ggplot2**graphs and/or a custom interface to the (MIT-licensed) JavaScript library [**plotly.js**](https://plotly.com/javascript/) inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
+Plotly’s R graphing library create interactive web graphics from **ggplot2**graphs and/or a custom interface to the (MIT-licensed) JavaScript library **plotly.js** inspired by the grammar of graphics. Different from other plotly platform, plot.R is free and open source.
 
-![There are two ways to create interactive graph by using plotly, they are:](images/clipboard-574240139.png)
+![](images/clipboard-574240139.png)
+
+There are two ways to create interactive graph by using plotly, they are:
 
 -   by using *plot_ly()*, and
 
@@ -547,7 +552,7 @@ plot_ly(data = exam_data,
              y = ~ENGLISH)
 ```
 
-## The Code
+## The code chunk
 
 ```{r, echo=TRUE, eval=FALSE}
 plot_ly(data = exam_data, 
@@ -571,7 +576,7 @@ plot_ly(data = exam_data,
         color = ~RACE)
 ```
 
-## The Code
+## The code chunk
 
 ```{r, echo=TRUE, eval=FALSE}
 plot_ly(data = exam_data, 
@@ -599,7 +604,7 @@ p <- ggplot(data=exam_data,
 ggplotly(p)
 ```
 
-## The Code
+## The code chunk
 
 ```{r, echo=TRUE, eval=FALSE}
 p <- ggplot(data=exam_data, 
@@ -647,7 +652,7 @@ subplot(ggplotly(p1),
         ggplotly(p2))
 ```
 
-## The Code
+## The code chunk
 
 ```{r, echo=TRUE, eval=FALSE}
 d <- highlight_key(exam_data)
@@ -712,7 +717,7 @@ crosstalk::bscols(gg,
                   widths = 5)        
 ```
 
-## The Code
+## The code chunk
 
 Code chunk below is used to implement the coordinated brushing shown above.
 
