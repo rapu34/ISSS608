@@ -421,7 +421,8 @@ girafe(
 
 Interactivity: Web document link with a data object will be displayed on the web browser upon mouse click.
 
-```{r, eval=FALSE}
+```{r}
+#| echo: false
 exam_data$onclick <- sprintf("window.open(\"%s%s\")",
 "https://www.moe.gov.sg/schoolfinder?journey=Primary%20school",
 as.character(exam_data$ID))
