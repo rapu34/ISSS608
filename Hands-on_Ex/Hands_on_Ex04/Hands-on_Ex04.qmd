@@ -198,7 +198,7 @@ gg <- ggplot(globalPop,
 ggplotly(gg)
 ```
 
-## The Code
+## The code chunk
 
 ```{r eval=FALSE, echo=TRUE}
 #| message: false
@@ -249,7 +249,7 @@ gg <- ggplot(globalPop,
 ggplotly(gg)
 ```
 
-## The Code
+## The code chunk
 
 ```{r eval=FALSE, echo=TRUE}
 #| message: false
@@ -299,7 +299,7 @@ bp <- globalPop %>%
 bp
 ```
 
-## The Code
+## The code chunk
 
 ```{r eval=FALSE, echo=TRUE}
 #| message: false
