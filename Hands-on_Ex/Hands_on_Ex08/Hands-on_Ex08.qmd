@@ -1,0 +1,168 @@
+---
+title: "Hands-on_Ex08"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# **12  Funnel Plots for Fair Comparisons**
+
+## **12.1 Overview**
+
+A **funnel plot** is a specialised data visualisation tool for unbiased comparisons between outlets, stores, or business entities. In this exercise, you will learn to:
+
+1.  Plot funnel plots using the **funnelPlotR** package.
+
+2.  Create static funnel plots using the **ggplot2** package.
+
+3.  Generate interactive funnel plots using **plotly R** and **ggplot2**.
+
+## **12.2 Installing and Launching R Packages**
+
+In this exercise, four R packages will be used. They are:
+
+-   **readr** for importing csv into R.
+
+-   **FunnelPlotR** for creating funnel plot.
+
+-   **ggplot2** for creating funnel plot manually.
+
+-   **knitr** for building static html table.
+
+-   **plotly** for creating interactive funnel plot.
+
+```{r}
+pacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)
+```
+
+## **12.3 Importing Data**
+
+In this section, COVID-19_DKI_Jakarta will be used. The data was downloaded from [Open Data Covid-19 Provinsi DKI Jakarta portal](https://riwayat-file-covid-19-dki-jakarta-jakartagis.hub.arcgis.com/). For this hands-on exercise, we are going to compare the cumulative COVID-19 cases and death by sub-district (i.e. kelurahan) as at 31st July 2021, DKI Jakarta.
+
+```{r}
+#| message: false
+#| warning: false
+library(dplyr)
+library(tidyverse)
+
+covid19 <- read_csv("/Users/jay/ISSS608-VAA/Hands-on_Ex/Hands_on_Ex08/data/COVID-19_DKI_Jakarta.csv") %>%
+  mutate_if(is.character, as.factor)
+```
+
+## **12.4 FunnelPlotR methods**
+
+[**FunnelPlotR**](https://nhs-r-community.github.io/FunnelPlotR/) package uses ggplot to generate funnel plots. It requires a `numerator` (events of interest), `denominator` (population to be considered) and `group`. The key arguments selected for customisation are:
+
+-   `limit`: plot limits (95 or 99).
+
+-   `label_outliers`: to label outliers (true or false).
+
+-   `Poisson_limits`: to add Poisson limits to the plot.
+
+-   `OD_adjust`: to add overdispersed limits to the plot.
+
+-   `xrange` and `yrange`: to specify the range to display for axes, acts like a zoom function.
+
+-   Other aesthetic components such as graph title, axis labels etc.
+
+### **12.4.1 FunnelPlotR methods: The basic plot**
+
+Before proceeding with 12.4.1 FunnelPlotR methods: The basic plot, you need to first install and load the FunnelPlotR package by running the following commands:
+
+```{r}
+#install.packages("FunnelPlotR")
+library(FunnelPlotR)
+```
+
+::: panel-tabset
+## The Plot
+
+```{r}
+#| echo: false
+funnel_plot(
+  .data = covid19,
+  numerator = Positive,
+  denominator = Death,
+  group = `Sub-district`
+)
+```
+
+## The code chunk
+
+```{r, echo=TRUE, eval=FALSE}
+funnel_plot(
+  .data = covid19,
+  numerator = Positive,
+  denominator = Death,
+  group = `Sub-district`
+)
+```
+:::
+
+-   **`group`**
+
+    -   In this function, `group` specifies the level of the points to be plotted (e.g., Sub-district, District, or City).
+
+    -   If `City` is selected, only six data points will be plotted.
+
+-   **`data_type`**
+
+    -   The default value for the `data_type` argument is `"SR"`.
+
+-   **`limit`**
+
+    -   Specifies the plot limits.
+
+    -   Accepted values are `95` (for 95% quantiles) or `99` (for 99.8% quantiles of the distribution).
+
+### **12.4.2 FunnelPlotR methods: Makeover 1**
+
+::: panel-tabset
+## The Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+funnel_plot(
+  .data = covid19,
+  numerator = Death,
+  denominator = Positive,
+  group = `Sub-district`,
+  data_type = "PR",     #<<
+  xrange = c(0, 6500),  #<<
+  yrange = c(0, 0.05)   #<<
+)
+```
+
+## The code chunk
+
+```{r, echo=TRUE, eval=FALSE}
+funnel_plot(
+  .data = covid19,
+  numerator = Death,
+  denominator = Positive,
+  group = `Sub-district`,
+  data_type = "PR",     #<<
+  xrange = c(0, 6500),  #<<
+  yrange = c(0, 0.05)   #<<
+)
+```
+:::
+
+```         
+A funnel plot object with 267 points of which 7 are outliers. 
+Plot is adjusted for overdispersion. 
+```
+
+Things to learn from the code chunk above.
+
+-   `label = NA` argument is to removed the default label outliers feature.
+
+-   `title` argument is used to add plot title.
+
+-   `x_label` and `y_label` arguments are used to add/edit x-axis and y-axis titles.
