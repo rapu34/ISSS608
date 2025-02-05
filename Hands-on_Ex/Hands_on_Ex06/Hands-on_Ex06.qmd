@@ -88,7 +88,7 @@ Default information: - statistical details - Bayes Factor - sample sizes - distr
 
 -   A Bayes factor is the ratio of the likelihood of one hypothesis to another, measuring the **strength of evidence** between competing theories. It helps evaluate data in favor of a null hypothesis and incorporates external information to assess the weight of evidence for a given hypothesis.
 
--   When we are comparing two hypotheses, H1 (the alternate hypothesis) and H0 (the null hypothesis), the Bayes Factor is often written as B6. It can be defined mathematically as
+-   When we are comparing two hypotheses, H1 (the alternate hypothesis) and H0 (the null hypothesis). It can be defined mathematically as
 
 ![](images/clipboard-3157740270.png)
 
@@ -219,7 +219,7 @@ In the code chunk below, the Maths scores is binned into a 4-class variable by u
 exam1 <- exam %>% 
   mutate(MATHS_bins = 
            cut(MATHS, 
-               breaks = c(0,60,75,85,60))
+               breaks = c(0,60,75,85,100))
 )
 ```
 
@@ -290,6 +290,17 @@ In the code chunk, [*check_collinearity()*](https://easystats.github.io/perform
 #| message: false
 #| warning: false
 check_collinearity(model)
+```
+
+::: callout-important
+For Mac users, please activate the code below before starting the collinearity analysis.
+:::
+
+```{r}
+#install. packages("bayestestR")
+#remotes: : install_github("easystats/see")
+library("bayestestR")
+library("see")
 ```
 
 ```{r}

@@ -162,7 +162,7 @@ ggplot(my_sum) +
 :::
 ::::
 
-### **11.3.2 Plotting confidence interval of point estimates**
+### **7.3.2 Plotting confidence interval of point estimates**
 
 Instead of plotting the standard error bar of point estimates, we can also plot the confidence intervals of mean maths score by race.
 
@@ -223,7 +223,7 @@ ggplot(my_sum) +
 :::
 ::::
 
-### **11.3.3 Visualizing the uncertainty of point estimates with interactive error bars**
+### **7.3.3 Visualizing the uncertainty of point estimates with interactive error bars**
 
 In this section, you will learn how to plot interactive error bars for the 99% confidence interval of mean maths score by race as shown in the figure belo
 
@@ -328,7 +328,7 @@ bscols(widths = c(4,8),
 ```
 :::
 
-## **11.4 Visualising Uncertainty: ggdist package**
+## **7.4 Visualising Uncertainty: ggdist package**
 
 `ggdist` is an R package designed to visualise distributions and uncertainty using a flexible set of ggplot2 geoms and statistics.
 
@@ -344,7 +344,7 @@ bscols(widths = c(4,8),
 
     -   Bayesian Models: Visualise probability distributions (works with the tidybayes package).
 
-### **11.4.1 Visualizing the uncertainty of point estimates: ggdistmethods**
+### **7.4.1 Visualizing the uncertainty of point estimates: ggdistmethods**
 
 In the code chunk below, [`stat_pointinterval()`](https://mjskay.github.io/ggdist/reference/stat_pointinterval.html) of **ggdist** is used to build a visual for displaying distribution of maths scores by race.
 
@@ -385,7 +385,7 @@ exam %>%
     subtitle = "Median Point + Multiple-interval plot")
 ```
 
-### **11.4.2 Visualizing the uncertainty of point estimates: ggdistmethods**
+### **7.4.2 Visualizing the uncertainty of point estimates: ggdistmethods**
 
 Showing 95% and 99% confidence intervals.
 
@@ -419,7 +419,7 @@ exam %>%
     subtitle = "Mean Point + Multiple-interval plot")
 ```
 
-### **11.4.3 Visualizing the uncertainty of point estimates: ggdistmethods**
+### **7.4.3 Visualizing the uncertainty of point estimates: ggdistmethods**
 
 In the code chunk below, [`stat_gradientinterval()`](https://mjskay.github.io/ggdist/reference/stat_gradientinterval.html) of **ggdist** is used to build a visual for displaying distribution of maths scores by race.
 
@@ -436,21 +436,21 @@ exam %>%
     subtitle = "Gradient + interval plot")
 ```
 
-## **11.5 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
+## **7.5 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
 
-### **11.5.1 Installing ungeviz package**
+### **7.5.1 Installing ungeviz package**
 
 ```{r}
 devtools::install_github("wilkelab/ungeviz")
 ```
 
-### **11.5.2 Launch the application in R**
+### **7.5.2 Launch the application in R**
 
 ```{r}
 library(ungeviz)
 ```
 
-### **11.5.3 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
+### **7.5.3 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
 
 ::: panel-tabset
 ## The Plot
