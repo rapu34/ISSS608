@@ -1,0 +1,47 @@
+---
+title: "In-class_Ex04"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+```{r}
+#| message: false
+#| warning: false
+pacman::p_load(ggdist, ggridges, ggthemes,
+               colorspace, tidyverse)
+```
+
+```{r}
+exam_data <-read_csv("/Users/jay/ISSS608-VAA/In_class_Ex/In-class_Ex04/data/Exam_data.csv")
+```
+
+```{r}
+library(haven)
+
+churn_telecom <- read_sas("/Users/jay/ISSS608-VAA/In_class_Ex/In-class_Ex04/data/churn_telecom.sas7bdat") %>%
+  mutate(CHURN_FLG = factor(
+    CHURN_FLG,
+    levels = c("1","0"),
+    labels = c("Churn","Non-Churn")
+  ))
+```
+
+Visualising the target variables
+
+```{r}
+ggplot(data = churn_telecom,
+       aes(x=CHURN_FLG)) +
+  geom_bar()
+```
+
+```{r}
+ggplot(data = exam_data,
+       aes(x=ENGLISH,
+           y= CLASS)) +
+  geom_boxplot()
+```
