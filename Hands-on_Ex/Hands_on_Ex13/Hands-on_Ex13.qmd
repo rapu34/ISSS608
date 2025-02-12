@@ -1,0 +1,352 @@
+---
+title: "Hands-on_Ex13"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# **16  Treemap Visualisation with R**
+
+1.  **Data manipulation**: Transform transaction data into a treemap structure using `dplyr` functions.
+
+2.  **Static treemap**: Create a static treemap using the `treemap` package.
+
+3.  **Interactive treemap**: Design an interactive treemap using the `d3treeR` package.
+
+## **16.2 Installing and Launching R Packages**
+
+Before we get started, you are required to check if **treemap** and **tidyverse** pacakges have been installed in you R.
+
+```{r}
+#| message: false
+#| warning: false
+pacman::p_load(treemap, treemapify, tidyverse) 
+```
+
+## **16.3 Data Wrangling**
+
+In this exercise, *REALIS2018.csv* data will be used. This dataset provides information of private property transaction records in 2018. The dataset is extracted from REALIS portal (https://spring.ura.gov.sg/lad/ore/login/index.cfm) of Urban Redevelopment Authority (URA).
+
+### **16.3.1 Importing the data set**
+
+In the code chunk below, *read_csv()* of **readr** is used to import realis2018.csv into R and parsed it into tibble R data.frame format.
+
+The output tibble data.frame is called *realis2018*.
+
+```{r}
+realis2018 <- read_csv("data/realis2018.csv")
+```
+
+### **16.3.2 Data Wrangling and Manipulation**
+
+-   The `realis2018` dataset is in a highly disaggregated transaction format, making it unsuitable for treemap visualization.
+
+-   Data transformation steps:
+
+    1.  Group transaction records by Project Name, Planning Region, Planning Area, Property Type, and Type of Sale.
+
+    2.  Compute summary statistics:
+
+        -   Total Unit Sold → Sum of `No. of Units`
+
+        -   Total Area → Sum of `Area (sqm)`
+
+        -   Median Unit Price → Median of `Unit Price ($ psm)`
+
+        -   Median Transacted Price → Median of `Transacted Price ($)`
+
+-   Key `dplyr` functions used:
+
+    -   `group_by()`: Groups data by specified variables.
+
+    -   `summarise()`: Computes summary statistics for each group.
+
+-   Effects of grouping on `dplyr` verbs:
+
+    -   `select()` retains grouping variables.
+
+    -   `arrange()` can order by groups if `.by_group = TRUE`.
+
+    -   `mutate()` and `filter()` work well with window functions (e.g., `rank()`, `min()`).
+
+    -   `sample_n()` and `sample_frac()` sample rows within groups.
+
+    -   `summarise()` generates aggregated results for each group.
+
+-   In this case: `group_by()` + `summarise()` are used to create a summarized dataset suitable for treemap visualization.
+
+::: callout-note
+Students who are new to **dplyr** methods should consult [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) before moving on to the next section.
+:::
+
+### **16.3.3 Grouped summaries without the Pipe**
+
+The code chank below shows a typical two lines code approach to perform the steps.
+
+```{r}
+realis2018_grouped <- group_by(realis2018, `Project Name`,
+                               `Planning Region`, `Planning Area`, 
+                               `Property Type`, `Type of Sale`)
+realis2018_summarised <- summarise(realis2018_grouped, 
+                          `Total Unit Sold` = sum(`No. of Units`, na.rm = TRUE),
+                          `Total Area` = sum(`Area (sqm)`, na.rm = TRUE),
+                          `Median Unit Price ($ psm)` = median(`Unit Price ($ psm)`, na.rm = TRUE), 
+                          `Median Transacted Price` = median(`Transacted Price ($)`, na.rm = TRUE))
+```
+
+::: callout-note
+-   Aggregation functions such as *sum()* and *meadian()* obey the usual rule of missing values: if there’s any missing value in the input, the output will be a missing value. The argument *na.rm = TRUE* removes the missing values prior to computation.
+:::
+
+The code chunk above is not very efficient because we have to give each intermediate data.frame a name, even though we don’t have to care about it.
+
+### **16.3.4 Grouped summaries with the *pipe***
+
+The code chunk below shows a more efficient way to tackle the same processes by using the *pipe*, %\>%:
+
+::: callout-note
+To learn more about pipe, visit this excellent article: [Pipes in R Tutorial For Beginners](https://www.datacamp.com/community/tutorials/pipe-r-tutorial).
+:::
+
+```{r}
+realis2018_summarised <- realis2018 %>% 
+  group_by(`Project Name`,`Planning Region`, 
+           `Planning Area`, `Property Type`, 
+           `Type of Sale`) %>%
+  summarise(`Total Unit Sold` = sum(`No. of Units`, na.rm = TRUE), 
+            `Total Area` = sum(`Area (sqm)`, na.rm = TRUE),
+            `Median Unit Price ($ psm)` = median(`Unit Price ($ psm)`, na.rm = TRUE),
+            `Median Transacted Price` = median(`Transacted Price ($)`, na.rm = TRUE))
+```
+
+## **16.4 Designing Treemap with treemap Package**
+
+**treemap** package is a R package specially designed to offer great flexibility in drawing treemaps. The core function, namely: *treemap()* offers at least 43 arguments. In this section, we will only explore the major arguments for designing elegent and yet truthful treemaps.
+
+### **16.4.1 Designing a static treemap**
+
+In this section, *treemap()* of **Treemap** package is used to plot a treemap showing the distribution of median unit prices and total unit sold of resale condominium by geographic hierarchy in 2017.
+
+First, we will select records belongs to resale condominium property type from *realis2018_selected* data frame.
+
+```{r}
+realis2018_selected <- realis2018_summarised %>%
+  filter(`Property Type` == "Condominium", `Type of Sale` == "Resale")
+```
+
+### **16.4.2 Using the basic arguments**
+
+The code chunk below designed a treemap by using three core arguments of *treemap()*, namely: *index*, *vSize* and *vColor*.
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```
+
+-   **`index` (Hierarchy Definition)**
+
+    -   Must contain **at least two column names** to create a **hierarchical treemap**.
+
+    -   The **first column** represents the **highest aggregation level**, the **second column** the next level, and so on.
+
+-   **`vSize` (Rectangle Size Mapping)**
+
+    -   The selected column **determines the size** of each rectangle in the treemap.
+
+    -   **Values must be non-negative**, as negative values cannot be mapped to rectangle sizes.
+
+::: callout-warning
+-   The **current treemap is incorrectly colored**; the **rectangle colors should reflect different intensities** based on **median unit prices**.
+
+-   In `treemap()`, the **`vColor` argument** determines the **color mapping** of rectangles.
+
+-   The **`type` argument** controls how colors are assigned:
+
+    -   If `type` is **not defined**, `treemap()` defaults to `type = "index"`, coloring based on **hierarchy (e.g., planning areas)**.
+
+    -   To correctly represent **median unit prices**, `type` should be explicitly set to `"value"` or another suitable option.
+:::
+
+### **16.4.3 Working with *vColor* and *type* arguments**
+
+In the code chunk below, *type* argument is define as value.
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        type = "value",
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```
+
+Thinking to learn from the conde chunk above.
+
+-   The rectangles are coloured with different intensity of green, reflecting their respective median unit prices.
+
+-   The legend reveals that the values are binned into ten bins, i.e. 0-5000, 5000-10000, etc. with an equal interval of 5000.
+
+### **16.4.4 Colours in treemap package**
+
+-   Two key arguments for color mapping:
+
+    1.  **`mapping`** – Defines how values are mapped to colors.
+
+    2.  **`palette`** – Specifies the color palette used.
+
+-   Difference between `"value"` and `"manual"` mapping:
+
+    -   `"value"` mapping:
+
+        -   Uses a diverging color palette (e.g., `"RdYlBu"` from ColorBrewer).
+
+        -   0 maps to the middle color (e.g., white/yellow).
+
+        -   Negative max values → Left-end color.
+
+        -   Positive max values → Right-end color.
+
+    -   `"manual"` mapping:
+
+        -   Min value → Left-end color.
+
+        -   Max value → Right-end color.
+
+        -   Mean value → Middle color.
+
+### **16.4.5 The “value” type treemap**
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        type="value",
+        palette="RdYlBu", 
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```
+
+Thing to learn from the code chunk above:
+
+-   Although the colour palette used is RdYlBu but there are no red rectangles in the treemap above. This is because all the median unit prices are positive.
+
+-   The reason why we see only 5000 to 45000 in the legend is because the *range* argument is by default c(min(values, max(values)) with some pretty rounding.
+
+### **16.4.6 The “manual” type treemap**
+
+The “manual” type does not interpret the values as the “value” type does. Instead, the value range is mapped linearly to the colour palette.
+
+The code chunk below shows a manual type treemap.
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        type="manual",
+        palette="RdYlBu", 
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```
+
+Things to learn from the code chunk above:
+
+-   The colour scheme used is very confusing. This is because mapping = (min(values), mean(range(values)), max(values)). It is not wise to use diverging colour palette such as *RdYlBu* if the values are all positive or negative.
+
+To overcome this problem, a single colour palette such as Blues should be used.
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        type="manual",
+        palette="Blues", 
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```
+
+### **16.4.7 Treemap Layout**
+
+**`treemap()` supports two layout algorithms**:
+
+1.  **`"squarified"`** (Bruls et al., 2000)
+
+    -   Produces **balanced aspect ratios** for rectangles.
+
+    -   **Ignores sorting order (`sortID`)**.
+
+2.  **`"pivotSize"`** (default, Bederson et al., 2002)
+
+    -   **Maintains sorting order (`sortID`)**.
+
+    -   Produces **acceptable aspect ratios** while preserving order.
+
+### **16.4.8 Working with *algorithm* argument**
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        type="manual",
+        palette="Blues", 
+        algorithm = "squarified",
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```
+
+### **16.4.9 Using *sortID***
+
+When “pivotSize” algorithm is used, *sortID* argument can be used to dertemine the order in which the rectangles are placed from top left to bottom right.
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+treemap(realis2018_selected,
+        index=c("Planning Region", "Planning Area", "Project Name"),
+        vSize="Total Unit Sold",
+        vColor="Median Unit Price ($ psm)",
+        type="manual",
+        palette="Blues", 
+        algorithm = "pivotSize",
+        sortID = "Median Transacted Price",
+        title="Resale Condominium by Planning Region and Area, 2017",
+        title.legend = "Median Unit Price (S$ per sq. m)"
+        )
+```

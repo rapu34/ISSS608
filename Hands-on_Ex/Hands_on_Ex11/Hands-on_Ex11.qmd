@@ -9,9 +9,9 @@ execute:
   freeze: true
 ---
 
-# **14  Heatmap for Visualising and Analysing Multivariate Data**
+# **11  Heatmap for Visualising and Analysing Multivariate Data**
 
-## **14.1 Overview**
+## **11.1 Overview**
 
 -   **Heatmaps** use **color variations** to visualize data in a **tabular format**.
 
@@ -29,7 +29,7 @@ execute:
 
 -   This hands-on exercise will cover plotting static and interactive heatmaps in R for data visualization and analysis.
 
-## **14.2 Installing and Launching R Packages**
+## **11.2 Installing and Launching R Packages**
 
 Next, you will use the code chunk below to install and launch **seriation**, **heatmaply**, **dendextend** and **tidyverse** in RStudio.
 
@@ -39,17 +39,17 @@ Next, you will use the code chunk below to install and launch **seriation**, *
 pacman::p_load(seriation, dendextend, heatmaply, tidyverse)
 ```
 
-## **14.3 Importing and Preparing The Data Set**
+## **11.3 Importing and Preparing The Data Set**
 
 In this hands-on exercise, the data of [World Happines 2018 report](https://worldhappiness.report/ed/2018/) will be used. The data set is downloaded from [here](https://s3.amazonaws.com/happiness-report/2018/WHR2018Chapter2OnlineData.xls). The original data set is in Microsoft Excel format. It has been extracted and saved in csv file called **WHData-2018.csv**.
 
-### **14.3.1 Importing the data set**
+### **11.3.1 Importing the data set**
 
 ```{r}
 wh <- read_csv("data/WHData-2018.csv")
 ```
 
-### **14.3.2 Preparing the data**
+### **11.3.2 Preparing the data**
 
 Next, we need to change the rows by country name instead of row number by using the code chunk below
 
@@ -59,7 +59,7 @@ Next, we need to change the rows by country name instead of row number by using 
 row.names(wh) <- wh$Country
 ```
 
-### **14.3.3 Transforming the data frame into a matrix**
+### **11.3.3 Transforming the data frame into a matrix**
 
 The data was loaded into a data frame, but it has to be a data matrix to make your heatmap.
 
@@ -74,7 +74,7 @@ wh_matrix <- data.matrix(wh)
 
 Notice that **wh_matrix** is in R matrix format.
 
-## **14.4 Static Heatmap**
+## **11.4 Static Heatmap**
 
 -   **Various R packages** offer functions to create **static heatmaps**, including:
 
@@ -90,7 +90,7 @@ Notice that **wh_matrix** is in R matrix format.
 
 -   This section focuses on **creating static heatmaps** using **`heatmap()`** from the **R stats package**.
 
-### **14.4.1 heatmap() of R Stats**
+### **11.4.1 heatmap() of R Stats**
 
 In this sub-section, we will plot a heatmap by using *heatmap()* of Base Stats. The code chunk is given below.
 
@@ -142,7 +142,7 @@ wh_heatmap <- heatmap(wh_matrix,
 
 -   The `cexRow` and `cexCol` arguments control the font size for the y-axis and x-axis labels, respectively.
 
-## **14.5 Creating Interactive Heatmap**
+## **11.5 Creating Interactive Heatmap**
 
 -   **`heatmaply`** is an **R package** for building **interactive cluster heatmaps** that can be shared as **stand-alone HTML files**.
 
@@ -156,7 +156,7 @@ wh_heatmap <- heatmap(wh_matrix,
 
 -   This section provides **hands-on experience** in designing an **interactive cluster heatmap** using `heatmaply`, with **`wh_matrix`** as the input dataset.
 
-### **14.5.1 Working with heatmaply**
+### **11.5.1 Working with heatmaply**
 
 ```{r}
 #| echo: true
@@ -182,7 +182,7 @@ heatmaply(wh_matrix[, -c(1, 2, 4, 5)])
     -   When the x-axis marker labels are too long, they will be rotated by 135 degree from the north.
     :::
 
-### **14.5.2 Data Transformation Summary**
+### **11.5.2 Data Transformation Summary**
 
 -   Multivariate datasets often contain variables with different measurement scales.
 
@@ -196,7 +196,7 @@ heatmaply(wh_matrix[, -c(1, 2, 4, 5)])
 
     3.  Percentilizing
 
-### **14.5.2.1 Scaling Method**
+### **11.5.2.1 Scaling Method**
 
 -   Used when variables follow or are assumed to follow a normal distribution.
 
@@ -216,7 +216,7 @@ heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
           scale = "column")
 ```
 
-#### 14.5.2.2 Normalizing Method Summary
+#### 11.5.2.2 Normalizing Method Summary
 
 -   Used when variables come from different (non-normal) distributions.
 
@@ -237,7 +237,7 @@ heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]))
 ```
 
-#### 14.5.2.3 Percentising method
+#### 11.5.2.3 Percentising method
 
 -   This is similar to ranking the variables, but instead of keeping the rank values, divide them by the maximal rank.
 
@@ -254,7 +254,7 @@ Similar to **Normalize method**, the Percentize method is also performed on the 
 heatmaply(percentize(wh_matrix[, -c(1, 2, 4, 5)]))
 ```
 
-### **14.5.3 Clustering algorithm**
+### **11.5.3 Clustering algorithm**
 
 -   **`heatmaply` supports various hierarchical clustering methods**.
 
@@ -280,7 +280,7 @@ heatmaply(percentize(wh_matrix[, -c(1, 2, 4, 5)]))
 
 -   Clustering models can be calibrated manually or statistically.
 
-### **14.5.4 Manual approach**
+### **11.5.4 Manual approach**
 
 In the code chunk below, the heatmap is plotted by using hierachical clustering algorithm with “Euclidean distance” and “ward.D” method.
 
@@ -293,7 +293,7 @@ heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           hclust_method = "ward.D")
 ```
 
-### **14.5.5 Statistical approach**
+### **11.5.5 Statistical approach**
 
 In order to determine the best clustering method and number of cluster the *dend_expend()* and *find_k()* functions of **dendextend** package will be used.
 
@@ -334,7 +334,7 @@ heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           k_row = 3)
 ```
 
-### **14.5.6 Seriation**
+### **11.5.6 Seriation**
 
 -   Issue with hierarchical clustering:
 
@@ -401,7 +401,7 @@ heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           seriate = "none")
 ```
 
-### **14.5.7 Working with colour palettes**
+### **11.5.7 Working with colour palettes**
 
 The default colour palette uses by **heatmaply** is *viridis*. heatmaply users, however, can use other colour palettes in order to improve the aestheticness and visual friendliness of the heatmap.
 
@@ -418,7 +418,7 @@ heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
           colors = Blues)
 ```
 
-### **14.5.8 The finishing touch**
+### **11.5.8 The finishing touch**
 
 Beside providing a wide collection of arguments for meeting the statistical analysis needs, *heatmaply* also provides many plotting features to ensure cartographic quality heatmap can be produced.
 
