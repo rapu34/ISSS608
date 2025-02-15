@@ -1,0 +1,123 @@
+---
+title: "In-class_Ex05"
+author: "Jeounghyun Kim"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+Getting started
+
+```{r}
+pacman::p_load(tidyverse, readxl, SmartEDA, easystats, gtsummary, ggstatsplot)
+
+```
+
+Importing Data
+
+```{r}
+car_resale <- read_xls("/Users/jay/ISSS608-VAA/In_class_Ex/In-class_Ex05/data/ToyotaCorolla - Copy.xls","data")
+```
+
+```{r}
+glimpse(car_resale)
+```
+
+```{r}
+summary(car_resale)
+```
+
+```{r}
+list(car_resale)
+```
+
+Data Overview
+
+```{r}
+car_resale %>%
+  ExpData(type = 2)
+```
+
+```{r}
+cols <- c("Mfg_Month", "HP_Bin", "CC_bin", "Doors", "Gears",
+          "Cylinders", "Fuel_Type", "Color", "Met_Color",
+          "Automatic", "Mfr_Guarantee", "BOVAG_Guarantee", "ABS",
+          "Airbag_1", "Airbag_2", "Airco", "Automatic_airco", "Boardcomputer",
+          "CD_Player", "Central_Lock", "Powered_windows", "Power_Steering", "Radio",
+          "Mistlamps", "Sport_Model", "Backseat_Divider", "Metallic_Rim",
+          "Radio_cassette", "Tow_Bar")
+
+```
+
+```{r}
+car_resale %>%
+  ExpNumViz(target=NULL,
+            nlim=10,
+            Page=c(2,2)
+            )
+
+```
+
+```{r}
+car_resale %>%
+  ExpNumViz(target="Price",
+            nlim=10,
+            Page=c(2,2))
+```
+
+```{r}
+#| fig-width: 12
+#| fig-height: 10
+car_resale %>%
+  ExpCatViz(target=NULL,
+            col="sky blue",
+            clim =10,
+            margin =2,
+            Page =c(4,4),
+            sample=16)
+```
+
+```{r}
+model<- lm(Price ~ Age_08_04 + KM + Weight + Guarantee_Period, data =car_resale)
+check_normality(model)
+```
+
+```{r}
+check_collinearity(model)
+```
+
+```{r}
+check_c <- check_collinearity(model)
+plot(check_c)
+
+```
+
+```{r}
+model1<- lm(Price ~ Age_08_04 + KM + Weight + Guarantee_Period, data =car_resale)
+check_normality(model1)
+```
+
+```{r}
+tbl_regression(model1,
+              intercept = TRUE) %>%
+  add_glance_source_note(
+    label = list(sigma = "\U03c3"),
+    include = c(`r.squared`, `adj.r.squared`, AIC, statistic, `p.value`, sigma)
+  )
+
+```
+
+```{r}
+P_model1 <- parameters(model1)
+```
+
+```{r}
+plot(parameters(model1))
+```
+
+```{r}
+ggcoefstats(model1, output="plot")
+```

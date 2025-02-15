@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -162,6 +196,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex04/In-class_Ex04.html">
  <span class="dropdown-text">In-class Exercise 4</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex05/In-class_Ex05.html">
+ <span class="dropdown-text">In-class Exercise 5, 15 feb 2025</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -196,8 +234,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#take-home-exercise-1" id="toc-take-home-exercise-1" class="nav-link active" data-scroll-target="#take-home-exercise-1"><strong>Take-home Exercise 1</strong></a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>1 Overview</strong></a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>1.1 Introduction</strong></a></li>
+  </ul></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>1.2 The Data</strong></a>
+  <ul class="collapse">
+  <li><a href="#dataset-components" id="toc-dataset-components" class="nav-link" data-scroll-target="#dataset-components"><strong>Dataset Components</strong></a></li>
+  </ul></li>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import"><strong>1.2 Import</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -228,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 1, 2025</p>
+      <p class="date-modified">February 15, 2025</p>
     </div>
   </div>
     
@@ -239,8 +295,282 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="take-home-exercise-1" class="level1">
+<h1><strong>Take-home Exercise 1</strong></h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview"><strong>1 Overview</strong></h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction"><strong>1.1 Introduction</strong></h3>
+<p>According to the&nbsp;World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately&nbsp;17.9 million deaths per year. Among CVDs, heart attacks are one of the most critical and life-threatening conditions, making early prevention and risk factor analysis essential.</p>
+<p>This dataset provides an&nbsp;in-depth analysis of heart attack incidents in Japan, with a focus on the differences between youth and adult populations. It includes&nbsp;various medical indicators&nbsp;(cholesterol levels, blood pressure, maximum heart rate),&nbsp;lifestyle factors&nbsp;(exercise, diet), and&nbsp;demographic information, offering valuable insights into age-specific cardiovascular risks. By analyzing this dataset,&nbsp;researchers, healthcare professionals, and policymakers&nbsp;can gain a deeper understanding of these risks and develop more effective prevention strategies.</p>
+<p>This dataset serves as a valuable resource for comparison with&nbsp;global cardiovascular research efforts, such as&nbsp;WHO’s ‘Global Hearts’ initiative&nbsp;and the&nbsp;CDC’s ‘Million Hearts’ program. Additionally, it supports&nbsp;statistical modeling, trend visualization, and predictive analytics, contributing to the development of&nbsp;data-driven public health policies and early intervention programs&nbsp;aimed at reducing the prevalence of cardiovascular diseases.</p>
+</section>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data"><strong>1.2 The Data</strong></h2>
+<p>The data for this analysis comes from the&nbsp;<strong>Heart Attack in Japan: Youth vs.&nbsp;Adult</strong>&nbsp;dataset, retrieved from the&nbsp;<a href="https://www.kaggle.com/datasets/ashaychoudhary/heart-attack-in-japan-youth-vs-adult/data">Kaggle database</a>. The dataset provides detailed information on heart attack incidents among youth and adults, focusing on medical indicators, lifestyle factors, and demographic characteristics.</p>
+<section id="dataset-components" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-components"><strong>Dataset Components</strong></h3>
+<p>The dataset includes various features, such as:</p>
+<ul>
+<li><p><strong>Demographic Information:</strong>&nbsp;Age, gender, and residential region (Urban/Rural).</p></li>
+<li><p><strong>Medical History:</strong>&nbsp;Presence of pre-existing conditions such as&nbsp;<strong>diabetes</strong>&nbsp;and&nbsp;<strong>hypertension</strong>.</p></li>
+<li><p><strong>Lifestyle Factors:</strong></p>
+<ul>
+<li><p><strong>Smoking History</strong>&nbsp;and&nbsp;<strong>Alcohol Consumption</strong>&nbsp;levels.</p></li>
+<li><p><strong>Physical Activity</strong>&nbsp;categorized as High, Moderate, or Low.</p></li>
+<li><p><strong>Diet Quality</strong>&nbsp;classified as Good, Average, or Poor.</p></li>
+</ul></li>
+<li><p><strong>Medical Indicators:</strong></p>
+<ul>
+<li><p><strong>Cholesterol Levels</strong>&nbsp;(numerical values).</p></li>
+<li><p><strong>Resting Blood Pressure</strong>&nbsp;<em>(if available in the full dataset)</em>.</p></li>
+</ul></li>
+<li><p><strong>Additional Data Fields:</strong>&nbsp;The dataset contains extra computed columns that may require further preprocessing for analysis.</p></li>
+</ul>
+<p>This dataset serves as a valuable resource for&nbsp;data analysts, healthcare professionals, and policymakers&nbsp;aiming to understand and mitigate cardiovascular risks in Japan. Proper&nbsp;data preprocessing and ethical considerations&nbsp;are recommended before conducting any analysis.</p>
+<p>Getting started,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggiraph, plotly, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               patchwork, DT, tidyverse,corrplot,reshape2,ggpairs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="import" class="level2">
+<h2 class="anchored" data-anchor-id="import"><strong>1.2 Import</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"japan_heart_attack_dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 30,000
+Columns: 32
+$ Age                     &lt;dbl&gt; 56, 69, 46, 32, 60, 25, 78, 38, 56, 75, 36, 40…
+$ Gender                  &lt;chr&gt; "Male", "Male", "Male", "Female", "Female", "F…
+$ Region                  &lt;chr&gt; "Urban", "Urban", "Rural", "Urban", "Rural", "…
+$ Smoking_History         &lt;chr&gt; "Yes", "No", "Yes", "No", "No", "No", "No", "Y…
+$ Diabetes_History        &lt;chr&gt; "No", "No", "No", "No", "No", "No", "Yes", "No…
+$ Hypertension_History    &lt;chr&gt; "No", "No", "No", "No", "No", "No", "Yes", "No…
+$ Cholesterol_Level       &lt;dbl&gt; 186.4002, 185.1367, 210.6966, 211.1655, 223.81…
+$ Physical_Activity       &lt;chr&gt; "Moderate", "Low", "Low", "Moderate", "High", …
+$ Diet_Quality            &lt;chr&gt; "Poor", "Good", "Average", "Good", "Good", "Go…
+$ Alcohol_Consumption     &lt;chr&gt; "Low", "Low", "Moderate", "High", "High", "Hig…
+$ Stress_Levels           &lt;dbl&gt; 3.644786, 3.384056, 3.810911, 6.014878, 6.8068…
+$ BMI                     &lt;dbl&gt; 33.96135, 28.24287, 27.60121, 23.71729, 19.771…
+$ Heart_Rate              &lt;dbl&gt; 72.30153, 57.45764, 64.65870, 55.13147, 76.667…
+$ Systolic_BP             &lt;dbl&gt; 123.90209, 129.89331, 145.65490, 131.78522, 10…
+$ Diastolic_BP            &lt;dbl&gt; 85.68281, 73.52426, 71.99481, 68.21133, 92.902…
+$ Family_History          &lt;chr&gt; "No", "Yes", "No", "No", "No", "No", "No", "No…
+$ Heart_Attack_Occurrence &lt;chr&gt; "No", "No", "No", "No", "No", "No", "No", "No"…
+$ Extra_Column_1          &lt;dbl&gt; 0.40498852, 0.03627815, 0.85297888, 0.39085280…
+$ Extra_Column_2          &lt;dbl&gt; 0.43330004, 0.51256694, 0.21959083, 0.29684675…
+$ Extra_Column_3          &lt;dbl&gt; 0.62871236, 0.66839275, 0.61343656, 0.15572404…
+$ Extra_Column_4          &lt;dbl&gt; 0.70160955, 0.11552874, 0.50800995, 0.87025144…
+$ Extra_Column_5          &lt;dbl&gt; 0.49814235, 0.42381938, 0.90066981, 0.39035591…
+$ Extra_Column_6          &lt;dbl&gt; 0.007901312, 0.083932768, 0.227205241, 0.40318…
+$ Extra_Column_7          &lt;dbl&gt; 0.79458257, 0.68895108, 0.49634358, 0.74140891…
+$ Extra_Column_8          &lt;dbl&gt; 0.29077922, 0.83016364, 0.75210679, 0.22396813…
+$ Extra_Column_9          &lt;dbl&gt; 0.49719307, 0.63449028, 0.18150125, 0.32931387…
+$ Extra_Column_10         &lt;dbl&gt; 0.52199452, 0.30204337, 0.62918031, 0.14319054…
+$ Extra_Column_11         &lt;dbl&gt; 0.79965663, 0.04368285, 0.01827617, 0.90778075…
+$ Extra_Column_12         &lt;dbl&gt; 0.72239788, 0.45166789, 0.06322702, 0.54232201…
+$ Extra_Column_13         &lt;dbl&gt; 0.1487387, 0.8786714, 0.1465122, 0.9224606, 0.…
+$ Extra_Column_14         &lt;dbl&gt; 0.8340099, 0.5356022, 0.9972962, 0.6262165, 0.…
+$ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.22860…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Age           Gender             Region          Smoking_History   
+ Min.   :18.00   Length:30000       Length:30000       Length:30000      
+ 1st Qu.:33.00   Class :character   Class :character   Class :character  
+ Median :48.00   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :48.49                                                           
+ 3rd Qu.:64.00                                                           
+ Max.   :79.00                                                           
+ Diabetes_History   Hypertension_History Cholesterol_Level Physical_Activity 
+ Length:30000       Length:30000         Min.   : 80.02    Length:30000      
+ Class :character   Class :character     1st Qu.:179.55    Class :character  
+ Mode  :character   Mode  :character     Median :199.77    Mode  :character  
+                                         Mean   :199.90                      
+                                         3rd Qu.:220.16                      
+                                         Max.   :336.86                      
+ Diet_Quality       Alcohol_Consumption Stress_Levels         BMI       
+ Length:30000       Length:30000        Min.   : 0.000   Min.   : 5.58  
+ Class :character   Class :character    1st Qu.: 3.644   1st Qu.:21.63  
+ Mode  :character   Mode  :character    Median : 4.993   Median :24.96  
+                                        Mean   : 5.002   Mean   :25.00  
+                                        3rd Qu.: 6.353   3rd Qu.:28.36  
+                                        Max.   :10.000   Max.   :46.10  
+   Heart_Rate      Systolic_BP      Diastolic_BP    Family_History    
+ Min.   : 30.03   Min.   : 56.23   Min.   : 39.95   Length:30000      
+ 1st Qu.: 63.25   1st Qu.:109.79   1st Qu.: 73.26   Class :character  
+ Median : 69.95   Median :119.90   Median : 80.12   Mode  :character  
+ Mean   : 69.98   Mean   :119.91   Mean   : 80.03                     
+ 3rd Qu.: 76.66   3rd Qu.:130.02   3rd Qu.: 86.76                     
+ Max.   :108.78   Max.   :178.77   Max.   :117.67                     
+ Heart_Attack_Occurrence Extra_Column_1     Extra_Column_2     
+ Length:30000            Min.   :0.000007   Min.   :0.0000052  
+ Class :character        1st Qu.:0.253308   1st Qu.:0.2473606  
+ Mode  :character        Median :0.500820   Median :0.4961980  
+                         Mean   :0.501939   Mean   :0.4978940  
+                         3rd Qu.:0.750529   3rd Qu.:0.7473954  
+                         Max.   :0.999965   Max.   :0.9999894  
+ Extra_Column_3      Extra_Column_4      Extra_Column_5     Extra_Column_6     
+ Min.   :0.0000227   Min.   :0.0000934   Min.   :0.000105   Min.   :0.0000531  
+ 1st Qu.:0.2483093   1st Qu.:0.2522110   1st Qu.:0.251803   1st Qu.:0.2559989  
+ Median :0.4976104   Median :0.4976175   Median :0.501987   Median :0.5017726  
+ Mean   :0.4981949   Mean   :0.5005952   Mean   :0.501410   Mean   :0.5027631  
+ 3rd Qu.:0.7476807   3rd Qu.:0.7505662   3rd Qu.:0.753657   3rd Qu.:0.7511886  
+ Max.   :0.9999694   Max.   :0.9999869   Max.   :0.999995   Max.   :0.9998892  
+ Extra_Column_7      Extra_Column_8      Extra_Column_9     
+ Min.   :0.0000678   Min.   :0.0000449   Min.   :0.0000305  
+ 1st Qu.:0.2482839   1st Qu.:0.2509790   1st Qu.:0.2502452  
+ Median :0.4988157   Median :0.4985698   Median :0.4984491  
+ Mean   :0.4980753   Mean   :0.5003557   Mean   :0.5002292  
+ 3rd Qu.:0.7456378   3rd Qu.:0.7507293   3rd Qu.:0.7512186  
+ Max.   :0.9999900   Max.   :0.9999300   Max.   :0.9999852  
+ Extra_Column_10     Extra_Column_11     Extra_Column_12    
+ Min.   :0.0000133   Min.   :0.0000008   Min.   :0.0000713  
+ 1st Qu.:0.2484256   1st Qu.:0.2538092   1st Qu.:0.2505341  
+ Median :0.5031040   Median :0.5067589   Median :0.5038609  
+ Mean   :0.5010694   Mean   :0.5044949   Mean   :0.5008624  
+ 3rd Qu.:0.7522686   3rd Qu.:0.7556257   3rd Qu.:0.7511780  
+ Max.   :0.9999928   Max.   :0.9999578   Max.   :0.9999484  
+ Extra_Column_13     Extra_Column_14     Extra_Column_15    
+ Min.   :0.0000204   Min.   :0.0000025   Min.   :0.0000241  
+ 1st Qu.:0.2473108   1st Qu.:0.2482152   1st Qu.:0.2482573  
+ Median :0.5041162   Median :0.4943841   Median :0.5009406  
+ Mean   :0.5004557   Mean   :0.4976507   Mean   :0.4999634  
+ 3rd Qu.:0.7497094   3rd Qu.:0.7456212   3rd Qu.:0.7487379  
+ Max.   :0.9999451   Max.   :0.9999779   Max.   :0.9999913  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Yes/No 범주형 변수 → 0/1 변환</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">smoking_history =</span> <span class="fu">ifelse</span>(Smoking_History <span class="sc">==</span> <span class="st">"Yes"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">diabetes_history =</span> <span class="fu">ifelse</span>(Diabetes_History <span class="sc">==</span> <span class="st">"Yes"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">hypertension_history =</span> <span class="fu">ifelse</span>(Hypertension_History <span class="sc">==</span> <span class="st">"Yes"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 성별 변환 (Male → 1, Female → 0)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">ifelse</span>(Gender <span class="sc">==</span> <span class="st">"Male"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 심장마비 여부 변환 (Yes → 1, No → 0)</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">heart_attack_occurrence =</span> <span class="fu">ifelse</span>(Heart_Attack_Occurrence <span class="sc">==</span> <span class="st">"Yes"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)  <span class="co"># 컬럼명 출력</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Age"                     "Gender"                 
+ [3] "Region"                  "Smoking_History"        
+ [5] "Diabetes_History"        "Hypertension_History"   
+ [7] "Cholesterol_Level"       "Physical_Activity"      
+ [9] "Diet_Quality"            "Alcohol_Consumption"    
+[11] "Stress_Levels"           "BMI"                    
+[13] "Heart_Rate"              "Systolic_BP"            
+[15] "Diastolic_BP"            "Family_History"         
+[17] "Heart_Attack_Occurrence" "Extra_Column_1"         
+[19] "Extra_Column_2"          "Extra_Column_3"         
+[21] "Extra_Column_4"          "Extra_Column_5"         
+[23] "Extra_Column_6"          "Extra_Column_7"         
+[25] "Extra_Column_8"          "Extra_Column_9"         
+[27] "Extra_Column_10"         "Extra_Column_11"        
+[29] "Extra_Column_12"         "Extra_Column_13"        
+[31] "Extra_Column_14"         "Extra_Column_15"        
+[33] "smoking_history"         "diabetes_history"       
+[35] "hypertension_history"    "gender"                 
+[37] "heart_attack_occurrence"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Extra_Column"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code></code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Smoking_History, <span class="sc">-</span>Diabetes_History, <span class="sc">-</span>Hypertension_History, <span class="sc">-</span>Gender, <span class="sc">-</span>Heart_Attack_Occurrence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(cor_matrix, <span class="at">method =</span> <span class="st">"circle"</span>, <span class="at">type =</span> <span class="st">"lower"</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">col =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>))(<span class="dv">200</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">addCoef.col =</span> <span class="st">"black"</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">number.cex =</span> <span class="fl">0.8</span>, </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Correlation Heatmap (corrplot)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1440"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Cholesterol_Level)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cholesterol Level Distribution"</span>, <span class="at">x =</span> <span class="st">"Cholesterol Level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1440"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(heart_attack_occurrence), <span class="at">y =</span> Cholesterol_Level, <span class="at">fill =</span> <span class="fu">as.factor</span>(heart_attack_occurrence))) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cholesterol Level by Heart Attack Occurrence"</span>, <span class="at">x =</span> <span class="st">"Heart Attack (0 = No, 1 = Yes)"</span>, <span class="at">y =</span> <span class="st">"Cholesterol Level"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(smoking_history), <span class="at">fill =</span> <span class="fu">as.factor</span>(heart_attack_occurrence))) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Heart Attack Occurrence by Smoking History"</span>, <span class="at">x =</span> <span class="st">"Smoking History (0 = No, 1 = Yes)"</span>, <span class="at">y =</span> <span class="st">"Proportion"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>), <span class="at">name =</span> <span class="st">"Heart Attack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Systolic_BP, <span class="at">y =</span> Heart_Rate, <span class="at">color =</span> <span class="fu">as.factor</span>(heart_attack_occurrence))) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Heart Rate vs. Systolic BP (by Heart Attack Occurrence)"</span>, <span class="at">x =</span> <span class="st">"Systolic BP"</span>, <span class="at">y =</span> <span class="st">"Heart Rate"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>), <span class="at">name =</span> <span class="st">"Heart Attack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>여기서부터 다시 시작</p>
+<pre><code></code></pre>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
