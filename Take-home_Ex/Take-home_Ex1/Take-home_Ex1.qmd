@@ -621,8 +621,7 @@ ggplot(health_factors_by_age, aes(x = variable, y = value, fill = as.factor(hear
 
 -   60+: Individuals who had a heart attack tend to show higher systolic blood pressure compared to those who did not. Unlike younger individuals, where lifestyle factors seem more relevant, chronic conditions such as hypertension and cholesterol levels may play a larger role in cardiovascular risks for older adults.
 
-Conclusion:\
-For younger individuals (30-40s), stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+), managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.
+-   For younger individuals (30-40s), stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+), managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.
 
 ## **4. Conclusion**
 
