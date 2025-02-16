@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">2.1 Load Packages</a></li>
   <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">2.2 Import data</a></li>
-  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">2.3 Data pre-processing</a></li>
+  <li><a href="#data-overview-pre-processing" id="toc-data-overview-pre-processing" class="nav-link" data-scroll-target="#data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</a></li>
   </ul></li>
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><strong>3. Exploratory Data Analysis</strong></a>
   <ul class="collapse">
@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>4. Conclusion</strong></a>
   <ul class="collapse">
-  <li><a href="#future-recommendations" id="toc-future-recommendations" class="nav-link" data-scroll-target="#future-recommendations">4.1 Future Recommendations</a></li>
+  <li><a href="#future-research-agenda" id="toc-future-research-agenda" class="nav-link" data-scroll-target="#future-research-agenda">4.1 Future research Agenda</a></li>
   </ul></li>
   <li><a href="#key-references" id="toc-key-references" class="nav-link" data-scroll-target="#key-references"><strong>5. Key References</strong></a></li>
   </ul></li>
@@ -335,11 +335,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Medical Indicators:</strong></p>
 <ul>
 <li><p><strong>Cholesterol Levels</strong>&nbsp;(numerical values).</p></li>
-<li><p><strong>Resting Blood Pressure</strong>&nbsp;<em>(if available in the full dataset)</em>.</p></li>
+<li><p><strong>Resting Blood Pressure</strong></p></li>
 </ul></li>
-<li><p><strong>Additional Data Fields:</strong>&nbsp;The dataset contains extra computed columns that may require further preprocessing for analysis.</p></li>
+<li><p>Additionally, the dataset contains extra computed columns that are not directly relevant to this analysis. These columns will be removed during data preprocessing to ensure cleaner and more interpretable results.</p></li>
 </ul>
-<p>This dataset serves as a valuable resource for&nbsp;data analysts, healthcare professionals, and policymakers&nbsp;aiming to understand and mitigate cardiovascular risks in Japan. Proper&nbsp;data preprocessing and ethical considerations&nbsp;are recommended before conducting any analysis.</p>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started"><strong>2. Getting started</strong></h2>
@@ -369,8 +368,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"japan_heart_attack_dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-pre-processing" class="level3">
-<h3 class="anchored" data-anchor-id="data-pre-processing">2.3 Data pre-processing</h3>
+<section id="data-overview-pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</h3>
+<p>This output from&nbsp;<code>glimpse(df)</code>&nbsp;provides a summary of the dataset’s structure, offering an overview of the number of rows, columns, and the types of variables included.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -412,6 +412,7 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </div>
 <section id="check-missing-values" class="level4">
 <h4 class="anchored" data-anchor-id="check-missing-values"><strong>2.3.1 Check missing values</strong></h4>
+<p><code>colSums(is.na(df))</code>&nbsp;calculates the&nbsp;<strong>number of missing values</strong>&nbsp;in each column of the dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -439,7 +440,10 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
                       0                       0 </code></pre>
 </div>
 </div>
-<p><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></p>
+</section>
+<section id="data-cleaning-and-encoding-of-categorical-variables" class="level4">
+<h4 class="anchored" data-anchor-id="data-cleaning-and-encoding-of-categorical-variables"><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></h4>
+<p>This preprocessing step&nbsp;transforms categorical variables into numeric representations&nbsp;and&nbsp;removes unnecessary columns&nbsp;to prepare the dataset for analysis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -475,6 +479,30 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>Physical_Activity, <span class="sc">-</span>Diet_Quality, <span class="sc">-</span>Alcohol_Consumption,</span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Extra_Column_"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>- Encoding Categorical Variables</strong></p>
+<ul>
+<li><p>Binary Encoding (0/1):</p>
+<ul>
+<li><code>smoking_history</code>,&nbsp;<code>diabetes_history</code>,&nbsp;<code>hypertension_history</code>,&nbsp;<code>gender</code>,&nbsp;<code>heart_attack_occurrence</code>,&nbsp;<code>region</code>, <code>family_history</code>&nbsp;are converted into binary numeric values (<code>1 = Yes/Male/Urban</code>,&nbsp;<code>0 = No/Female/Rural</code>).</li>
+</ul></li>
+<li><p>Ordinal Encoding:</p>
+<ul>
+<li><p><code>physical_activity</code>: Encoded as&nbsp;<code>0 = Low</code>,&nbsp;<code>1 = Moderate</code>,&nbsp;<code>2 = High</code>.</p></li>
+<li><p><code>diet_quality</code>: Encoded as&nbsp;<code>0 = Poor</code>,&nbsp;<code>1 = Average</code>,&nbsp;<code>2 = Good</code>.</p></li>
+<li><p><code>alcohol_consumption</code>: Encoded as&nbsp;<code>0 = None</code>,&nbsp;<code>1 = Low</code>,&nbsp;<code>2 = Moderate</code>,&nbsp;<code>3 = High</code>.</p></li>
+</ul></li>
+</ul>
+<p><strong>- Removing Unnecessary Columns</strong></p>
+<ul>
+<li><p>The original categorical columns (<code>Smoking_History</code>,&nbsp;<code>Diabetes_History</code>, etc.) are removed after encoding.</p></li>
+<li><p>Extra computed columns (<code>Extra_Column_1</code>&nbsp;to&nbsp;<code>Extra_Column_15</code>) are removed as they are&nbsp;not relevant to the analysis.</p></li>
+</ul>
+<p><strong>- Purpose of This Preprocessing</strong></p>
+<ul>
+<li><p>Makes data suitable for statistical modeling and machine learning, which typically require numeric inputs.</p></li>
+<li><p>Reduces dimensionality&nbsp;by eliminating redundant columns.</p></li>
+<li><p>Ensures consistency&nbsp;by encoding categorical variables in a structured way.</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -489,6 +517,7 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 [17] "Systolic_BP"            </code></pre>
 </div>
 </div>
+<p><code>ls(df)</code>&nbsp;<strong>lists all column names in the processed dataset</strong>, allowing verification of the cleaned and transformed variables after preprocessing.</p>
 </section>
 </section>
 </section>
@@ -550,7 +579,7 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </section>
 <section id="observation" class="level4">
 <h4 class="anchored" data-anchor-id="observation"><strong>Observation</strong></h4>
-<p>An&nbsp;unexpectedly high occurrence&nbsp;is observed in the&nbsp;30s and 40s, suggesting that younger adults may also be at risk. The rate temporarily declines in the&nbsp;late 50s&nbsp;before rising again sharply from the&nbsp;late 60s onward. The high occurrence in younger individuals could be attributed to&nbsp;lifestyle factors like stress, smoking, or underlying health conditions, while the decline in the late 50s might indicate&nbsp;medical intervention or lifestyle modifications. The increase in older adults aligns with conventional risk factors such as&nbsp;hypertension, diabetes, and cardiovascular aging.</p>
+<p>An unexpectedly high occurrence is observed in individuals in their 30s and 40s,&nbsp;suggesting that younger adults may also be at significant risk. This contradicts the common perception that heart attacks predominantly affect older populations.&nbsp;Potential contributing factors include increased stress levels, smoking, and undiagnosed pre-existing conditions. The temporary decline in heart attack rates in the late 50s may reflect the impact of medical interventions or lifestyle modifications, while the sharp increase beyond the late 60s aligns with conventional risk factors such as hypertension, diabetes, and cardiovascular aging.</p>
 </section>
 </section>
 <section id="heart-attack-and-risk-factors-by-age-group-10-year-intervals" class="level3">
@@ -609,8 +638,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </div>
 <p><strong>Observation</strong></p>
 <ul>
-<li><p>Hypertension and diabetes rates increase steadily until the 50s, followed by a slight decline after 60. This may reflect cumulative health risks from earlier life stages, but also possible medical interventions. Smoking rates peak in the 20s and 30s, then decline sharply, especially after the 60s, likely due to health concerns or cessation efforts.</p></li>
-<li><p>The 30s–50s group exhibits a combination of high smoking rates and increasing hypertension/diabetes, making it the most vulnerable period for heart attacks. Conversely, while smoking rates drop in older adults, pre-existing chronic conditions may continue to drive heart attack risks beyond the 60s.</p></li>
+<li><p>Hypertension and diabetes rates&nbsp;tend to increase&nbsp;steadily until the 50s, followed by a slight decline after 60,&nbsp;which may be influenced by&nbsp;increased medical intervention and lifestyle modifications. Smoking rates peak in the 20s and 30s before declining sharply after 60, likely due to health concerns or cessation efforts.</p></li>
+<li><p>Although smoking rates decrease in older age groups, earlier exposure to smoking, along with increasing hypertension and diabetes prevalence,&nbsp;may be associated with cardiovascular risks in individuals in their 30s–50s. Conversely, in older adults (60+), chronic conditions such as diabetes and hypertension&nbsp;appear to remain relevant factors&nbsp;for heart attack risk, even as smoking rates decline.</p></li>
 </ul>
 </section>
 </section>
@@ -660,11 +689,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 <section id="observation-1" class="level4">
 <h4 class="anchored" data-anchor-id="observation-1"><strong>Observation</strong></h4>
 <ul>
-<li>The&nbsp;median BMI&nbsp;is&nbsp;24.90 for the 30-40s&nbsp;and&nbsp;24.97 for the 60+ group, showing&nbsp;no significant difference. A&nbsp;Mann-Whitney U test&nbsp;confirms this (W = 2.70×10⁷, p = 0.99), indicating that the BMI distribution does not differ&nbsp;statisticallybetween the two groups. The rank biserial correlation is nearly zero (-1.07e-04), and the confidence interval&nbsp;[-0.02, 0.02]suggests any difference is negligible.</li>
-</ul>
-<!-- -->
-<ul>
-<li>Since BMI is not a key differentiating factor for heart attack risk between these age groups, further analysis should focus on other potential contributors, such as&nbsp;physical activity, cholesterol levels, or stress levels.</li>
+<li>The median BMI is 24.90 for individuals aged 30-40 and 24.97 for those aged 60+, indicating no statistically significant difference. A Mann-Whitney U test confirms this (W = 2.70×10⁷, p = 0.99), with a rank biserial correlation of nearly zero (-1.07e-04) and a confidence interval of [-0.02, 0.02],&nbsp;suggesting that BMI does not serve as a key differentiator for heart attack risk between these age groups.</li>
+<li>Despite the common perception that BMI influences heart attack risk, this analysis suggests that other factors, such as cholesterol levels, physical activity, and stress, may play a more significant role in determining cardiovascular outcomes.</li>
 </ul>
 </section>
 </section>
@@ -815,30 +841,30 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 <section id="observation-3" class="level4">
 <h4 class="anchored" data-anchor-id="observation-3"><strong>Observation</strong></h4>
 <ul>
-<li>30-40s:&nbsp;Higher stress levels and lower physical activity&nbsp;are strongly linked to heart attacks, while&nbsp;higher cholesterol and poor diet quality&nbsp;are also notable risk factors, suggesting lifestyle-related contributors.</li>
+<li><p>30-40s:&nbsp;Higher stress levels and lower physical activity&nbsp;appear to be more common among individuals who experienced a heart attack. Elevated cholesterol levels and poor diet quality are also observed to some extent, suggesting that&nbsp;lifestyle-related factors may be associated&nbsp;with cardiovascular risk in younger adults.</p></li>
+<li><p>60+:&nbsp;Individuals who had a heart attack&nbsp;tend to show higher systolic blood pressure&nbsp;compared to those who did not. Unlike younger individuals, where lifestyle factors seem more relevant,&nbsp;chronic conditions such as hypertension and cholesterol levels may play a larger role&nbsp;in cardiovascular risks for older adults.</p></li>
 </ul>
-<!-- -->
-<ul>
-<li>60+:&nbsp;Significantly higher systolic blood pressure (BP)&nbsp;is observed in heart attack patients. Unlike younger groups,&nbsp;chronic conditions such as hypertension and cholesterol levels&nbsp;appear to be dominant risk factors.</li>
-</ul>
-<!-- -->
-<ul>
-<li>Conclusion:&nbsp;For younger individuals (30-40s), lifestyle factors such as stress and physical activity matter more. In contrast, for older individuals (60+), managing chronic conditions like high blood pressure is crucial in reducing heart attack risks.</li>
-</ul>
+<p>Conclusion:<br>
+For younger individuals (30-40s),&nbsp;stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+),&nbsp;managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.</p>
 </section>
 </section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion"><strong>4. Conclusion</strong></h2>
-<p>In conclusion, the&nbsp;<strong>ggplot2</strong>&nbsp;package has proven to be a powerful tool for exploratory data analysis through visualization. This study analyzed various health factors influencing heart attack occurrences, revealing key insights across different age groups. Younger individuals (30-40s) showed&nbsp;<strong>higher stress levels and lower physical activity</strong>&nbsp;as major risk factors, whereas older individuals (60+) exhibited&nbsp;<strong>higher systolic blood pressure and cholesterol levels</strong>, emphasizing the role of chronic conditions.</p>
-<section id="future-recommendations" class="level3">
-<h3 class="anchored" data-anchor-id="future-recommendations">4.1 Future Recommendations</h3>
+<p>This analysis explored the relationship between heart attack occurrence across different age groups and various health factors, including&nbsp;blood pressure, cholesterol levels, stress, and lifestyle habits.</p>
 <ul>
-<li><p>Further research&nbsp;should incorporate&nbsp;longitudinal studies&nbsp;to understand the causal relationship between stress, physical activity, and heart disease in younger populations.</p></li>
-<li><p>Policy interventions&nbsp;targeting stress reduction and physical activity promotion among working-age adults should be considered.</p></li>
-<li><p>Healthcare strategies&nbsp;should focus on&nbsp;early detection and management of hypertension and cholesterol&nbsp;in older populations to prevent heart attacks.</p></li>
+<li><p>For individuals in their 30s and 40s,&nbsp;higher stress levels, lower physical activity, and elevated cholesterol levels&nbsp;were associated with a higher likelihood of heart attacks.</p></li>
+<li><p>For those aged 60 and above,&nbsp;high blood pressure and elevated cholesterol levels&nbsp;were more prominent health indicators linked to heart attack occurrence.</p></li>
 </ul>
-<p>By addressing these areas,&nbsp;public health policies can be tailored more effectively to mitigate heart attack risks across different age groups.</p>
+<p>Additionally, the group with moderate alcohol consumption showed the lowest heart attack rates. However, this does not indicate a&nbsp;direct causal relationship&nbsp;but rather suggests potential associations influenced by lifestyle habits and other health factors.</p>
+<p>Based on these findings,&nbsp;stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above.However, further research is necessary to establish more definitive causal relationships.</p>
+<section id="future-research-agenda" class="level3">
+<h3 class="anchored" data-anchor-id="future-research-agenda">4.1 Future research Agenda</h3>
+<ul>
+<li><p>Further research should incorporate&nbsp;longitudinal studies&nbsp;to better understand the causal relationship between&nbsp;stress, physical activity, and heart disease&nbsp;in younger populations. Examining how lifestyle changes over time impact cardiovascular health will provide a deeper understanding of early prevention strategies.</p></li>
+<li><p>Additionally, research should explore the effectiveness of&nbsp;policy interventions&nbsp;aimed at stress reduction and physical activity promotion among working-age adults. Investigating whether workplace wellness programs or public health initiatives can mitigate heart attack risks will be valuable.</p></li>
+<li><p>For older populations, future studies should focus on optimizing&nbsp;healthcare strategies&nbsp;for the&nbsp;early detection and management of hypertension and cholesterol levels.&nbsp;Understanding the effectiveness of targeted medical interventions and personalized treatment approaches will be essential in preventing heart attacks in aging populations.</p></li>
+</ul>
 </section>
 </section>
 <section id="key-references" class="level2">

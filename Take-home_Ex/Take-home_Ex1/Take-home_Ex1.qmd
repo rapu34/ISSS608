@@ -46,11 +46,9 @@ The dataset includes various features, such as:
 
     -   **Cholesterol Levels** (numerical values).
 
-    -   **Resting Blood Pressure** *(if available in the full dataset)*.
+    -   **Resting Blood Pressure**
 
--   **Additional Data Fields:** The dataset contains extra computed columns that may require further preprocessing for analysis.
-
-This dataset serves as a valuable resource for data analysts, healthcare professionals, and policymakers aiming to understand and mitigate cardiovascular risks in Japan. Proper data preprocessing and ethical considerations are recommended before conducting any analysis.
+-   Additionally, the dataset contains extra computed columns that are not directly relevant to this analysis. These columns will be removed during data preprocessing to ensure cleaner and more interpretable results.
 
 ## **2. Getting started**
 
@@ -89,7 +87,9 @@ pacman::p_load(ggiraph, plotly, patchwork, DT, tidyverse,
 df <- read_csv("japan_heart_attack_dataset.csv")
 ```
 
-### 2.3 Data pre-processing
+### 2.3 Data Overview & pre-processing
+
+This output from `glimpse(df)` provides a summary of the dataset's structure, offering an overview of the number of rows, columns, and the types of variables included.
 
 ```{r}
 glimpse(df)
@@ -97,12 +97,16 @@ glimpse(df)
 
 #### **2.3.1 Check missing values**
 
+`colSums(is.na(df))` calculates the **number of missing values** in each column of the dataset.
+
 ```{r}
 
 colSums(is.na(df))
 ```
 
-**2.3.2 Data Cleaning and Encoding of Categorical Variables**
+#### **2.3.2 Data Cleaning and Encoding of Categorical Variables**
+
+This preprocessing step transforms categorical variables into numeric representations and removes unnecessary columns to prepare the dataset for analysis.
 
 ```{r}
 
@@ -141,9 +145,39 @@ df <- df %>%
          -starts_with("Extra_Column_")) 
 ```
 
+**- Encoding Categorical Variables**
+
+-   Binary Encoding (0/1):
+
+    -   `smoking_history`, `diabetes_history`, `hypertension_history`, `gender`, `heart_attack_occurrence`, `region`, `family_history` are converted into binary numeric values (`1 = Yes/Male/Urban`, `0 = No/Female/Rural`).
+
+-   Ordinal Encoding:
+
+    -   `physical_activity`: Encoded as `0 = Low`, `1 = Moderate`, `2 = High`.
+
+    -   `diet_quality`: Encoded as `0 = Poor`, `1 = Average`, `2 = Good`.
+
+    -   `alcohol_consumption`: Encoded as `0 = None`, `1 = Low`, `2 = Moderate`, `3 = High`.
+
+**- Removing Unnecessary Columns**
+
+-   The original categorical columns (`Smoking_History`, `Diabetes_History`, etc.) are removed after encoding.
+
+-   Extra computed columns (`Extra_Column_1` to `Extra_Column_15`) are removed as they are not relevant to the analysis.
+
+**- Purpose of This Preprocessing**
+
+-   Makes data suitable for statistical modeling and machine learning, which typically require numeric inputs.
+
+-   Reduces dimensionality by eliminating redundant columns.
+
+-   Ensures consistency by encoding categorical variables in a structured way.
+
 ```{r}
 ls(df)
 ```
+
+`ls(df)` **lists all column names in the processed dataset**, allowing verification of the cleaned and transformed variables after preprocessing.
 
 ## **3. Exploratory Data Analysis**
 
@@ -224,7 +258,7 @@ ggplot(na.omit(age_heart_attack_rate), aes(x = Age)) +
 
 #### **Observation**
 
-An unexpectedly high occurrence is observed in the 30s and 40s, suggesting that younger adults may also be at risk. The rate temporarily declines in the late 50s before rising again sharply from the late 60s onward. The high occurrence in younger individuals could be attributed to lifestyle factors like stress, smoking, or underlying health conditions, while the decline in the late 50s might indicate medical intervention or lifestyle modifications. The increase in older adults aligns with conventional risk factors such as hypertension, diabetes, and cardiovascular aging.
+An unexpectedly high occurrence is observed in individuals in their 30s and 40s, suggesting that younger adults may also be at significant risk. This contradicts the common perception that heart attacks predominantly affect older populations. Potential contributing factors include increased stress levels, smoking, and undiagnosed pre-existing conditions. The temporary decline in heart attack rates in the late 50s may reflect the impact of medical interventions or lifestyle modifications, while the sharp increase beyond the late 60s aligns with conventional risk factors such as hypertension, diabetes, and cardiovascular aging.
 
 ### 3.2 Heart Attack and Risk Factors by Age Group (10-Year Intervals)
 
@@ -307,9 +341,9 @@ df %>%
 
 **Observation**
 
--   Hypertension and diabetes rates increase steadily until the 50s, followed by a slight decline after 60. This may reflect cumulative health risks from earlier life stages, but also possible medical interventions. Smoking rates peak in the 20s and 30s, then decline sharply, especially after the 60s, likely due to health concerns or cessation efforts.
+-   Hypertension and diabetes rates tend to increase steadily until the 50s, followed by a slight decline after 60, which may be influenced by increased medical intervention and lifestyle modifications. Smoking rates peak in the 20s and 30s before declining sharply after 60, likely due to health concerns or cessation efforts.
 
--   The 30s–50s group exhibits a combination of high smoking rates and increasing hypertension/diabetes, making it the most vulnerable period for heart attacks. Conversely, while smoking rates drop in older adults, pre-existing chronic conditions may continue to drive heart attack risks beyond the 60s.
+-   Although smoking rates decrease in older age groups, earlier exposure to smoking, along with increasing hypertension and diabetes prevalence, may be associated with cardiovascular risks in individuals in their 30s–50s. Conversely, in older adults (60+), chronic conditions such as diabetes and hypertension appear to remain relevant factors for heart attack risk, even as smoking rates decline.
 
 ### 3.3 BMI Distribution by Age Group (30-40s vs. 60+)
 
@@ -368,11 +402,8 @@ df %>%
 
 #### **Observation**
 
--   The median BMI is 24.90 for the 30-40s and 24.97 for the 60+ group, showing no significant difference. A Mann-Whitney U test confirms this (W = 2.70×10⁷, p = 0.99), indicating that the BMI distribution does not differ statisticallybetween the two groups. The rank biserial correlation is nearly zero (-1.07e-04), and the confidence interval \[-0.02, 0.02\]suggests any difference is negligible.
-
-<!-- -->
-
--   Since BMI is not a key differentiating factor for heart attack risk between these age groups, further analysis should focus on other potential contributors, such as physical activity, cholesterol levels, or stress levels.
+-   The median BMI is 24.90 for individuals aged 30-40 and 24.97 for those aged 60+, indicating no statistically significant difference. A Mann-Whitney U test confirms this (W = 2.70×10⁷, p = 0.99), with a rank biserial correlation of nearly zero (-1.07e-04) and a confidence interval of \[-0.02, 0.02\], suggesting that BMI does not serve as a key differentiator for heart attack risk between these age groups.
+-   Despite the common perception that BMI influences heart attack risk, this analysis suggests that other factors, such as cholesterol levels, physical activity, and stress, may play a more significant role in determining cardiovascular outcomes.
 
 ### 3.4 Heart Attack Rate by Alcohol Consumption Level
 
@@ -584,29 +615,32 @@ ggplot(health_factors_by_age, aes(x = variable, y = value, fill = as.factor(hear
 
 #### **Observation**
 
--   30-40s: Higher stress levels and lower physical activity are strongly linked to heart attacks, while higher cholesterol and poor diet quality are also notable risk factors, suggesting lifestyle-related contributors.
+-   30-40s: Higher stress levels and lower physical activity appear to be more common among individuals who experienced a heart attack. Elevated cholesterol levels and poor diet quality are also observed to some extent, suggesting that lifestyle-related factors may be associated with cardiovascular risk in younger adults.
 
-<!-- -->
+-   60+: Individuals who had a heart attack tend to show higher systolic blood pressure compared to those who did not. Unlike younger individuals, where lifestyle factors seem more relevant, chronic conditions such as hypertension and cholesterol levels may play a larger role in cardiovascular risks for older adults.
 
--   60+: Significantly higher systolic blood pressure (BP) is observed in heart attack patients. Unlike younger groups, chronic conditions such as hypertension and cholesterol levels appear to be dominant risk factors.
-
-<!-- -->
-
--   Conclusion: For younger individuals (30-40s), lifestyle factors such as stress and physical activity matter more. In contrast, for older individuals (60+), managing chronic conditions like high blood pressure is crucial in reducing heart attack risks.
+Conclusion:\
+For younger individuals (30-40s), stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+), managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.
 
 ## **4. Conclusion**
 
-In conclusion, the **ggplot2** package has proven to be a powerful tool for exploratory data analysis through visualization. This study analyzed various health factors influencing heart attack occurrences, revealing key insights across different age groups. Younger individuals (30-40s) showed **higher stress levels and lower physical activity** as major risk factors, whereas older individuals (60+) exhibited **higher systolic blood pressure and cholesterol levels**, emphasizing the role of chronic conditions.
+This analysis explored the relationship between heart attack occurrence across different age groups and various health factors, including blood pressure, cholesterol levels, stress, and lifestyle habits.
 
-### 4.1 Future Recommendations
+-   For individuals in their 30s and 40s, higher stress levels, lower physical activity, and elevated cholesterol levels were associated with a higher likelihood of heart attacks.
 
--   Further research should incorporate longitudinal studies to understand the causal relationship between stress, physical activity, and heart disease in younger populations.
+-   For those aged 60 and above, high blood pressure and elevated cholesterol levels were more prominent health indicators linked to heart attack occurrence.
 
--   Policy interventions targeting stress reduction and physical activity promotion among working-age adults should be considered.
+Additionally, the group with moderate alcohol consumption showed the lowest heart attack rates. However, this does not indicate a direct causal relationship but rather suggests potential associations influenced by lifestyle habits and other health factors.
 
--   Healthcare strategies should focus on early detection and management of hypertension and cholesterol in older populations to prevent heart attacks.
+Based on these findings, stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above.However, further research is necessary to establish more definitive causal relationships.
 
-By addressing these areas, public health policies can be tailored more effectively to mitigate heart attack risks across different age groups.
+### 4.1 Future research Agenda
+
+-   Further research should incorporate longitudinal studies to better understand the causal relationship between stress, physical activity, and heart disease in younger populations. Examining how lifestyle changes over time impact cardiovascular health will provide a deeper understanding of early prevention strategies.
+
+-   Additionally, research should explore the effectiveness of policy interventions aimed at stress reduction and physical activity promotion among working-age adults. Investigating whether workplace wellness programs or public health initiatives can mitigate heart attack risks will be valuable.
+
+-   For older populations, future studies should focus on optimizing healthcare strategies for the early detection and management of hypertension and cholesterol levels. Understanding the effectiveness of targeted medical interventions and personalized treatment approaches will be essential in preventing heart attacks in aging populations.
 
 ## **5. Key References**
 

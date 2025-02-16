@@ -53,7 +53,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: Lumen
     css: styles.css
     toc: true
 
