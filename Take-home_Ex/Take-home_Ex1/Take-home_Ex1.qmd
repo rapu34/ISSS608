@@ -10,9 +10,9 @@ execute:
   freeze: true
 ---
 
-# **Take-home Exercise 1**
+# Heart Attack Risks: A Data-Driven Analysis
 
-## **1 Overview**
+# **1. Overview**
 
 ### **1.1 Introduction**
 
@@ -22,13 +22,11 @@ This dataset provides an in-depth analysis of heart attack incidents in Japan, 
 
 This dataset serves as a valuable resource for comparison with global cardiovascular research efforts, such as WHO's 'Global Hearts' initiative and the CDC's 'Million Hearts' program. Additionally, it supports statistical modeling, trend visualization, and predictive analytics, contributing to the development of data-driven public health policies and early intervention programs aimed at reducing the prevalence of cardiovascular diseases.
 
-## 
-
-## **1.2 The Data**
+### **1.2 The Data**
 
 The data for this analysis comes from the **Heart Attack in Japan: Youth vs. Adult** dataset, retrieved from the [Kaggle database](https://www.kaggle.com/datasets/ashaychoudhary/heart-attack-in-japan-youth-vs-adult/data). The dataset provides detailed information on heart attack incidents among youth and adults, focusing on medical indicators, lifestyle factors, and demographic characteristics.
 
-### **Dataset Components**
+**Dataset Components**
 
 The dataset includes various features, such as:
 
@@ -54,398 +52,131 @@ The dataset includes various features, such as:
 
 This dataset serves as a valuable resource for data analysts, healthcare professionals, and policymakers aiming to understand and mitigate cardiovascular risks in Japan. Proper data preprocessing and ethical considerations are recommended before conducting any analysis.
 
-Getting started,
+## **2. Getting started**
+
+### 2.1 Load Packages
+
+We load the following R packages using the **`pacman::p_load()`** function to streamline the workflow:
+
+-   **tidyverse**: A core collection of R packages designed for data science and data manipulation.
+
+-   **ggiraph**: Provides interactive ggplot2 visualizations.
+
+-   **plotly**: Enables interactive plots for data exploration.
+
+-   **patchwork**: Facilitates combining multiple `ggplot2` visualizations into a cohesive layout.
+
+-   **DT**: Provides an interactive table interface for data visualization.
+
+-   **corrplot**: Generates visualizations for correlation matrices.
+
+-   **reshape2**: Helps with data reshaping for efficient analysis.
+
+-   **GGally**: Extends `ggplot2` for correlation and pairwise visualizations.
+
+-   **zoo**: Provides functions for time series data manipulation and rolling window calculations.
+
+-   **ggcorrplot**: Specialized in correlation matrix visualization using `ggplot2`.
 
 ```{r}
-pacman::p_load(ggiraph, plotly, 
-               patchwork, DT, tidyverse,corrplot,reshape2,ggpairs)
+pacman::p_load(ggiraph, plotly, patchwork, DT, tidyverse, 
+               corrplot, reshape2, GGally, zoo, ggcorrplot,ggstatsplot)
 ```
 
-## **1.2 Import**
+### 2.2 Import data
 
 ```{r}
 df <- read_csv("japan_heart_attack_dataset.csv")
 ```
+
+### 2.3 Data pre-processing
 
 ```{r}
 glimpse(df)
 ```
 
-```{r}
-summary(df)
-```
+#### **2.3.1 Check missing values**
 
 ```{r}
+
+colSums(is.na(df))
+```
+
+**2.3.2 Data Cleaning and Encoding of Categorical Variables**
+
+```{r}
+
 df <- df %>%
   mutate(
-    # Yes/No 범주형 변수 → 0/1 변환
     smoking_history = ifelse(Smoking_History == "Yes", 1, 0),
     diabetes_history = ifelse(Diabetes_History == "Yes", 1, 0),
     hypertension_history = ifelse(Hypertension_History == "Yes", 1, 0),
+    gender = ifelse(Gender == "Male", 1, 0),
+    heart_attack_occurrence = ifelse(Heart_Attack_Occurrence == "Yes", 1, 0),
+    region = ifelse(Region == "Urban", 1, 0),
+    family_history = ifelse(Family_History == "Yes", 1, 0), 
     
-    # 성별 변환 (Male → 1, Female → 0)
-    gender = ifelse(Gender == "Male", 1, 0),
-
-    # 심장마비 여부 변환 (Yes → 1, No → 0)
-    heart_attack_occurrence = ifelse(Heart_Attack_Occurrence == "Yes", 1, 0)
-  )
-```
-
-```{r}
-colnames(df)  # 컬럼명 출력
-
-```
-
-```{r}
-df <- df %>%
-  select(-starts_with("Extra_Column"))
-```
-
-```         
-```
-
-```{r}
-df <- df %>%
-  select(-Smoking_History, -Diabetes_History, -Hypertension_History, -Gender, -Heart_Attack_Occurrence)
-
-```
-
-```{r}
-#| label: setup
-#| include: false
-
-# 필요한 패키지 로드
-pacman::p_load(ggiraph, plotly, 
-               patchwork, DT, tidyverse, corrplot, reshape2)
-
-# 데이터 불러오기
-df <- read_csv("japan_heart_attack_dataset.csv")
-
-# . Yes/No 범주형 변수 → 0/1 변환
-df <- df %>%
-  mutate(
-    smoking_history = ifelse(Smoking_History == "Yes", 1, 0),
-    diabetes_history = ifelse(Diabetes_History == "Yes", 1, 0),
-    hypertension_history = ifelse(Hypertension_History == "Yes", 1, 0),
-    gender = ifelse(Gender == "Male", 1, 0),
-    heart_attack_occurrence = ifelse(Heart_Attack_Occurrence == "Yes", 1, 0)
-  )
-
-# 2. 불필요한 컬럼 삭제
-df <- df %>%
-  select(-starts_with("Extra_Column"), 
-         -Smoking_History, -Diabetes_History, -Hypertension_History, 
-         -Gender, -Heart_Attack_Occurrence)
-
-# 3. 연속형 변수만 선택
-numeric_cols <- df %>% select(where(is.numeric))
-
-# 4. 변동이 없는 컬럼(표준편차 0) 제거
-zero_sd_cols <- numeric_cols %>% 
-  summarise(across(everything(), sd, na.rm = TRUE)) %>%
-  select(where(~ . == 0)) %>% colnames()
-numeric_cols <- numeric_cols %>% select(-all_of(zero_sd_cols))
-
-# 5. 상관행렬 생성
-cor_matrix <- cor(numeric_cols, use = "complete.obs")
-
-# 6. 상관행렬이 제대로 생성되었는지 확인
-print(dim(cor_matrix))  # 정상적으로 (n, n) 크기가 나와야 함
-
-```
-
-```{r}
-#| fig-width: 15 
-#| fig-height: 10
-
-corrplot(cor_matrix, method = "circle", type = "lower",
-         col = colorRampPalette(c("blue", "white", "red"))(200),
-         tl.col = "black", tl.srt = 45, 
-         addCoef.col = "black", 
-         number.cex = 0.8, 
-         title = "Correlation Heatmap (corrplot)")
-
-```
-
-```{r}
-#| fig-width: 15 
-#| fig-height: 10
-
-ggplot(df, aes(x = Cholesterol_Level)) +
-  geom_histogram(fill = "blue", bins = 30, alpha = 0.7) +
-  labs(title = "Cholesterol Level Distribution", x = "Cholesterol Level", y = "Count")
-
-```
-
-```{r}
-ggplot(df, aes(x = as.factor(heart_attack_occurrence), y = Cholesterol_Level, fill = as.factor(heart_attack_occurrence))) +
-  geom_boxplot() +
-  labs(title = "Cholesterol Level by Heart Attack Occurrence", x = "Heart Attack (0 = No, 1 = Yes)", y = "Cholesterol Level") +
-  scale_fill_manual(values = c("red", "blue"))
-
-```
-
-```{r}
-ggplot(df, aes(x = as.factor(smoking_history), fill = as.factor(heart_attack_occurrence))) +
-  geom_bar(position = "fill") +
-  labs(title = "Heart Attack Occurrence by Smoking History", x = "Smoking History (0 = No, 1 = Yes)", y = "Proportion") +
-  scale_fill_manual(values = c("red", "blue"), name = "Heart Attack")
-
-```
-
-```{r}
-ggplot(df, aes(x = Systolic_BP, y = Heart_Rate, color = as.factor(heart_attack_occurrence))) +
-  geom_point(alpha = 0.6) +
-  labs(title = "Heart Rate vs. Systolic BP (by Heart Attack Occurrence)", x = "Systolic BP", y = "Heart Rate") +
-  scale_color_manual(values = c("red", "blue"), name = "Heart Attack")
-
-```
-
-```{r}
-# 필요한 패키지 로드
-library(tidyverse)
-
-# 데이터 로드
-df <- read.csv("japan_heart_attack_dataset.csv")
-
-# 불필요한 컬럼 제거
-df <- df %>%
-  select(-starts_with("Extra_Column"))
-
-# 변수명 변경 (snake_case 사용)
-df <- df %>%
-  rename(
-    heart_attack = Heart_Attack_Occurrence,
-    bp_systolic = Systolic_BP,
-    bp_diastolic = Diastolic_BP
-  )
-
-# 연령대 변수 생성 (Youth: 18-35, Adult: 36-79)
-df <- df %>%
-  mutate(
-    age_group = ifelse(Age <= 35, "Youth", "Adult"),
-    bmi_category = case_when(
-      BMI < 18.5 ~ "Underweight",
-      BMI < 25 ~ "Normal",
-      BMI < 30 ~ "Overweight",
-      TRUE ~ "Obese"
+    physical_activity = case_when(
+      Physical_Activity == "Low" ~ 0,
+      Physical_Activity == "Moderate" ~ 1,
+      Physical_Activity == "High" ~ 2
+    ),
+    
+    diet_quality = case_when(
+      Diet_Quality == "Poor" ~ 0,
+      Diet_Quality == "Average" ~ 1,
+      Diet_Quality == "Good" ~ 2
+    ),
+    
+    alcohol_consumption = case_when(
+      Alcohol_Consumption == "None" ~ 0, 
+      Alcohol_Consumption == "Low" ~ 1,   
+      Alcohol_Consumption == "Moderate" ~ 2,
+      Alcohol_Consumption == "High" ~ 3,
     )
-  )
-
+  ) %>%
+  select(-Smoking_History, -Diabetes_History, -Hypertension_History, 
+         -Gender, -Heart_Attack_Occurrence, -Region, -Family_History,
+         -Physical_Activity, -Diet_Quality, -Alcohol_Consumption,
+         -starts_with("Extra_Column_")) 
 ```
 
 ```{r}
-
+ls(df)
 ```
+
+## **3. Exploratory Data Analysis**
+
+### 3.1 Heart Attack Occurrence Rate by Age (5-Year Rolling Average)
+
+#### **Graph Description**
+
+The graph visualizes the heart attack occurrence rate across different ages, with a 5-year rolling average applied to smooth fluctuations. The red line represents the raw occurrence rate, while the blue line highlights the trend. The rate generally increases with age, but interestingly, there are notable variations across different age groups.
+
+::: panel-tabset
+#### The Plot
 
 ```{r}
-#이거 사용가능할듯 BMI 지수가 높은 비만 비율에서 하트어택이 많이 나타난거니까.
-# ->콜레스트롤이랑 같이확인
-ggplot(df, aes(x = bmi_category, y = BMI, fill = heart_attack)) +
-  geom_boxplot() +
-  scale_fill_manual(values = c("No" = "blue", "Yes" = "red")) +
-  labs(title = "BMI Distribution by Heart Attack Occurrence",
-       x = "BMI Category",
-       y = "BMI") +
-  theme_minimal()
-
-```
-
-```{r}
-# BMI 기준으로 비만 여부 컬럼 생성
-df <- df %>%
-  mutate(BMI_Category = case_when(
-    BMI >= 30 ~ "Obese",
-    BMI >= 25 & BMI < 30 ~ "Overweight",
-    BMI >= 18.5 & BMI < 25 ~ "Normal",
-    BMI < 18.5 ~ "Underweight"
-  ))
-
-# BMI 그룹별 심장마비 발생률 계산
-bmi_heart_attack_rate <- df %>%
-  group_by(BMI_Category) %>%
-  summarise(heart_attack_rate = mean(heart_attack, na.rm = TRUE) * 100)
-
-# 시각화
-ggplot(bmi_heart_attack_rate, aes(x = BMI_Category, y = heart_attack_rate, fill = BMI_Category)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Heart Attack Occurrence Rate by BMI Category",
-       x = "BMI Category",
-       y = "Heart Attack Occurrence (%)") +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-    axis.text = element_text(size = 12),
-    axis.title = element_text(size = 12, face = "bold"),
-    legend.position = "none"
-  )
-
-```
-
-```{r}
-ggplot(df, aes(x = Cholesterol_Level, fill = heart_attack)) +
-  geom_density(alpha = 0.5) +
-  scale_fill_manual(values = c("No" = "green", "Yes" = "red")) +
-  labs(title = "Cholesterol Level Distribution by Heart Attack Occurrence",
-       x = "Cholesterol Level",
-       y = "Density") +
-  theme_minimal()
-
-```
-
-```         
-```
-
-```{r}
-ggplot(df, aes(x = Smoking_History, fill = heart_attack)) +
-  geom_bar(position = "fill") +
-  scale_fill_manual(values = c("No" = "gray", "Yes" = "red")) +
-  labs(title = "Heart Attack Occurrence by Smoking History",
-       x = "Smoking History",
-       y = "Proportion") +
-  theme_minimal()
-
-```
-
-```{r}
-ggplot(df, aes(x = heart_attack, y = bp_systolic, fill = heart_attack)) +
-  geom_boxplot() +
-  scale_fill_manual(values = c("No" = "blue", "Yes" = "red")) +
-  labs(title = "Systolic Blood Pressure by Heart Attack Occurrence",
-       x = "Heart Attack Occurrence",
-       y = "Systolic BP") +
-  theme_minimal()
-
-```
-
-```{r}
-library(ggridges)
-
-
-```
-
-```{r}
-ggplot(df, aes(x = Cholesterol_Level, y = age_group, fill = 0.5 - abs(0.5 - stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "Cholesterol Level Distribution by Age Group",
-       x = "Cholesterol Level") +
-  theme_minimal()
-
-```
-
-```{r}
-ggplot(df, aes(x = bp_systolic, y = heart_attack, fill = 0.5 - abs(0.5 - stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "Systolic BP Distribution by Heart Attack Occurrence",
-       x = "Systolic Blood Pressure") +
-  theme_minimal()
-
-```
-
-```{r}
-ggplot(df, aes(x = BMI, y = Smoking_History, fill = 0.5 - abs(0.5 - stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "BMI Distribution by Smoking History",
-       x = "BMI") +
-  theme_minimal()
-
-```
-
-```{r}
-# 필요한 패키지 로드
-library(ggplot2)
-library(ggridges)
-library(patchwork)
-
-# Ridge Plot 1: Age Group별 Cholesterol Level 분포
-ridgeplot_chol <- ggplot(df, aes(x = Cholesterol_Level, y = age_group, fill = 0.5 - abs(0.5 - stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "Cholesterol Level Distribution by Age Group",
-       x = "Cholesterol Level") +
-  theme_minimal()
-
-# Ridge Plot 2: 흡연 여부별 BMI 분포
-ridgeplot_bmi <- ggplot(df, aes(x = BMI, y = Smoking_History, fill = 0.5 - abs(0.5 - stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "BMI Distribution by Smoking History",
-       x = "BMI") +
-  theme_minimal()
-
-# Ridge Plot 3: 심장마비 여부에 따른 수축기 혈압 분포
-ridgeplot_bp <- ggplot(df, aes(x = bp_systolic, y = heart_attack, fill = 0.5 - abs(0.5 - stat(ecdf)))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "Systolic BP Distribution by Heart Attack Occurrence",
-       x = "Systolic Blood Pressure") +
-  theme_minimal()
-
-# 여러 개의 Ridge Plot을 한 화면에 배치
-(ridgeplot_chol / ridgeplot_bmi) | ridgeplot_bp
-
-```
-
-```{r}
-# 필요한 패키지 로드
-library(ggplot2)
-library(ggridges)
+#| echo: false
 library(dplyr)
-
-# 데이터 전처리: 소문자로 저장된 `heart_attack` 변수를 사용
-df <- df %>%
-  mutate(heart_attack = factor(heart_attack, levels = c("No", "Yes")))
-
-# Ridge Plot: 심장마비 여부(Yes/No)별 콜레스테롤 수치 분포
-ggplot(df, aes(x = Cholesterol_Level, y = heart_attack, fill = after_stat(ecdf))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
-  scale_fill_viridis_c(name = "Tail probability", direction = -1) +
-  labs(title = "Cholesterol Level Distribution by Heart Attack Occurrence",
-       x = "Cholesterol Level",
-       y = "Heart Attack") +
-  theme_minimal()
-
-
-```
-
-```{r}
-# 데이터 로드
-df <- read.csv("japan_heart_attack_dataset.csv")
-df <- df %>%
-  mutate(heart_attack = case_when(
-    Heart_Attack_Occurrence == "Yes" ~ 1,
-    Heart_Attack_Occurrence == "No" ~ 0,
-    TRUE ~ NA_real_
-  ))
-
-```
-
-```{r}
-table(df$heart_attack, useNA = "ifany")  # 변환된 값 개수 확인
-
-```
-
-```{r}
-#1번으로갑니다!
-
-# 필요한 패키지 로드
 library(ggplot2)
-library(dplyr)
+library(zoo)
 
-
-# 연령별 심장마비 발생률 계산
 age_heart_attack_rate <- df %>%
   group_by(Age) %>%
-  summarise(heart_attack_rate = mean(heart_attack) * 100)
+  summarize(heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(Age = as.numeric(Age))  
 
-# 시각화 (ggplot2)
-ggplot(age_heart_attack_rate, aes(x = Age, y = heart_attack_rate)) +
-  geom_line(color = "red", size = 1) +  # 선 그래프
-  geom_point(color = "red", size = 2) +  # 점 추가
-  labs(title = "Heart Attack Occurrence Rate by Age",
+age_heart_attack_rate <- age_heart_attack_rate %>%
+  arrange(Age) %>%
+  mutate(rolling_avg = rollmean(heart_attack_rate, k = 5, fill = mean(heart_attack_rate, na.rm = TRUE), align = "right", na.rm = TRUE))
+
+ggplot(na.omit(age_heart_attack_rate), aes(x = Age)) +
+  geom_line(aes(y = heart_attack_rate), color = "red", size = 1, alpha = 0.5) +  
+  geom_line(aes(y = rolling_avg), color = "blue", size = 1.2) + 
+  geom_point(aes(y = rolling_avg), color = "blue", size = 2) +  
+  labs(title = "Heart Attack Occurrence Rate by Age (5-Year Rolling Avg)",
        x = "Age",
        y = "Heart Attack Occurrence (%)") +
   theme_minimal() +
@@ -455,30 +186,31 @@ ggplot(age_heart_attack_rate, aes(x = Age, y = heart_attack_rate)) +
     axis.title = element_text(size = 12, face = "bold"),
     panel.grid.major = element_line(color = "gray", linetype = "dashed")
   )
-
 ```
 
-```{r}
-df <- df %>%
-  mutate(Age_Group_10s = cut(Age, breaks = seq(10, 80, by = 10), 
-                             labels = c("10s", "20s", "30s", "40s", "50s", "60s", "70s"), 
-                             right = FALSE))
+#### The code chunk
 
-age_group_heart_attack_rate <- df %>%
-  group_by(Age_Group_10s) %>%
-  summarise(heart_attack_rate = mean(heart_attack, na.rm = TRUE) * 100)
+```{r, echo=TRUE, eval=FALSE}
+library(dplyr)
+library(ggplot2)
+library(zoo)
 
-# 확인
-print(age_group_heart_attack_rate)
+age_heart_attack_rate <- df %>%
+  group_by(Age) %>%
+  summarize(heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(Age = as.numeric(Age))  
 
-```
+age_heart_attack_rate <- age_heart_attack_rate %>%
+  arrange(Age) %>%
+  mutate(rolling_avg = rollmean(heart_attack_rate, k = 5, fill = mean(heart_attack_rate, na.rm = TRUE), align = "right", na.rm = TRUE))
 
-```{r}
-ggplot(age_group_heart_attack_rate, aes(x = Age_Group_10s, y = heart_attack_rate, group = 1)) +
-  geom_line(color = "blue", size = 1.2) +
-  geom_point(color = "blue", size = 3) +
-  labs(title = "Heart Attack Occurrence Rate by 10-Year Age Group",
-       x = "Age Group",
+ggplot(na.omit(age_heart_attack_rate), aes(x = Age)) +
+  geom_line(aes(y = heart_attack_rate), color = "red", size = 1, alpha = 0.5) +  
+  geom_line(aes(y = rolling_avg), color = "blue", size = 1.2) + 
+  geom_point(aes(y = rolling_avg), color = "blue", size = 2) +  
+  labs(title = "Heart Attack Occurrence Rate by Age (5-Year Rolling Avg)",
+       x = "Age",
        y = "Heart Attack Occurrence (%)") +
   theme_minimal() +
   theme(
@@ -487,196 +219,399 @@ ggplot(age_group_heart_attack_rate, aes(x = Age_Group_10s, y = heart_attack_rate
     axis.title = element_text(size = 12, face = "bold"),
     panel.grid.major = element_line(color = "gray", linetype = "dashed")
   )
-
-
 ```
+:::
 
-바이올린인가 콜레스트롤 찍어보기. 거기서 찍어보고 위험군 나눠서 하트어택이랑 연관성 확인할것.
+#### **Observation**
+
+An unexpectedly high occurrence is observed in the 30s and 40s, suggesting that younger adults may also be at risk. The rate temporarily declines in the late 50s before rising again sharply from the late 60s onward. The high occurrence in younger individuals could be attributed to lifestyle factors like stress, smoking, or underlying health conditions, while the decline in the late 50s might indicate medical intervention or lifestyle modifications. The increase in older adults aligns with conventional risk factors such as hypertension, diabetes, and cardiovascular aging.
+
+### 3.2 Heart Attack and Risk Factors by Age Group (10-Year Intervals)
+
+#### **Graph Description**
+
+This graph illustrates the heart attack rate along with key risk factors—smoking, hypertension, and diabetes—across different age groups in 10-year intervals. Each colored line represents a different variable, highlighting how these factors change with age.
+
+::: panel-tabset
+#### The Plot
 
 ```{r}
-#처음 전처리한 데이터사용
-# 필요한 패키지 로드
-library(tidyverse)
+#| echo: false
 
-# 콜레스테롤을 5개 그룹으로 나누기 (Very Low ~ Very High)
-df <- df %>%
-  mutate(Cholesterol_Category = cut(Cholesterol_Level, 
-                                    breaks = quantile(Cholesterol_Level, probs = seq(0, 1, 0.2), na.rm = TRUE), 
-                                    include.lowest = TRUE,
-                                    labels = c("Very Low", "Low", "Normal", "High", "Very High")))
-
-# 콜레스테롤 그룹별 심장마비 발생률 계산
-cholesterol_heart_attack_rate <- df %>%
-  group_by(Cholesterol_Category) %>%
-  summarise(heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE) * 100)
-
-# 결과 확인
-print(cholesterol_heart_attack_rate)
-
-```
-
-```{r}
-# 필요한 패키지 로드
-library(tidyverse)
-
-# 콜레스테롤을 5개 그룹으로 나누기 (Very Low ~ Very High)
-df <- df %>%
-  mutate(Cholesterol_Category = cut(Cholesterol_Level, 
-                                    breaks = quantile(Cholesterol_Level, probs = seq(0, 1, 0.2), na.rm = TRUE), 
-                                    include.lowest = TRUE,
-                                    labels = c("Very Low", "Low", "Normal", "High", "Very High")))
-
-# 콜레스테롤 그룹별 심장마비 발생 건수 계산
-cholesterol_heart_attack_count <- df %>%
-  group_by(Cholesterol_Category, heart_attack_occurrence) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  pivot_wider(names_from = heart_attack_occurrence, values_from = count, values_fill = 0) %>%
-  rename(No_Heart_Attack = `0`, Heart_Attack = `1`)
-
-# 결과 확인
-print(cholesterol_heart_attack_count)
-
-```
-
-```{r}
-ggplot(cholesterol_heart_attack_rate, aes(x = Cholesterol_Category, y = heart_attack_rate, fill = Cholesterol_Category)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Heart Attack Occurrence Rate by Cholesterol Level",
-       x = "Cholesterol Category",
-       y = "Heart Attack Occurrence (%)") +
+df %>%
+  mutate(Age_Group = cut(Age, 
+                         breaks = c(0, 20, 30, 40, 50, 60, 70, 80, Inf),  
+                         include.lowest = TRUE, 
+                         right = FALSE, 
+                         labels = c("<20", "20s", "30s", "40s", "50s", "60s", "70s", "80+"))) %>%
+  mutate(Age_Group = factor(Age_Group, levels = c("<20", "20s", "30s", "40s", "50s", "60s", "70s", "80+"))) %>%
+  group_by(Age_Group) %>%
+  summarise(
+    heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE) * 100,
+    smoking_rate = mean(smoking_history, na.rm = TRUE) * 100,  
+    hypertension_rate = mean(hypertension_history, na.rm = TRUE) * 100,  
+    diabetes_rate = mean(diabetes_history, na.rm = TRUE) * 100  
+  ) %>%
+  pivot_longer(cols = c(heart_attack_rate, smoking_rate, hypertension_rate, diabetes_rate),
+               names_to = "variable", values_to = "rate") %>%
+  ggplot(aes(x = Age_Group, y = rate, color = variable, group = variable)) +
+  geom_line(size = 1.2) +  
+  geom_point(size = 3) +  
+  labs(title = "Heart Attack and Risk Factors by Age Group (10-year intervals)",
+       x = "Age Group",
+       y = "Rate (%)") +
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-    axis.text = element_text(size = 12),
+    axis.text.x = element_text(size = 12), 
     axis.title = element_text(size = 12, face = "bold"),
-    legend.position = "none"
+    panel.grid.major = element_line(color = "gray", linetype = "dashed")
   )
-
 ```
 
-```{r}
-# 필요한 패키지 로드
-library(tidyverse)
+#### The code chunk
 
-# 의학적 기준 (WHO/AHA)으로 콜레스테롤을 5개 그룹으로 나누기
-df <- df %>%
-  mutate(Cholesterol_Category = cut(Cholesterol_Level, 
-                                    breaks = c(-Inf, 130, 160, 190, 220, Inf), 
-                                    include.lowest = TRUE,
-                                    labels = c("Very Low", "Low", "Normal", "High", "Very High")))
+```{r, echo=TRUE, eval=FALSE}
 
-# 콜레스테롤 그룹별 심장마비 발생 건수 계산
-cholesterol_heart_attack_count <- df %>%
-  group_by(Cholesterol_Category, heart_attack_occurrence) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  pivot_wider(names_from = heart_attack_occurrence, values_from = count, values_fill = 0) %>%
-  rename(No_Heart_Attack = `0`, Heart_Attack = `1`)
-
-# 결과 확인
-print(cholesterol_heart_attack_count)
-
-```
-
-```{r}
-ggplot(cholesterol_heart_attack_count, aes(x = Cholesterol_Category)) +
-  geom_bar(aes(y = No_Heart_Attack, fill = "No Heart Attack"), stat = "identity") +
-  geom_bar(aes(y = Heart_Attack, fill = "Heart Attack"), stat = "identity", position = "stack") +
-  labs(title = "Heart Attack Occurrence by Cholesterol Category (WHO/AHA Standard)",
-       x = "Cholesterol Category", y = "Count") +
-  scale_fill_manual(values = c("blue", "red")) +
-  theme_minimal()
-
-
-```
-
-```{r}
-# 콜레스테롤 그룹별 심장마비 발생 비율 계산
-cholesterol_heart_attack_rate <- df %>%
-  group_by(Cholesterol_Category) %>%
+df %>%
+  mutate(Age_Group = cut(Age, 
+                         breaks = c(0, 20, 30, 40, 50, 60, 70, 80, Inf),  
+                         include.lowest = TRUE, 
+                         right = FALSE, 
+                         labels = c("<20", "20s", "30s", "40s", "50s", "60s", "70s", "80+"))) %>%
+  mutate(Age_Group = factor(Age_Group, levels = c("<20", "20s", "30s", "40s", "50s", "60s", "70s", "80+"))) %>%
+  group_by(Age_Group) %>%
   summarise(
-    Heart_Attack_Count = sum(heart_attack_occurrence, na.rm = TRUE),
-    Total_Count = n(),
-    Heart_Attack_Rate = (Heart_Attack_Count / Total_Count) * 100
+    heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE) * 100,
+    smoking_rate = mean(smoking_history, na.rm = TRUE) * 100,  
+    hypertension_rate = mean(hypertension_history, na.rm = TRUE) * 100,  
+    diabetes_rate = mean(diabetes_history, na.rm = TRUE) * 100  
+  ) %>%
+  pivot_longer(cols = c(heart_attack_rate, smoking_rate, hypertension_rate, diabetes_rate),
+               names_to = "variable", values_to = "rate") %>%
+  ggplot(aes(x = Age_Group, y = rate, color = variable, group = variable)) +
+  geom_line(size = 1.2) +  
+  geom_point(size = 3) +  
+  labs(title = "Heart Attack and Risk Factors by Age Group (10-year intervals)",
+       x = "Age Group",
+       y = "Rate (%)") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    axis.text.x = element_text(size = 12), 
+    axis.title = element_text(size = 12, face = "bold"),
+    panel.grid.major = element_line(color = "gray", linetype = "dashed")
+  )
+```
+:::
+
+**Observation**
+
+-   Hypertension and diabetes rates increase steadily until the 50s, followed by a slight decline after 60. This may reflect cumulative health risks from earlier life stages, but also possible medical interventions. Smoking rates peak in the 20s and 30s, then decline sharply, especially after the 60s, likely due to health concerns or cessation efforts.
+
+-   The 30s–50s group exhibits a combination of high smoking rates and increasing hypertension/diabetes, making it the most vulnerable period for heart attacks. Conversely, while smoking rates drop in older adults, pre-existing chronic conditions may continue to drive heart attack risks beyond the 60s.
+
+### 3.3 BMI Distribution by Age Group (30-40s vs. 60+)
+
+#### **Graph Description**
+
+This violin plot with a boxplot overlay compares the BMI distributions of individuals aged 30-40s and 60+. It provides a visual representation of the median values, spread, and density for each group.
+
+::: panel-tabset
+#### The Plot
+
+```{r}
+#| echo: false
+df %>%
+  filter(Age >= 30 & Age <= 40 | Age >= 60) %>%
+  mutate(
+    age_group = case_when(
+      Age >= 30 & Age <= 40 ~ "30-40s",
+      Age >= 60 ~ "60+"
+    ),
+    heart_attack_label = ifelse(heart_attack_occurrence == 1, "Yes", "No")
+  ) %>%
+  ggbetweenstats(
+    x = age_group, 
+    y = BMI, 
+    grouping.var = heart_attack_label,  
+    type = "np",                        # Mann-Whitney U test
+    pairwise.comparisons = TRUE,        
+    messages = FALSE
   )
 
-# 비율 기반 시각화
-ggplot(cholesterol_heart_attack_rate, aes(x = Cholesterol_Category, y = Heart_Attack_Rate, fill = Cholesterol_Category)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Heart Attack Percentage by Cholesterol Category",
-       x = "Cholesterol Category", y = "Heart Attack Rate (%)") +
+```
+
+#### The code chunk
+
+```{r, echo=TRUE, eval=FALSE}
+df %>%
+  filter(Age >= 30 & Age <= 40 | Age >= 60) %>%
+  mutate(
+    age_group = case_when(
+      Age >= 30 & Age <= 40 ~ "30-40s",
+      Age >= 60 ~ "60+"
+    ),
+    heart_attack_label = ifelse(heart_attack_occurrence == 1, "Yes", "No")
+  ) %>%
+  ggbetweenstats(
+    x = age_group, 
+    y = BMI, 
+    grouping.var = heart_attack_label,  
+    type = "np",                       # Mann-Whitney U test
+    pairwise.comparisons = TRUE,       
+    messages = FALSE
+  )
+
+```
+:::
+
+#### **Observation**
+
+-   The median BMI is 24.90 for the 30-40s and 24.97 for the 60+ group, showing no significant difference. A Mann-Whitney U test confirms this (W = 2.70×10⁷, p = 0.99), indicating that the BMI distribution does not differ statisticallybetween the two groups. The rank biserial correlation is nearly zero (-1.07e-04), and the confidence interval \[-0.02, 0.02\]suggests any difference is negligible.
+
+<!-- -->
+
+-   Since BMI is not a key differentiating factor for heart attack risk between these age groups, further analysis should focus on other potential contributors, such as physical activity, cholesterol levels, or stress levels.
+
+### 3.4 Heart Attack Rate by Alcohol Consumption Level
+
+#### **Graph Description**
+
+This bar chart illustrates the heart attack rates across different levels of alcohol consumption: None, Low, Moderate, and High. The data suggests a non-linear trend, with moderate drinkers showing the lowest heart attack rate, while both non-drinkers and heavy drinkers exhibit slightly higher rates.
+
+::: panel-tabset
+#### The Plot
+
+```{r}
+#| echo: false
+library(dplyr)
+library(ggplot2)
+
+heart_attack_by_alcohol <- df %>%
+  group_by(alcohol_consumption) %>%
+  summarize(heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE)) %>%
+  ungroup()
+
+
+heart_attack_by_alcohol <- heart_attack_by_alcohol %>%
+  mutate(
+    alcohol_label = factor(alcohol_consumption, 
+                           levels = c(0, 1, 2, 3), 
+                           labels = c("None", "Low", "Moderate", "High"))
+  )
+
+ggplot(heart_attack_by_alcohol, aes(x = alcohol_label, y = heart_attack_rate, fill = alcohol_label)) +
+  geom_bar(stat = "identity", width = 0.6, color = "black", size = 0.5) + 
+  scale_fill_manual(values = c("None" = "#A93226", "Low" = "#E67E22", "Moderate" = "#2ECC71", "High" = "#3498DB")) + # 색상 강조
+  labs(
+    title = "Heart Attack Rate by Alcohol Consumption Level",
+    x = "Alcohol Consumption Level",
+    y = "Heart Attack Rate (%)",
+    fill = "Alcohol Level"
+  ) +
+  theme_minimal(base_size = 14) + 
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 18), 
+    axis.title.x = element_text(size = 14, face = "bold"), 
+    axis.title.y = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 12), 
+    legend.title = element_text(size = 14, face = "bold"), 
+    legend.text = element_text(size = 12), 
+    panel.grid.major = element_line(color = "gray90"), 
+    panel.grid.minor = element_blank()
+  )
+```
+
+#### The code chunk
+
+```{r, echo=TRUE, eval=FALSE}
+library(dplyr)
+library(ggplot2)
+
+heart_attack_by_alcohol <- df %>%
+  group_by(alcohol_consumption) %>%
+  summarize(heart_attack_rate = mean(heart_attack_occurrence, na.rm = TRUE)) %>%
+  ungroup()
+
+
+heart_attack_by_alcohol <- heart_attack_by_alcohol %>%
+  mutate(
+    alcohol_label = factor(alcohol_consumption, 
+                           levels = c(0, 1, 2, 3), 
+                           labels = c("None", "Low", "Moderate", "High"))
+  )
+
+ggplot(heart_attack_by_alcohol, aes(x = alcohol_label, y = heart_attack_rate, fill = alcohol_label)) +
+  geom_bar(stat = "identity", width = 0.6, color = "black", size = 0.5) + 
+  scale_fill_manual(values = c("None" = "#A93226", "Low" = "#E67E22", "Moderate" = "#2ECC71", "High" = "#3498DB")) + # 색상 강조
+  labs(
+    title = "Heart Attack Rate by Alcohol Consumption Level",
+    x = "Alcohol Consumption Level",
+    y = "Heart Attack Rate (%)",
+    fill = "Alcohol Level"
+  ) +
+  theme_minimal(base_size = 14) + 
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 18), 
+    axis.title.x = element_text(size = 14, face = "bold"), 
+    axis.title.y = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 12), 
+    legend.title = element_text(size = 14, face = "bold"), 
+    legend.text = element_text(size = 12), 
+    panel.grid.major = element_line(color = "gray90"), 
+    panel.grid.minor = element_blank()
+  )
+```
+:::
+
+#### **Observation**
+
+-   The findings suggest that moderate alcohol consumption may be linked to a lower risk of heart attack, potentially due to improved circulation or reduced stress. However, this does not imply that drinking is beneficial. Other contributing factors, such as lifestyle, diet, and pre-existing health conditions, could influence these results.
+
+<!-- -->
+
+-   Further investigation is required to determine whether alcohol consumption has a direct causal effect on heart attack risk or if other confounding factors play a more significant role.
+
+### 3.5 Standardized Health Factors by Heart Attack Occurrence (by Age Group)
+
+#### **Graph Description**
+
+This bar chart displays the standardized Z-scores of key health factors for individuals with and without heart attacks, categorized into two age groups: 30-40s and 60+. Red bars represent those who have experienced a heart attack, while blue bars represent those who have not.
+
+::: panel-tabset
+#### The Plot
+
+```{r}
+#| echo: false
+df_scaled <- df %>%
+  mutate(age_group = ifelse(Age >= 60, "60+", "30-40s")) %>%
+  group_by(age_group) %>%
+  mutate(
+    diet_quality_scaled = scale(diet_quality),
+    physical_activity_scaled = scale(physical_activity),
+    BMI_scaled = scale(BMI),
+    stress_scaled = scale(Stress_Levels),
+    cholesterol_scaled = scale(Cholesterol_Level),
+    systolic_BP_scaled = scale(Systolic_BP),
+    diastolic_BP_scaled = scale(Diastolic_BP)
+  ) %>%
+  ungroup()
+
+health_factors_by_age <- df_scaled %>%
+  group_by(age_group, heart_attack_occurrence) %>%
+  summarise(
+    diet_quality_avg = mean(diet_quality_scaled),
+    physical_activity_avg = mean(physical_activity_scaled),
+    BMI_avg = mean(BMI_scaled),
+    stress_avg = mean(stress_scaled),
+    cholesterol_avg = mean(cholesterol_scaled),
+    systolic_BP_avg = mean(systolic_BP_scaled),
+    diastolic_BP_avg = mean(diastolic_BP_scaled)
+  ) %>%
+  pivot_longer(cols = -c(age_group, heart_attack_occurrence), 
+               names_to = "variable", values_to = "value")
+
+ggplot(health_factors_by_age, aes(x = variable, y = value, fill = as.factor(heart_attack_occurrence))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~age_group) +  
+  labs(title = "Standardized Health Factors by Heart Attack Occurrence (by Age Group)",
+       x = "Health Factor",
+       y = "Standardized Average Value (Z-score)",
+       fill = "Heart Attack (0: No, 1: Yes)") +
+  scale_fill_manual(values = c("0" = "#3498DB", "1" = "#E74C3C")) +
   theme_minimal() +
-  scale_fill_brewer(palette = "Reds")
-
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    axis.text.x = element_text(size = 12, angle = 45, hjust = 1),  
+    axis.title.x = element_text(face = "bold"),
+    legend.text = element_text(size = 10),
+    legend.title = element_text(face = "bold"),
+    strip.text = element_text(size = 12, face = "bold")  
+  )
 ```
 
-```{r}
-tbl <- table(df$Cholesterol_Category, df$heart_attack_occurrence)
-chisq.test(tbl)
+#### The code chunk
 
-```
+```{r, echo=TRUE, eval=FALSE}
+df_scaled <- df %>%
+  mutate(age_group = ifelse(Age >= 60, "60+", "30-40s")) %>%
+  group_by(age_group) %>%
+  mutate(
+    diet_quality_scaled = scale(diet_quality),
+    physical_activity_scaled = scale(physical_activity),
+    BMI_scaled = scale(BMI),
+    stress_scaled = scale(Stress_Levels),
+    cholesterol_scaled = scale(Cholesterol_Level),
+    systolic_BP_scaled = scale(Systolic_BP),
+    diastolic_BP_scaled = scale(Diastolic_BP)
+  ) %>%
+  ungroup()
 
-```{r}
-model <- glm(heart_attack_occurrence ~ Cholesterol_Level, data = df, family = binomial)
-summary(model)
-```
+health_factors_by_age <- df_scaled %>%
+  group_by(age_group, heart_attack_occurrence) %>%
+  summarise(
+    diet_quality_avg = mean(diet_quality_scaled),
+    physical_activity_avg = mean(physical_activity_scaled),
+    BMI_avg = mean(BMI_scaled),
+    stress_avg = mean(stress_scaled),
+    cholesterol_avg = mean(cholesterol_scaled),
+    systolic_BP_avg = mean(systolic_BP_scaled),
+    diastolic_BP_avg = mean(diastolic_BP_scaled)
+  ) %>%
+  pivot_longer(cols = -c(age_group, heart_attack_occurrence), 
+               names_to = "variable", values_to = "value")
 
-```{r}
-library(ggplot2)
-library(dplyr)
-
-# 성별별 심장마비 발생률 계산
-gender_heart_attack <- df %>%
-  group_by(Gender, heart_attack_occurrence) %>%
-  summarise(count = n(), .groups = "drop")
-
-# 시각화
-ggplot(gender_heart_attack, aes(x = Gender, y = count, fill = as.factor(heart_attack_occurrence))) +
+ggplot(health_factors_by_age, aes(x = variable, y = value, fill = as.factor(heart_attack_occurrence))) +
   geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Heart Attack Occurrence by Gender",
-       x = "Gender", y = "Count", fill = "Heart Attack") +
-  scale_fill_manual(values = c("blue", "red"), labels = c("No", "Yes")) +
-  theme_minimal()
-
+  facet_wrap(~age_group) +  
+  labs(title = "Standardized Health Factors by Heart Attack Occurrence (by Age Group)",
+       x = "Health Factor",
+       y = "Standardized Average Value (Z-score)",
+       fill = "Heart Attack (0: No, 1: Yes)") +
+  scale_fill_manual(values = c("0" = "#3498DB", "1" = "#E74C3C")) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    axis.text.x = element_text(size = 12, angle = 45, hjust = 1),  
+    axis.title.x = element_text(face = "bold"),
+    legend.text = element_text(size = 10),
+    legend.title = element_text(face = "bold"),
+    strip.text = element_text(size = 12, face = "bold")  
+  )
 ```
+:::
 
-```{r}
-# 지역별 심장마비 발생률 계산
-region_heart_attack <- df %>%
-  group_by(Region, heart_attack_occurrence) %>%
-  summarise(count = n(), .groups = "drop")
+#### **Observation**
 
-# 시각화
-ggplot(region_heart_attack, aes(x = Region, y = count, fill = as.factor(heart_attack_occurrence))) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Heart Attack Occurrence by Region",
-       x = "Region (Urban/Rural)", y = "Count", fill = "Heart Attack") +
-  scale_fill_manual(values = c("blue", "red"), labels = c("No", "Yes")) +
-  theme_minimal()
+-   30-40s: Higher stress levels and lower physical activity are strongly linked to heart attacks, while higher cholesterol and poor diet quality are also notable risk factors, suggesting lifestyle-related contributors.
 
-```
+<!-- -->
 
-```{r}
-library(ggplot2)
-library(dplyr)
+-   60+: Significantly higher systolic blood pressure (BP) is observed in heart attack patients. Unlike younger groups, chronic conditions such as hypertension and cholesterol levels appear to be dominant risk factors.
 
-# 전체 지역별 인원수 기준으로 심장마비 발생 비율 계산
-region_heart_attack_rate <- df %>%
-  group_by(Region, heart_attack_occurrence) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  group_by(Region) %>%
-  mutate(percentage = count / sum(count) * 100)
+<!-- -->
 
-# 결과 확인
-print(region_heart_attack_rate)
+-   Conclusion: For younger individuals (30-40s), lifestyle factors such as stress and physical activity matter more. In contrast, for older individuals (60+), managing chronic conditions like high blood pressure is crucial in reducing heart attack risks.
 
-```
+## **4. Conclusion**
 
-```{r}
-ggplot(region_heart_attack_rate, aes(x = Region, y = percentage, fill = as.factor(heart_attack_occurrence))) +
-  geom_bar(stat = "identity", position = "stack") +
-  labs(title = "Heart Attack Percentage by Region",
-       x = "Region (Urban/Rural)", y = "Heart Attack Rate (%)", fill = "Heart Attack") +
-  scale_fill_manual(values = c("blue", "red"), labels = c("No", "Yes")) +
-  theme_minimal()
+In conclusion, the **ggplot2** package has proven to be a powerful tool for exploratory data analysis through visualization. This study analyzed various health factors influencing heart attack occurrences, revealing key insights across different age groups. Younger individuals (30-40s) showed **higher stress levels and lower physical activity** as major risk factors, whereas older individuals (60+) exhibited **higher systolic blood pressure and cholesterol levels**, emphasizing the role of chronic conditions.
 
-```
+### 4.1 Future Recommendations
+
+-   Further research should incorporate longitudinal studies to understand the causal relationship between stress, physical activity, and heart disease in younger populations.
+
+-   Policy interventions targeting stress reduction and physical activity promotion among working-age adults should be considered.
+
+-   Healthcare strategies should focus on early detection and management of hypertension and cholesterol in older populations to prevent heart attacks.
+
+By addressing these areas, public health policies can be tailored more effectively to mitigate heart attack risks across different age groups.
+
+## **5. Key References**
+
+-   [R for Visual Analytics](https://r4va.netlify.app/).
+
+-   [R for Data Science](https://r4ds.hadley.nz/).
+
+-   [Kaggle Japan Heart attack database](https://www.kaggle.com/datasets/ashaychoudhary/heart-attack-in-japan-youth-vs-adult/data)
