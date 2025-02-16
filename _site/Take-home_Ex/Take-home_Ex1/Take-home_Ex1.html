@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#heart-attack-risks-a-data-driven-analysis" id="toc-heart-attack-risks-a-data-driven-analysis" class="nav-link active" data-scroll-target="#heart-attack-risks-a-data-driven-analysis">Heart Attack Risks: A Data-Driven Analysis</a></li>
+  <li><a href="#heart-attack-risks-a-data-driven-analysis" id="toc-heart-attack-risks-a-data-driven-analysis" class="nav-link active" data-scroll-target="#heart-attack-risks-a-data-driven-analysis"><strong>Heart Attack Risks: A Data-Driven Analysis</strong></a></li>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>1. Overview</strong></a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1.1 Introduction</a></li>
@@ -251,8 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">2.2 Import data</a></li>
   <li><a href="#data-overview-pre-processing" id="toc-data-overview-pre-processing" class="nav-link" data-scroll-target="#data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</a>
   <ul class="collapse">
-  <li><a href="#check-missing-values" id="toc-check-missing-values" class="nav-link" data-scroll-target="#check-missing-values"><strong>2.3.1 Check missing values</strong></a></li>
-  <li><a href="#data-cleaning-and-encoding-of-categorical-variables" id="toc-data-cleaning-and-encoding-of-categorical-variables" class="nav-link" data-scroll-target="#data-cleaning-and-encoding-of-categorical-variables"><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></a></li>
+  <li><a href="#check-missing-values" id="toc-check-missing-values" class="nav-link" data-scroll-target="#check-missing-values">2.3.1 Check missing values</a></li>
+  <li><a href="#data-cleaning-and-encoding-of-categorical-variables" id="toc-data-cleaning-and-encoding-of-categorical-variables" class="nav-link" data-scroll-target="#data-cleaning-and-encoding-of-categorical-variables">2.3.2 Data Cleaning and Encoding of Categorical Variables</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><strong>3. Exploratory Data Analysis</strong></a>
@@ -312,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="heart-attack-risks-a-data-driven-analysis" class="level1">
-<h1>Heart Attack Risks: A Data-Driven Analysis</h1>
+<h1><strong>Heart Attack Risks: A Data-Driven Analysis</strong></h1>
 </section>
 <section id="overview" class="level1">
 <h1><strong>1. Overview</strong></h1>
@@ -419,7 +419,7 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </div>
 </div>
 <section id="check-missing-values" class="level3">
-<h3 class="anchored" data-anchor-id="check-missing-values"><strong>2.3.1 Check missing values</strong></h3>
+<h3 class="anchored" data-anchor-id="check-missing-values">2.3.1 Check missing values</h3>
 <p><code>colSums(is.na(df))</code>&nbsp;calculates the&nbsp;<strong>number of missing values</strong>&nbsp;in each column of the dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -450,7 +450,7 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </div>
 </section>
 <section id="data-cleaning-and-encoding-of-categorical-variables" class="level3">
-<h3 class="anchored" data-anchor-id="data-cleaning-and-encoding-of-categorical-variables"><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></h3>
+<h3 class="anchored" data-anchor-id="data-cleaning-and-encoding-of-categorical-variables">2.3.2 Data Cleaning and Encoding of Categorical Variables</h3>
 <p>This preprocessing step&nbsp;transforms categorical variables into numeric representations&nbsp;and&nbsp;removes unnecessary columns&nbsp;to prepare the dataset for analysis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>

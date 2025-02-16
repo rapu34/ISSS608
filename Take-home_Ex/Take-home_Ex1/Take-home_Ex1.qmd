@@ -10,7 +10,7 @@ execute:
   freeze: true
 ---
 
-# Heart Attack Risks: A Data-Driven Analysis
+# **Heart Attack Risks: A Data-Driven Analysis**
 
 # **1. Overview**
 
@@ -98,7 +98,7 @@ This output from `glimpse(df)` provides a summary of the dataset's structure, 
 glimpse(df)
 ```
 
-### **2.3.1 Check missing values**
+### 2.3.1 Check missing values
 
 `colSums(is.na(df))` calculates the **number of missing values** in each column of the dataset.
 
@@ -107,7 +107,7 @@ glimpse(df)
 colSums(is.na(df))
 ```
 
-### **2.3.2 Data Cleaning and Encoding of Categorical Variables**
+### 2.3.2 Data Cleaning and Encoding of Categorical Variables
 
 This preprocessing step transforms categorical variables into numeric representations and removes unnecessary columns to prepare the dataset for analysis.
 
