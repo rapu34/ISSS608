@@ -14,7 +14,7 @@ execute:
 
 # **1. Overview**
 
-### **1.1 Introduction**
+## 1.1 Introduction
 
 According to the World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately 17.9 million deaths per year. Among them, heart attacks are particularly critical, emphasizing the need for early prevention and risk analysis.
 
@@ -22,7 +22,7 @@ This dataset examines heart attack incidents in Japan, comparing youth and adult
 
 By leveraging this dataset, researchers and policymakers can enhance prevention strategies and compare findings with global initiatives like WHO’s *Global Hearts* and the CDC’s *Million Hearts* program. It also supports statistical modeling and predictive analytics to inform data-driven public health policies and early interventions.
 
-### **1.2 The Data**
+## 1.2 The Data
 
 The data for this analysis comes from the **Heart Attack in Japan: Youth vs. Adult** dataset, retrieved from the [Kaggle database](https://www.kaggle.com/datasets/ashaychoudhary/heart-attack-in-japan-youth-vs-adult/data). The dataset provides detailed information on heart attack incidents among youth and adults, focusing on medical indicators, lifestyle factors, and demographic characteristics.
 
@@ -50,9 +50,9 @@ The dataset includes various features, such as:
 
 -   Additionally, the dataset contains extra computed columns that are not directly relevant to this analysis. These columns will be removed during data preprocessing to ensure cleaner and more interpretable results.
 
-## **2. Getting started**
+# **2. Getting started**
 
-### 2.1 Load Packages
+## 2.1 Load Packages
 
 We load the following R packages using the **`pacman::p_load()`** function to streamline the workflow:
 
@@ -84,13 +84,13 @@ pacman::p_load(ggiraph, plotly, patchwork, DT, tidyverse,
 
 ```
 
-### 2.2 Import data
+## 2.2 Import data
 
 ```{r}
 df <- read_csv("japan_heart_attack_dataset.csv")
 ```
 
-### 2.3 Data Overview & pre-processing
+## 2.3 Data Overview & pre-processing
 
 This output from `glimpse(df)` provides a summary of the dataset's structure, offering an overview of the number of rows, columns, and the types of variables included.
 
@@ -98,7 +98,7 @@ This output from `glimpse(df)` provides a summary of the dataset's structure, 
 glimpse(df)
 ```
 
-#### **2.3.1 Check missing values**
+### **2.3.1 Check missing values**
 
 `colSums(is.na(df))` calculates the **number of missing values** in each column of the dataset.
 
@@ -107,7 +107,7 @@ glimpse(df)
 colSums(is.na(df))
 ```
 
-#### **2.3.2 Data Cleaning and Encoding of Categorical Variables**
+### **2.3.2 Data Cleaning and Encoding of Categorical Variables**
 
 This preprocessing step transforms categorical variables into numeric representations and removes unnecessary columns to prepare the dataset for analysis.
 
@@ -181,9 +181,9 @@ ls(df)
 
 `ls(df)` **lists all column names in the processed dataset**, allowing verification of the cleaned and transformed variables after preprocessing.
 
-## **3. Exploratory Data Analysis**
+# **3. Exploratory Data Analysis**
 
-### 3.1 Heart Attack Occurrence Rate by Age (5-Year Rolling Average)
+## 3.1 Heart Attack Occurrence Rate by Age (5-Year Rolling Average)
 
 #### **Graph Description**
 
@@ -262,7 +262,7 @@ ggplot(na.omit(age_heart_attack_rate), aes(x = Age)) +
 
 An unexpectedly high occurrence is observed in individuals in their 30s and 40s, suggesting that younger adults may also be at significant risk. This contradicts the common perception that heart attacks predominantly affect older populations. Potential contributing factors include increased stress levels, smoking, and undiagnosed pre-existing conditions. The temporary decline in heart attack rates in the late 50s may reflect the impact of medical interventions or lifestyle modifications, while the sharp increase beyond the late 60s aligns with conventional risk factors such as hypertension, diabetes, and cardiovascular aging.
 
-### 3.2 Heart Attack and Risk Factors by Age Group (10-Year Intervals)
+## 3.2 Heart Attack and Risk Factors by Age Group (10-Year Intervals)
 
 #### **Graph Description**
 
@@ -347,7 +347,7 @@ df %>%
 
 -   Although smoking rates decrease in older age groups, earlier exposure to smoking, along with increasing hypertension and diabetes prevalence, may be associated with cardiovascular risks in individuals in their 30s–50s. Conversely, in older adults (60+), chronic conditions such as diabetes and hypertension appear to remain relevant factors for heart attack risk, even as smoking rates decline.
 
-### 3.3 BMI Distribution by Age Group (30-40s vs. 60+)
+## 3.3 BMI Distribution by Age Group (30-40s vs. 60+)
 
 #### **Graph Description**
 
@@ -407,7 +407,7 @@ df %>%
 -   The median BMI is 24.90 for individuals aged 30-40 and 24.97 for those aged 60+, indicating no statistically significant difference. A Mann-Whitney U test confirms this (W = 2.70×10⁷, p = 0.99), with a rank biserial correlation of nearly zero (-1.07e-04) and a confidence interval of \[-0.02, 0.02\], suggesting that BMI does not serve as a key differentiator for heart attack risk between these age groups.
 -   Despite the common perception that BMI influences heart attack risk, this analysis suggests that other factors, such as cholesterol levels, physical activity, and stress, may play a more significant role in determining cardiovascular outcomes.
 
-### 3.4 Heart Attack Rate by Alcohol Consumption Level
+## 3.4 Heart Attack Rate by Alcohol Consumption Level
 
 #### **Graph Description**
 
@@ -506,7 +506,7 @@ ggplot(heart_attack_by_alcohol, aes(x = alcohol_label, y = heart_attack_rate, fi
 
 -   Further investigation is required to determine whether alcohol consumption has a direct causal effect on heart attack risk or if other confounding factors play a more significant role.
 
-### 3.5 Standardized Health Factors by Heart Attack Occurrence (by Age Group)
+## 3.5 Standardized Health Factors by Heart Attack Occurrence (by Age Group)
 
 #### **Graph Description**
 
@@ -623,7 +623,7 @@ ggplot(health_factors_by_age, aes(x = variable, y = value, fill = as.factor(hear
 
 -   For younger individuals (30-40s), stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+), managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.
 
-## **4. Conclusion**
+# **4. Conclusion**
 
 This analysis explored the relationship between heart attack occurrence across different age groups and various health factors, including blood pressure, cholesterol levels, stress, and lifestyle habits.
 
@@ -635,7 +635,7 @@ Additionally, the group with moderate alcohol consumption showed the lowest hear
 
 Based on these findings, stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above. However, further research is necessary to establish more definitive causal relationships.
 
-### 4.1 Future research Agenda
+## 4.1 Future research Agenda
 
 -   Further research should incorporate longitudinal studies to better understand the causal relationship between stress, physical activity, and heart disease in younger populations. Examining how lifestyle changes over time impact cardiovascular health will provide a deeper understanding of early prevention strategies.
 
@@ -643,7 +643,7 @@ Based on these findings, stress management and lifestyle improvements may be cr
 
 -   For older populations, future studies should focus on optimizing healthcare strategies for the early detection and management of hypertension and cholesterol levels. Understanding the effectiveness of targeted medical interventions and personalized treatment approaches will be essential in preventing heart attacks in aging populations.
 
-## **5. Key References**
+# **5. Key References**
 
 -   [R for Visual Analytics](https://r4va.netlify.app/).
 

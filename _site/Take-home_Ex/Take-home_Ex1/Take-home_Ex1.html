@@ -242,13 +242,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#heart-attack-risks-a-data-driven-analysis" id="toc-heart-attack-risks-a-data-driven-analysis" class="nav-link active" data-scroll-target="#heart-attack-risks-a-data-driven-analysis">Heart Attack Risks: A Data-Driven Analysis</a></li>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>1. Overview</strong></a>
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>1.1 Introduction</strong></a></li>
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>1.2 The Data</strong></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1.1 Introduction</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">1.2 The Data</a></li>
+  </ul></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><strong>2. Getting started</strong></a>
   <ul class="collapse">
   <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">2.1 Load Packages</a></li>
   <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">2.2 Import data</a></li>
-  <li><a href="#data-overview-pre-processing" id="toc-data-overview-pre-processing" class="nav-link" data-scroll-target="#data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</a></li>
+  <li><a href="#data-overview-pre-processing" id="toc-data-overview-pre-processing" class="nav-link" data-scroll-target="#data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</a>
+  <ul class="collapse">
+  <li><a href="#check-missing-values" id="toc-check-missing-values" class="nav-link" data-scroll-target="#check-missing-values"><strong>2.3.1 Check missing values</strong></a></li>
+  <li><a href="#data-cleaning-and-encoding-of-categorical-variables" id="toc-data-cleaning-and-encoding-of-categorical-variables" class="nav-link" data-scroll-target="#data-cleaning-and-encoding-of-categorical-variables"><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><strong>3. Exploratory Data Analysis</strong></a>
   <ul class="collapse">
@@ -263,7 +268,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#future-research-agenda" id="toc-future-research-agenda" class="nav-link" data-scroll-target="#future-research-agenda">4.1 Future research Agenda</a></li>
   </ul></li>
   <li><a href="#key-references" id="toc-key-references" class="nav-link" data-scroll-target="#key-references"><strong>5. Key References</strong></a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -312,14 +316,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="overview" class="level1">
 <h1><strong>1. Overview</strong></h1>
-<section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction"><strong>1.1 Introduction</strong></h3>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1.1 Introduction</h2>
 <p>According to the World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately 17.9 million deaths per year. Among them, heart attacks are particularly critical, emphasizing the need for early prevention and risk analysis.</p>
 <p>This dataset examines heart attack incidents in Japan, comparing youth and adult populations. It includes medical indicators (cholesterol, blood pressure, heart rate), lifestyle factors (exercise, diet), and demographics, offering insights into age-specific cardiovascular risks.</p>
 <p>By leveraging this dataset, researchers and policymakers can enhance prevention strategies and compare findings with global initiatives like WHO’s&nbsp;<em>Global Hearts</em>&nbsp;and the CDC’s&nbsp;<em>Million Hearts</em>&nbsp;program. It also supports statistical modeling and predictive analytics to inform data-driven public health policies and early interventions.</p>
 </section>
-<section id="the-data" class="level3">
-<h3 class="anchored" data-anchor-id="the-data"><strong>1.2 The Data</strong></h3>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">1.2 The Data</h2>
 <p>The data for this analysis comes from the&nbsp;<strong>Heart Attack in Japan: Youth vs.&nbsp;Adult</strong>&nbsp;dataset, retrieved from the&nbsp;<a href="https://www.kaggle.com/datasets/ashaychoudhary/heart-attack-in-japan-youth-vs-adult/data">Kaggle database</a>. The dataset provides detailed information on heart attack incidents among youth and adults, focusing on medical indicators, lifestyle factors, and demographic characteristics.</p>
 <p><strong>Dataset Components</strong></p>
 <p>The dataset includes various features, such as:</p>
@@ -340,10 +344,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Additionally, the dataset contains extra computed columns that are not directly relevant to this analysis. These columns will be removed during data preprocessing to ensure cleaner and more interpretable results.</p></li>
 </ul>
 </section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started"><strong>2. Getting started</strong></h2>
-<section id="load-packages" class="level3">
-<h3 class="anchored" data-anchor-id="load-packages">2.1 Load Packages</h3>
+</section>
+<section id="getting-started" class="level1">
+<h1><strong>2. Getting started</strong></h1>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">2.1 Load Packages</h2>
 <p>We load the following R packages using the&nbsp;<strong><code>pacman::p_load()</code></strong>&nbsp;function to streamline the workflow:</p>
 <ul>
 <li><strong>tidyverse</strong>: A core collection of R packages designed for data science, including data manipulation (<code>dplyr</code>), visualization (<code>ggplot2</code>), and data tidying (<code>tidyr</code>).</li>
@@ -365,14 +370,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               GGally, zoo, ggcorrplot, ggstatsplot, scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="import-data" class="level3">
-<h3 class="anchored" data-anchor-id="import-data">2.2 Import data</h3>
+<section id="import-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-data">2.2 Import data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"japan_heart_attack_dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-overview-pre-processing" class="level3">
-<h3 class="anchored" data-anchor-id="data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</h3>
+<section id="data-overview-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-overview-pre-processing">2.3 Data Overview &amp; pre-processing</h2>
 <p>This output from&nbsp;<code>glimpse(df)</code>&nbsp;provides a summary of the dataset’s structure, offering an overview of the number of rows, columns, and the types of variables included.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -413,8 +418,8 @@ $ Extra_Column_14         &lt;dbl&gt; 0.8340099, 0.5356022, 0.9972962, 0.6262165
 $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.22860…</code></pre>
 </div>
 </div>
-<section id="check-missing-values" class="level4">
-<h4 class="anchored" data-anchor-id="check-missing-values"><strong>2.3.1 Check missing values</strong></h4>
+<section id="check-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="check-missing-values"><strong>2.3.1 Check missing values</strong></h3>
 <p><code>colSums(is.na(df))</code>&nbsp;calculates the&nbsp;<strong>number of missing values</strong>&nbsp;in each column of the dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -444,8 +449,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </div>
 </div>
 </section>
-<section id="data-cleaning-and-encoding-of-categorical-variables" class="level4">
-<h4 class="anchored" data-anchor-id="data-cleaning-and-encoding-of-categorical-variables"><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></h4>
+<section id="data-cleaning-and-encoding-of-categorical-variables" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning-and-encoding-of-categorical-variables"><strong>2.3.2 Data Cleaning and Encoding of Categorical Variables</strong></h3>
 <p>This preprocessing step&nbsp;transforms categorical variables into numeric representations&nbsp;and&nbsp;removes unnecessary columns&nbsp;to prepare the dataset for analysis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
@@ -524,10 +529,10 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </section>
 </section>
 </section>
-<section id="exploratory-data-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-data-analysis"><strong>3. Exploratory Data Analysis</strong></h2>
-<section id="heart-attack-occurrence-rate-by-age-5-year-rolling-average" class="level3">
-<h3 class="anchored" data-anchor-id="heart-attack-occurrence-rate-by-age-5-year-rolling-average">3.1 Heart Attack Occurrence Rate by Age (5-Year Rolling Average)</h3>
+<section id="exploratory-data-analysis" class="level1">
+<h1><strong>3. Exploratory Data Analysis</strong></h1>
+<section id="heart-attack-occurrence-rate-by-age-5-year-rolling-average" class="level2">
+<h2 class="anchored" data-anchor-id="heart-attack-occurrence-rate-by-age-5-year-rolling-average">3.1 Heart Attack Occurrence Rate by Age (5-Year Rolling Average)</h2>
 <section id="graph-description" class="level4">
 <h4 class="anchored" data-anchor-id="graph-description"><strong>Graph Description</strong></h4>
 <p>The graph visualizes the heart attack occurrence rate across different ages, with a&nbsp;5-year rolling average&nbsp;applied to smooth fluctuations. The red line represents the raw occurrence rate, while the blue line highlights the trend. The rate generally increases with age, but interestingly, there are notable variations across different age groups.</p>
@@ -585,8 +590,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 <p>An unexpectedly high occurrence is observed in individuals in their 30s and 40s,&nbsp;suggesting that younger adults may also be at significant risk. This contradicts the common perception that heart attacks predominantly affect older populations.&nbsp;Potential contributing factors include increased stress levels, smoking, and undiagnosed pre-existing conditions. The temporary decline in heart attack rates in the late 50s may reflect the impact of medical interventions or lifestyle modifications, while the sharp increase beyond the late 60s aligns with conventional risk factors such as hypertension, diabetes, and cardiovascular aging.</p>
 </section>
 </section>
-<section id="heart-attack-and-risk-factors-by-age-group-10-year-intervals" class="level3">
-<h3 class="anchored" data-anchor-id="heart-attack-and-risk-factors-by-age-group-10-year-intervals">3.2 Heart Attack and Risk Factors by Age Group (10-Year Intervals)</h3>
+<section id="heart-attack-and-risk-factors-by-age-group-10-year-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="heart-attack-and-risk-factors-by-age-group-10-year-intervals">3.2 Heart Attack and Risk Factors by Age Group (10-Year Intervals)</h2>
 <section id="graph-description-1" class="level4">
 <h4 class="anchored" data-anchor-id="graph-description-1"><strong>Graph Description</strong></h4>
 <p>This graph illustrates the heart attack rate along with key risk factors—smoking, hypertension, and diabetes—across different age groups in&nbsp;10-year intervals. Each colored line represents a different variable, highlighting how these factors change with age.</p>
@@ -646,8 +651,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </ul>
 </section>
 </section>
-<section id="bmi-distribution-by-age-group-30-40s-vs.-60" class="level3">
-<h3 class="anchored" data-anchor-id="bmi-distribution-by-age-group-30-40s-vs.-60">3.3 BMI Distribution by Age Group (30-40s vs.&nbsp;60+)</h3>
+<section id="bmi-distribution-by-age-group-30-40s-vs.-60" class="level2">
+<h2 class="anchored" data-anchor-id="bmi-distribution-by-age-group-30-40s-vs.-60">3.3 BMI Distribution by Age Group (30-40s vs.&nbsp;60+)</h2>
 <section id="graph-description-2" class="level4">
 <h4 class="anchored" data-anchor-id="graph-description-2"><strong>Graph Description</strong></h4>
 <p>This violin plot with a boxplot overlay compares the&nbsp;BMI distributions&nbsp;of individuals aged&nbsp;30-40s&nbsp;and&nbsp;60+. It provides a visual representation of the&nbsp;median values, spread, and density&nbsp;for each group.</p>
@@ -697,8 +702,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </ul>
 </section>
 </section>
-<section id="heart-attack-rate-by-alcohol-consumption-level" class="level3">
-<h3 class="anchored" data-anchor-id="heart-attack-rate-by-alcohol-consumption-level">3.4 Heart Attack Rate by Alcohol Consumption Level</h3>
+<section id="heart-attack-rate-by-alcohol-consumption-level" class="level2">
+<h2 class="anchored" data-anchor-id="heart-attack-rate-by-alcohol-consumption-level">3.4 Heart Attack Rate by Alcohol Consumption Level</h2>
 <section id="graph-description-3" class="level4">
 <h4 class="anchored" data-anchor-id="graph-description-3"><strong>Graph Description</strong></h4>
 <p>This bar chart illustrates the&nbsp;heart attack rates&nbsp;across different levels of alcohol consumption:&nbsp;None, Low, Moderate, and High. The data suggests a non-linear trend, with moderate drinkers showing the&nbsp;lowest heart attack rate, while both&nbsp;non-drinkers and heavy drinkers&nbsp;exhibit slightly higher rates.</p>
@@ -770,8 +775,8 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </ul>
 </section>
 </section>
-<section id="standardized-health-factors-by-heart-attack-occurrence-by-age-group" class="level3">
-<h3 class="anchored" data-anchor-id="standardized-health-factors-by-heart-attack-occurrence-by-age-group">3.5 Standardized Health Factors by Heart Attack Occurrence (by Age Group)</h3>
+<section id="standardized-health-factors-by-heart-attack-occurrence-by-age-group" class="level2">
+<h2 class="anchored" data-anchor-id="standardized-health-factors-by-heart-attack-occurrence-by-age-group">3.5 Standardized Health Factors by Heart Attack Occurrence (by Age Group)</h2>
 <section id="graph-description-4" class="level4">
 <h4 class="anchored" data-anchor-id="graph-description-4"><strong>Graph Description</strong></h4>
 <p>This bar chart displays the&nbsp;standardized Z-scores&nbsp;of key health factors for individuals&nbsp;with and without heart attacks, categorized into two age groups:&nbsp;30-40s and 60+. Red bars represent those who have experienced a heart attack, while blue bars represent those who have not.</p>
@@ -846,23 +851,22 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 <ul>
 <li><p>30-40s:&nbsp;Higher stress levels and lower physical activity&nbsp;appear to be more common among individuals who experienced a heart attack. Elevated cholesterol levels and poor diet quality are also observed to some extent, suggesting that&nbsp;lifestyle-related factors may be associated&nbsp;with cardiovascular risk in younger adults.</p></li>
 <li><p>60+:&nbsp;Individuals who had a heart attack&nbsp;tend to show higher systolic blood pressure&nbsp;compared to those who did not. Unlike younger individuals, where lifestyle factors seem more relevant,&nbsp;chronic conditions such as hypertension and cholesterol levels may play a larger role&nbsp;in cardiovascular risks for older adults.</p></li>
+<li><p>For younger individuals (30-40s),&nbsp;stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+),&nbsp;managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.</p></li>
 </ul>
-<p>Conclusion:<br>
-For younger individuals (30-40s),&nbsp;stress levels and physical activity may have some association with heart attack occurrence, while for older adults (60+),&nbsp;managing chronic conditions such as high blood pressure and cholesterol levels could be more relevant in heart attack prevention. However, these observations do not indicate direct causality, and further analysis would be needed to confirm stronger relationships.</p>
 </section>
 </section>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion"><strong>4. Conclusion</strong></h2>
+<section id="conclusion" class="level1">
+<h1><strong>4. Conclusion</strong></h1>
 <p>This analysis explored the relationship between heart attack occurrence across different age groups and various health factors, including&nbsp;blood pressure, cholesterol levels, stress, and lifestyle habits.</p>
 <ul>
 <li><p>For individuals in their 30s and 40s,&nbsp;higher stress levels, lower physical activity, and elevated cholesterol levels&nbsp;were associated with a higher likelihood of heart attacks.</p></li>
 <li><p>For those aged 60 and above,&nbsp;high blood pressure and elevated cholesterol levels&nbsp;were more prominent health indicators linked to heart attack occurrence.</p></li>
 </ul>
 <p>Additionally, the group with moderate alcohol consumption showed the lowest heart attack rates. However, this does not indicate a&nbsp;direct causal relationship&nbsp;but rather suggests potential associations influenced by lifestyle habits and other health factors.</p>
-<p>Based on these findings,&nbsp;stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above.However, further research is necessary to establish more definitive causal relationships.</p>
-<section id="future-research-agenda" class="level3">
-<h3 class="anchored" data-anchor-id="future-research-agenda">4.1 Future research Agenda</h3>
+<p>Based on these findings,&nbsp;stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above. However, further research is necessary to establish more definitive causal relationships.</p>
+<section id="future-research-agenda" class="level2">
+<h2 class="anchored" data-anchor-id="future-research-agenda">4.1 Future research Agenda</h2>
 <ul>
 <li><p>Further research should incorporate&nbsp;longitudinal studies&nbsp;to better understand the causal relationship between&nbsp;stress, physical activity, and heart disease&nbsp;in younger populations. Examining how lifestyle changes over time impact cardiovascular health will provide a deeper understanding of early prevention strategies.</p></li>
 <li><p>Additionally, research should explore the effectiveness of&nbsp;policy interventions&nbsp;aimed at stress reduction and physical activity promotion among working-age adults. Investigating whether workplace wellness programs or public health initiatives can mitigate heart attack risks will be valuable.</p></li>
@@ -870,8 +874,8 @@ For younger individuals (30-40s),&nbsp;stress levels and physical activity may h
 </ul>
 </section>
 </section>
-<section id="key-references" class="level2">
-<h2 class="anchored" data-anchor-id="key-references"><strong>5. Key References</strong></h2>
+<section id="key-references" class="level1">
+<h1><strong>5. Key References</strong></h1>
 <ul>
 <li><p><a href="https://r4va.netlify.app/">R for Visual Analytics</a>.</p></li>
 <li><p><a href="https://r4ds.hadley.nz/">R for Data Science</a>.</p></li>
@@ -879,7 +883,6 @@ For younger individuals (30-40s),&nbsp;stress levels and physical activity may h
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
