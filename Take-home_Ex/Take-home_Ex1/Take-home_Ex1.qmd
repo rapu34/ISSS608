@@ -633,7 +633,7 @@ This analysis explored the relationship between heart attack occurrence across d
 
 Additionally, the group with moderate alcohol consumption showed the lowest heart attack rates. However, this does not indicate a direct causal relationship but rather suggests potential associations influenced by lifestyle habits and other health factors.
 
-Based on these findings, stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above.However, further research is necessary to establish more definitive causal relationships.
+Based on these findings, stress management and lifestyle improvements may be crucial for younger individuals (30s–40s), while chronic disease prevention and management should be prioritized for those aged 60 and above. However, further research is necessary to establish more definitive causal relationships.
 
 ### 4.1 Future research Agenda
 
