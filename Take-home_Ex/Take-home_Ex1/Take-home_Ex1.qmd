@@ -16,11 +16,11 @@ execute:
 
 ### **1.1 Introduction**
 
-According to the World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately 17.9 million deaths per year. Among CVDs, heart attacks are one of the most critical and life-threatening conditions, making early prevention and risk factor analysis essential.
+According to the World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately 17.9 million deaths per year. Among them, heart attacks are particularly critical, emphasizing the need for early prevention and risk analysis.
 
-This dataset provides an in-depth analysis of heart attack incidents in Japan, with a focus on the differences between youth and adult populations. It includes various medical indicators (cholesterol levels, blood pressure, maximum heart rate), lifestyle factors (exercise, diet), and demographic information, offering valuable insights into age-specific cardiovascular risks. By analyzing this dataset, researchers, healthcare professionals, and policymakers can gain a deeper understanding of these risks and develop more effective prevention strategies.
+This dataset examines heart attack incidents in Japan, comparing youth and adult populations. It includes medical indicators (cholesterol, blood pressure, heart rate), lifestyle factors (exercise, diet), and demographics, offering insights into age-specific cardiovascular risks.
 
-This dataset serves as a valuable resource for comparison with global cardiovascular research efforts, such as WHO's 'Global Hearts' initiative and the CDC's 'Million Hearts' program. Additionally, it supports statistical modeling, trend visualization, and predictive analytics, contributing to the development of data-driven public health policies and early intervention programs aimed at reducing the prevalence of cardiovascular diseases.
+By leveraging this dataset, researchers and policymakers can enhance prevention strategies and compare findings with global initiatives like WHO’s *Global Hearts* and the CDC’s *Million Hearts* program. It also supports statistical modeling and predictive analytics to inform data-driven public health policies and early interventions.
 
 ### **1.2 The Data**
 
@@ -56,9 +56,11 @@ The dataset includes various features, such as:
 
 We load the following R packages using the **`pacman::p_load()`** function to streamline the workflow:
 
--   **tidyverse**: A core collection of R packages designed for data science and data manipulation.
+-   **tidyverse**: A core collection of R packages designed for data science, including data manipulation (`dplyr`), visualization (`ggplot2`), and data tidying (`tidyr`).
 
--   **ggiraph**: Provides interactive ggplot2 visualizations.
+<!-- -->
+
+-   **ggiraph**: Provides interactive `ggplot2` visualizations.
 
 -   **plotly**: Enables interactive plots for data exploration.
 
@@ -66,19 +68,20 @@ We load the following R packages using the **`pacman::p_load()`** function to 
 
 -   **DT**: Provides an interactive table interface for data visualization.
 
--   **corrplot**: Generates visualizations for correlation matrices.
-
--   **reshape2**: Helps with data reshaping for efficient analysis.
-
 -   **GGally**: Extends `ggplot2` for correlation and pairwise visualizations.
 
 -   **zoo**: Provides functions for time series data manipulation and rolling window calculations.
 
 -   **ggcorrplot**: Specialized in correlation matrix visualization using `ggplot2`.
 
+-   **ggstatsplot**: Provides statistical visualizations, integrating hypothesis testing within `ggplot2`.
+
+-   **scales**: Enhances `ggplot2` with functions for scaling and formatting axes, labels, and colors.
+
 ```{r}
 pacman::p_load(ggiraph, plotly, patchwork, DT, tidyverse, 
-               corrplot, reshape2, GGally, zoo, ggcorrplot,ggstatsplot)
+               GGally, zoo, ggcorrplot, ggstatsplot, scales)
+
 ```
 
 ### 2.2 Import data
@@ -109,7 +112,6 @@ colSums(is.na(df))
 This preprocessing step transforms categorical variables into numeric representations and removes unnecessary columns to prepare the dataset for analysis.
 
 ```{r}
-
 df <- df %>%
   mutate(
     smoking_history = ifelse(Smoking_History == "Yes", 1, 0),
@@ -192,9 +194,9 @@ The graph visualizes the heart attack occurrence rate across different ages, wit
 
 ```{r}
 #| echo: false
-library(dplyr)
-library(ggplot2)
-library(zoo)
+#library(dplyr)
+#library(ggplot2)
+#library(zoo)
 
 age_heart_attack_rate <- df %>%
   group_by(Age) %>%
@@ -225,9 +227,9 @@ ggplot(na.omit(age_heart_attack_rate), aes(x = Age)) +
 #### The code chunk
 
 ```{r, echo=TRUE, eval=FALSE}
-library(dplyr)
-library(ggplot2)
-library(zoo)
+#library(dplyr)
+#library(ggplot2)
+#library(zoo)
 
 age_heart_attack_rate <- df %>%
   group_by(Age) %>%
@@ -416,8 +418,8 @@ This bar chart illustrates the heart attack rates across different levels of a
 
 ```{r}
 #| echo: false
-library(dplyr)
-library(ggplot2)
+#library(dplyr)
+#library(ggplot2)
 
 heart_attack_by_alcohol <- df %>%
   group_by(alcohol_consumption) %>%

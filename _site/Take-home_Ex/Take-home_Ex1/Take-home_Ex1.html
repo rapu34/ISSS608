@@ -314,9 +314,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1><strong>1. Overview</strong></h1>
 <section id="introduction" class="level3">
 <h3 class="anchored" data-anchor-id="introduction"><strong>1.1 Introduction</strong></h3>
-<p>According to the&nbsp;World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately&nbsp;17.9 million deaths per year. Among CVDs, heart attacks are one of the most critical and life-threatening conditions, making early prevention and risk factor analysis essential.</p>
-<p>This dataset provides an&nbsp;in-depth analysis of heart attack incidents in Japan, with a focus on the differences between youth and adult populations. It includes&nbsp;various medical indicators&nbsp;(cholesterol levels, blood pressure, maximum heart rate),&nbsp;lifestyle factors&nbsp;(exercise, diet), and&nbsp;demographic information, offering valuable insights into age-specific cardiovascular risks. By analyzing this dataset,&nbsp;researchers, healthcare professionals, and policymakers&nbsp;can gain a deeper understanding of these risks and develop more effective prevention strategies.</p>
-<p>This dataset serves as a valuable resource for comparison with&nbsp;global cardiovascular research efforts, such as&nbsp;WHO’s ‘Global Hearts’ initiative&nbsp;and the&nbsp;CDC’s ‘Million Hearts’ program. Additionally, it supports&nbsp;statistical modeling, trend visualization, and predictive analytics, contributing to the development of&nbsp;data-driven public health policies and early intervention programs&nbsp;aimed at reducing the prevalence of cardiovascular diseases.</p>
+<p>According to the World Health Organization (WHO), cardiovascular diseases (CVDs) are the leading cause of death globally, accounting for approximately 17.9 million deaths per year. Among them, heart attacks are particularly critical, emphasizing the need for early prevention and risk analysis.</p>
+<p>This dataset examines heart attack incidents in Japan, comparing youth and adult populations. It includes medical indicators (cholesterol, blood pressure, heart rate), lifestyle factors (exercise, diet), and demographics, offering insights into age-specific cardiovascular risks.</p>
+<p>By leveraging this dataset, researchers and policymakers can enhance prevention strategies and compare findings with global initiatives like WHO’s&nbsp;<em>Global Hearts</em>&nbsp;and the CDC’s&nbsp;<em>Million Hearts</em>&nbsp;program. It also supports statistical modeling and predictive analytics to inform data-driven public health policies and early interventions.</p>
 </section>
 <section id="the-data" class="level3">
 <h3 class="anchored" data-anchor-id="the-data"><strong>1.2 The Data</strong></h3>
@@ -346,20 +346,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="load-packages">2.1 Load Packages</h3>
 <p>We load the following R packages using the&nbsp;<strong><code>pacman::p_load()</code></strong>&nbsp;function to streamline the workflow:</p>
 <ul>
-<li><p><strong>tidyverse</strong>: A core collection of R packages designed for data science and data manipulation.</p></li>
-<li><p><strong>ggiraph</strong>: Provides interactive ggplot2 visualizations.</p></li>
+<li><strong>tidyverse</strong>: A core collection of R packages designed for data science, including data manipulation (<code>dplyr</code>), visualization (<code>ggplot2</code>), and data tidying (<code>tidyr</code>).</li>
+</ul>
+<!-- -->
+<ul>
+<li><p><strong>ggiraph</strong>: Provides interactive&nbsp;<code>ggplot2</code>&nbsp;visualizations.</p></li>
 <li><p><strong>plotly</strong>: Enables interactive plots for data exploration.</p></li>
 <li><p><strong>patchwork</strong>: Facilitates combining multiple&nbsp;<code>ggplot2</code>&nbsp;visualizations into a cohesive layout.</p></li>
 <li><p><strong>DT</strong>: Provides an interactive table interface for data visualization.</p></li>
-<li><p><strong>corrplot</strong>: Generates visualizations for correlation matrices.</p></li>
-<li><p><strong>reshape2</strong>: Helps with data reshaping for efficient analysis.</p></li>
 <li><p><strong>GGally</strong>: Extends&nbsp;<code>ggplot2</code>&nbsp;for correlation and pairwise visualizations.</p></li>
 <li><p><strong>zoo</strong>: Provides functions for time series data manipulation and rolling window calculations.</p></li>
 <li><p><strong>ggcorrplot</strong>: Specialized in correlation matrix visualization using&nbsp;<code>ggplot2</code>.</p></li>
+<li><p><strong>ggstatsplot</strong>: Provides statistical visualizations, integrating hypothesis testing within&nbsp;<code>ggplot2</code>.</p></li>
+<li><p><strong>scales</strong>: Enhances&nbsp;<code>ggplot2</code>&nbsp;with functions for scaling and formatting axes, labels, and colors.</p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggiraph, plotly, patchwork, DT, tidyverse, </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               corrplot, reshape2, GGally, zoo, ggcorrplot,ggstatsplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               GGally, zoo, ggcorrplot, ggstatsplot, scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="import-data" class="level3">
@@ -544,9 +547,9 @@ $ Extra_Column_15         &lt;dbl&gt; 0.061632229, 0.617825340, 0.974455410, 0.2
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(dplyr)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(ggplot2)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#library(zoo)</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>age_heart_attack_rate <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Age) <span class="sc">%&gt;%</span></span>
