@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-About this site
+Welcome to a space dedicated to the study of Visual Analytics and Applications using R. Here, we explore data visually, uncover meaningful insights, and enhance analytical skills through real-world case studies. Join me on a journey where data tells compelling stories!
 
-```{r}
-1 + 1
-```
+![](images/stick-figures-welcome-free-vector.jpg)
