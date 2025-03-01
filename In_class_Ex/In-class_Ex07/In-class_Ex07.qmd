@@ -260,3 +260,124 @@ fit_autoETS %>%
   forecast(h = "12 months") %>%
   autoplot(vietnam_train)
 ```
+
+## **19.8 AutoRegressive Integrated Moving Average(ARIMA) Methods for Time Series Forecasting: fable (tidyverts) methods**
+
+```{r}
+vietnam_train %>%
+  gg_tsdisplay(plot_type='partial')
+```
+
+```{r}
+tsibble_longer %>%
+  filter(`Country` == "Vietnam") %>%
+  ACF(Arrivals) %>% 
+  autoplot()
+```
+
+```{r}
+tsibble_longer %>%
+  filter(`Country` == "United Kingdom") %>%
+  ACF(Arrivals) %>% 
+  autoplot()
+```
+
+```{r}
+tsibble_longer %>%
+  filter(Country == "Vietnam") %>%
+  gg_tsdisplay(difference(
+    Arrivals,
+    lag = 1), 
+    plot_type='partial')
+```
+
+```{r}
+tsibble_longer %>%
+  filter(Country == "Vietnam") %>%
+  gg_tsdisplay(difference(
+    Arrivals,
+    difference = 12), 
+    plot_type='partial')
+```
+
+```{r}
+fit_arima <- vietnam_train %>%
+  model(
+    arima200 = ARIMA(Arrivals ~ pdq(2,0,0)),
+    sarima210 = ARIMA(Arrivals ~ pdq(2,0,0) + 
+                        PDQ(2,1,0))
+    )
+report(fit_arima)
+```
+
+```{r}
+fit_autoARIMA <- vietnam_train %>%
+  model(ARIMA(Arrivals))
+report(fit_autoARIMA)
+```
+
+```{r}
+bind_rows(
+    fit_autoARIMA %>% accuracy(),
+    fit_autoETS %>% accuracy(),
+    fit_autoARIMA %>% 
+      forecast(h = 12) %>% 
+      accuracy(vietnam_ts),
+    fit_autoETS %>% 
+      forecast(h = 12) %>% 
+      accuracy(vietnam_ts)) %>%
+  select(-ME, -MPE, -ACF1)
+```
+
+```{r}
+ASEAN <- tsibble_longer %>%
+  filter(Country == "Vietnam" |
+         Country == "Malaysia" |
+         Country == "Indonesia" |
+         Country == "Thailand" |
+         Country == "Philippines")
+```
+
+```{r}
+ASEAN_train <- ASEAN %>%
+  mutate(Type = if_else(
+    `Month-Year` >= "2019-01-01", 
+    "Hold-out", "Training")) %>%
+  filter(Type == "Training")
+```
+
+```{r}
+ASEAN_fit <- ASEAN_train %>%
+  model(
+    ets = ETS(Arrivals),
+    arima = ARIMA(Arrivals)
+  )
+```
+
+```{r}
+ASEAN_fit %>%
+  glance()
+```
+
+### **19.8.10 Extracintg fitted and residual values**
+
+```{r}
+ASEAN_fit %>%
+  augment()
+```
+
+```{r}
+ASEAN_fit %>%
+  accuracy() %>%
+  arrange(Country)
+```
+
+```{r}
+ASEAN_fc <- ASEAN_fit %>%
+  forecast(h = "12 months")
+```
+
+```{r}
+ASEAN_fc %>%
+  autoplot(ASEAN)
+```
