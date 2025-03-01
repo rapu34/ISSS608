@@ -859,5 +859,19 @@
     "title": "Hands-on_Ex14",
     "section": "",
     "text": "In this section, you will learn how to create a slopegraph in R.\nBefore starting:\n\nEnsure the CGPfunctions package is installed and loaded.\nRefer to newggslopegraph() documentation for usage and arguments.\n\n\n\n\nrice &lt;- read_csv(\"data/rice.csv\")\n\n\n\n\n\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Yield, Country,\n                Title = \"Rice Yield of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Dr. Kam Tin Seong\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThing to learn from the code chunk above\n\n\n\nFor effective data visualisation design, factor() is used convert the value type of Year field from numeric to factor."
+  },
+  {
+    "objectID": "In_class_Ex/In-class_Ex07/In-class_Ex07.html",
+    "href": "In_class_Ex/In-class_Ex07/In-class_Ex07.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "pacman::p_load(tidyverse,tsibble,feasts,fable,seasonal)"
+  },
+  {
+    "objectID": "In_class_Ex/In-class_Ex07/In-class_Ex07.html#visualising-time-series-data",
+    "href": "In_class_Ex/In-class_Ex07/In-class_Ex07.html#visualising-time-series-data",
+    "title": "Untitled",
+    "section": "Visualising Time-series Data",
+    "text": "Visualising Time-series Data\n\nts_longer &lt;- ts_data %&gt;%\n  pivot_longer(cols = c(2:34),\n               names_to = \"Country\",\n               values_to = \"Arrivals\")\n\n\nVisualising single time-series: ggplot2 methods\n\nts_longer %&gt;%\n  filter(Country == \"Vietnam\") %&gt;%\n  ggplot(aes(x = `Month-Year`, \n             y = Arrivals))+\n  geom_line(size = 0.5)\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n\n\n\n\n\n\n\n\n\nPlotting multiple time-series data with ggplot2 methods\n\nggplot(data = ts_longer, \n       aes(x = `Month-Year`, \n           y = Arrivals,\n           color = Country))+\n  geom_line(size = 0.5) +\n  theme(legend.position = \"bottom\", \n        legend.box.spacing = unit(0.5, \"cm\"))\n\n\n\n\n\n\n\n\nIn order to provide effective comparison, facet_wrap() of ggplot2package is used to create small multiple line graph also known as trellis plot.\n\nggplot(data = ts_longer, \n       aes(x = `Month-Year`, \n           y = Arrivals))+\n  geom_line(size = 0.5) +\n  facet_wrap(~ Country,\n             ncol = 3,\n             scales = \"free_y\") +\n  theme_bw()"
   }
 ]
