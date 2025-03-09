@@ -149,34 +149,9 @@ df_long <- df %>%
 print(df_long)
 ```
 
-```{r}
-# 데이터 전처리: 연도별 합산
-#df_long <- df %>%
-#  pivot_longer(cols = -Category, names_to = "Month", values_to = "Value") %>%
-#  mutate(Year = as.integer(substr(Month, 1, 4))) %>%  # 연도 추출
-#  group_by(Year, Category) %>%
-#  summarise(Total_Trade = sum(Value), .groups = "drop")
-
-# 시각화
-#ggplot(df_long, aes(x = Year, y = Total_Trade, fill = Category)) +
-#  geom_bar(stat = "identity", position = "stack") +  # Stacked Bar Chart
-#  geom_line(aes(group = 1, color = "Total Trade"), size = 1.2) + # Total Trade Line
-#  geom_point(aes(color = "Total Trade"), size = 3) +
-#  scale_fill_manual(values = c("steelblue", "tomato")) +  # Exports/Imports 색상 설정
-#  scale_color_manual(values = c("black")) +  # Line 색상 설정
-#  labs(title = "Total Merchandise Trade (2020 - 2024)",
-#       x = "Year", y = "Trade Value (Million SGD)",
-#       fill = "Trade Type", color = "Trade Type") +
-#  theme_minimal() +
-#  theme(legend.position = "right",
-#        text = element_text(size = 14),
-#        axis.text.x = element_text(face = "bold"))
-
-```
-
 # 3. Data Visualization
 
-## **3.1 TOTAL MERCHANDISE TRADE AT CURRENT PRICES, 2020 - 2024**
+## **3.1 Total Merchandise Trade at Current Prices, 2020 - 2024**
 
 ![](images/clipboard-2267507328.png){width="397"}
 
@@ -228,7 +203,7 @@ p_interactive
 
 ```
 
-## 3.2. NON-OIL DOMESTIC EXPORTS BY MAJOR COMMODITY SECTIONS, 2024
+## 3.2. Non-Oil domestic Exports by Major Commodity Sections, 2024
 
 ![](images/clipboard-723475948.png){width="381"}
 
@@ -463,6 +438,8 @@ ggplot(data = ts_longer,
 
 ```
 
+**Interpretation**: The United States trade volume shows a steady upward trend with fluctuations, indicating seasonal patterns and external economic influences. Compared to Total All Markets, U.S. trade remains significant but follows global trade trends. Further analysis could explore seasonal impacts and future forecasts.
+
 ## **4.4 Visual Analysis of Time-series Data**
 
 Time-series datasets often exhibit seasonal components, where patterns repeat periodically (e.g., monthly or yearly cycles). These cycles can sometimes obscure the underlying trend when forecasting but can also serve as a strong signal for predictive models.
@@ -485,9 +462,11 @@ A **seasonal plot** is similar to a time plot except that the data are plotted
 ```{r}
 tsibble_longer %>%
   filter(Country == "United States" |
-         Country == "Malaysia") %>% 
+         Country == "Total All Markets") %>% 
   gg_season(Trade)
 ```
+
+**Interpretation**: The United States trade volume shows seasonal patterns, with peaks around mid-year and declines at year-end. Trade has grown over time, with recent years showing higher volumes than earlier periods.
 
 ```{r}
 tsibble_longer %>%
@@ -496,5 +475,43 @@ tsibble_longer %>%
 
 ```
 
+**Interpretation**: The subseries plot confirms monthly variations, where mid-year months tend to have higher trade levels. The overall upward trend indicates consistent trade growth over time.
+
+## **4.5 Time series decomposition**
+
+### **4.5.1 Single time series decomposition**
+
 ```{r}
+tsibble_longer %>%
+  filter(`Country` == "United States") %>%
+  PACF(Trade) %>% 
+  autoplot()
 ```
+
+**Interpretation:**
+
+-   The PACF plot shows significant spikes at lag 1 and lag 2, indicating that the previous month's trade values strongly influence the current month's trade volume.
+
+-   A gradual decline in PACF suggests the potential need for an AR(1) or AR(2) component in an ARIMA model.
+
+-   The presence of seasonal lags (e.g., around lag 12) suggests a possible yearly seasonality effect in trade data.
+
+## **4.6 Visual STL Diagnostics**
+
+```{r}
+tsibble_longer %>%
+  filter(`Country` == "United States") %>%
+  model(stl = STL(Trade)) %>%
+  components() %>%
+  autoplot()
+```
+
+**Interpretation:**
+
+-   The trend component shows a long-term increasing trend, with notable fluctuations over the years.
+
+-   The seasonal component reveals a consistent repeating pattern, indicating that trade volume follows a predictable seasonal cycle each year.
+
+-   The remainder component represents unexplained variations (residuals), with some spikes likely due to external economic events or policy changes affecting trade.
+
+# **5. Conclusion**
