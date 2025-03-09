@@ -1,0 +1,500 @@
+---
+title: "Take-home Exercise 2"
+author: "Jeounghyun Kim"
+date: "March 2, 2025"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# **Singapore's International Trade Analysis**
+
+# **1. Overview**
+
+## **1.1 Introduction**
+
+Merchandise trade is one of the commonly used indicators of economic performance, for Singapore, international trade is crucial to its economy. In the context of shifting global dynamics of trade due to geopolitical events and economic policies, it becomes imperative to analyse and visualise trade trends in a meaningful manner.
+
+In this take-home piece, we aim to improve the understanding of Singapore’s merchandise trade data through the use of data graphics by checking three existing visualizations, and thereafter, proposing better ones utilizing ggplot2 and other R packages. By identifying the strengths and limitations of the original charts, we will apply appropriate visualization techniques to improve clarity, comparability, and insight generation.
+
+Additionally, we will conduct a time-series analysis or forecasting to uncover trade patterns over the years, offering a deeper understanding of Singapore’s trade performance. This exercise will not only refine data visualization skills but also provide valuable insights into Singapore’s trade landscape.
+
+## **1.2 The Data**
+
+The data for this analysis is sourced from **Singapore’s Merchandise Trade by Region/Market**, retrieved from the **Department of Statistics Singapore (DOS) via the SingStat website**. This dataset captures Singapore’s trade activities across various sectors and time periods.
+
+In this study, we examine three major datasets:
+
+-   Total Merchandise Trade (2020-2024): Value of all imports and exports of goods at current prices, the monthly series measures long term trends in trade.
+
+-   Non-Oil Domestic Exports (2024) — DATA Export data by major commodity sections excluding oil-related trade; Used to Study the Composition of Singapore’s Exports
+
+-   Annual trade in services statistics until October 2023, with key trading partners and services transaction values for exports and imports
+
+To ensure data clarity and accuracy, additional computed columns and non-relevant metadata were removed during preprocessing.
+
+# **2. Getting started**
+
+## **2.1 Load Packages**
+
+Load the following R packages using the `pacman::p_load()` function to streamline the workflow:
+
+-   **readxl**: Enables reading Excel files into R for data analysis.
+
+-   **tidyverse**: A core collection of R packages for data science, including:
+
+    -   **dplyr** (data manipulation)
+
+    -   **ggplot2** (data visualization)
+
+    -   **tidyr** (data tidying)
+
+-   **tsibble**: Provides tools for handling and analyzing time-series data.
+
+-   **feasts**: A package for time series visualization and feature extraction.
+
+-   **fable**: Used for forecasting time-series data using statistical models.
+
+-   **seasonal**: Facilitates seasonal adjustment of time series data.
+
+-   **treemap**: Creates treemap visualizations for hierarchical data.
+
+-   **plotly**: Enables interactive visualizations for data exploration.
+
+-   **scales**: Enhances ggplot2 with functions for formatting axes, labels, and colors.
+
+-   **RColorBrewer**: Provides color palettes for visually appealing data visualizations.
+
+By leveraging these packages, we ensure efficient data handling, visualization, and analysis throughout this study.
+
+```{r}
+#| warning: false
+pacman::p_load(readxl, tidyverse, tsibble, feasts, fable, seasonal, treemap, plotly, scales, RColorBrewer)
+```
+
+## **2.2 Import data**
+
+```{r}
+# 📂
+file_path <- "outputFile-3.xlsx"
+
+# 
+sheets <- excel_sheets(file_path)
+print(sheets)  
+```
+
+## **2.3 Data Overview**
+
+```{r}
+df_T1 <- read_excel(file_path, sheet = "T1")
+head(df_T1)
+```
+
+```{r}
+df_T1 <- read_excel(file_path, sheet = "T1", col_names = FALSE)
+df_selected <- df_T1 %>%
+  slice(26, 39)
+
+print(df_selected)
+```
+
+## 2.4 Export Data
+
+```{r}
+file_path <- "outputFile-3.xlsx"
+df_T1 <- read_excel(file_path, sheet = "T1", col_names = TRUE, skip = 10)
+
+df_filtered <- df_T1 %>%
+  filter(`Data Series` == "Total Merchandise Imports, (At Current Prices)" | 
+           `Data Series` == "Total Merchandise Exports, (At Current Prices)")
+colnames(df_filtered)[1] <- "Category"
+print(df_filtered)
+
+write_csv(df_filtered, "filtered_merchandise_trade.csv")
+```
+
+## 2.5 Re-import Data for first Visualisation
+
+```{r}
+library(readxl)
+df <- read_excel("filtered_mechandise_trade.xlsx")
+
+str(df)  
+head(df)
+
+print(colnames(df))
+```
+
+### 2.5.1 **Check missing values**
+
+```{r}
+colSums(is.na(df))
+```
+
+### 2.5.2 Data Preprocessing
+
+```{r}
+library(tidyverse)
+
+df_long <- df %>%
+  pivot_longer(
+    cols = -Category,  
+    names_to = "Month", 
+    values_to = "Value" 
+  )
+
+print(df_long)
+```
+
+```{r}
+# 데이터 전처리: 연도별 합산
+#df_long <- df %>%
+#  pivot_longer(cols = -Category, names_to = "Month", values_to = "Value") %>%
+#  mutate(Year = as.integer(substr(Month, 1, 4))) %>%  # 연도 추출
+#  group_by(Year, Category) %>%
+#  summarise(Total_Trade = sum(Value), .groups = "drop")
+
+# 시각화
+#ggplot(df_long, aes(x = Year, y = Total_Trade, fill = Category)) +
+#  geom_bar(stat = "identity", position = "stack") +  # Stacked Bar Chart
+#  geom_line(aes(group = 1, color = "Total Trade"), size = 1.2) + # Total Trade Line
+#  geom_point(aes(color = "Total Trade"), size = 3) +
+#  scale_fill_manual(values = c("steelblue", "tomato")) +  # Exports/Imports 색상 설정
+#  scale_color_manual(values = c("black")) +  # Line 색상 설정
+#  labs(title = "Total Merchandise Trade (2020 - 2024)",
+#       x = "Year", y = "Trade Value (Million SGD)",
+#       fill = "Trade Type", color = "Trade Type") +
+#  theme_minimal() +
+#  theme(legend.position = "right",
+#        text = element_text(size = 14),
+#        axis.text.x = element_text(face = "bold"))
+
+```
+
+# 3. Data Visualization
+
+## **3.1 TOTAL MERCHANDISE TRADE AT CURRENT PRICES, 2020 - 2024**
+
+![](images/clipboard-2267507328.png){width="397"}
+
+#### **Current Chart Analysis Pros and Cons**
+
+The original visualization used a horizontal bar chart to display annual trade values, making year-to-year comparisons clear. However, it lacked a clear representation of trade trends and balance over time.
+
+#### **Proposed Improvements**
+
+The revised chart combines a stacked bar chart with trend lines to provide a clearer overview of trade patterns. The stacked bars maintain the distinction between exports and imports, while the trend lines enhance visibility of trade fluctuations. This approach improves interpretability and makes it easier to identify trade growth and balance.
+
+#### **Implementation**
+
+The new visualization was created using **ggplot2** in R. **geom_bar()** was used for the stacked bars, while **geom_line()** and **geom_point()** were added to highlight trade trends. This method i
+
+### 3.1.2 Visualisation
+
+```{r}
+df_long <- df %>%
+  pivot_longer(cols = -Category, names_to = "Month", values_to = "Value") %>%
+  mutate(Year = as.integer(substr(Month, 1, 4))) %>%  
+  group_by(Year, Category) %>%
+  summarise(Total_Trade = sum(Value), .groups = "drop")
+
+p <- ggplot(df_long, aes(x = Year, y = Total_Trade, fill = Category)) +
+  geom_bar(stat = "identity", position = "stack") +  
+  geom_line(aes(group = 1, color = "Total Trade"), size = 1.2) + # Total Trade Line
+  geom_point(aes(color = "Total Trade"), size = 3) +
+  scale_fill_manual(values = c("steelblue", "tomato"), 
+                    labels = c("Exports", "Imports")) +  
+  scale_color_manual(values = c("black"), 
+                     labels = c("Exports Trend", "Imports Trend")) +  
+  scale_y_continuous(labels = label_comma(scale = 1e-6)) +  
+  labs(title = "Total Merchandise Trade (2020 - 2024)",
+       x = "Year", y = "Trade Value (Million SGD)", 
+       fill = "Trade Type", color = "Trend Line") +  
+  theme_minimal() +
+  theme(legend.position = "right",
+        text = element_text(size = 14),
+        axis.text.x = element_text(face = "bold"),
+        legend.title = element_text(size = 12),  
+        legend.text = element_text(size = 10))  
+
+# plotly를 사용하여 인터랙티브 그래프로 변환
+p_interactive <- ggplotly(p)
+
+# 인터랙티브 그래프 출력
+p_interactive
+
+```
+
+## 3.2. NON-OIL DOMESTIC EXPORTS BY MAJOR COMMODITY SECTIONS, 2024
+
+![](images/clipboard-723475948.png){width="381"}
+
+#### **Current Chart Analysis Pros and Cons**
+
+The original chart is ship-based infographic, so the idea of an export is visually intuitive. Different commodity categories are distinguished by unique icons and color-coded sections. However, the ratios of export values are not represented accurately and hence it is difficult to make comparisons. Label placement is also cluttered, making it non-readable.
+
+### **Proposed Improvements**
+
+As such, a treemap guarantees that each category is simultaneously represented in proportion to the area it occupies, enabling greater accuracy in comparison. This also decreases visual clutter and still keeps a structured layout.
+
+### **Implementation**
+
+The revised chart was created using ggplot2 and treemapify in R. Each category is represented proportionally, with labels placed inside for clarity. A color gradient enhances readability, making larger export categories stand out.
+
+### **3.2.1 Import data & Data Preprocessing**
+
+```{r}
+file_path <- "non_oil_domestic_exports_2024.xlsx"
+data <- read_excel(file_path)
+
+data$Value <- data$`2024 Total` / 1e6  
+
+summary(data$Value)
+
+data$Percentage <- round((data$Value / sum(data$Value)) * 100, 1)
+
+data$Label <- paste0(data$Category, "\n", round(data$Value, 1), "B S$ (", round(data$Percentage, 1), "%)")
+```
+
+### **3.2.2 Visualisation**
+
+```{r}
+treemap(data,
+        index = "Label",          
+        vSize = "Value",          
+        vColor = "Value",         
+        type = "manual",          
+        palette = brewer.pal(9, "Blues"),  
+        algorithm = "pivotSize",  
+        sortID = "Value",         
+        title = "Singapore Non-Oil Domestic Exports (2024)",  
+        title.legend = "Export Value (B S$)",  
+        fontsize.labels = 12,     
+        fontcolor.labels = "white", 
+        align.labels = list(c("center", "center"))) 
+
+```
+
+## **3.3** Overall Exports and Imports of Services (2020-2024)
+
+![](images/clipboard-1418604782.png){width="464"}
+
+#### Current Chart Analysis
+
+The original visualization uses horizontal bars with container-themed elements to represent exports and imports over time. Althought great looking, the design fails at communicating trends in trade. Having one bar for every year makes visibility of patterns over time difficult, and the decorative lines add nothing of value.
+
+#### Proposed Improvements
+
+Instead, a stacked bar chart with trend lines is a better option. This format allows for both explicit year-on-year comparisons and emphasizes the international relationship of exports to imports. Interpretability is further improved by trend lines that show global growth tendencies.
+
+#### Implementation
+
+The revised chart was created using `ggplot2` in R. `geom_bar()` was used for stacked bars, with `geom_line()` and `geom_point()` overlaying trade trends. Custom colors and labels improve readability while maintaining a clean, data-focused design.
+
+### **3.3.1 Import data & Data Preprocessing**
+
+```{r}
+file_path <- "Exports_Imports_2020_2024.xlsx"  
+data <- read_excel(file_path)
+
+print(head(data))
+str(data)
+```
+
+```{r}
+data_long <- data %>%
+  pivot_longer(cols = c("Exports (S$ Bil)", "Imports (S$ Bil)"), 
+               names_to = "Category", values_to = "Value")
+
+print(head(data_long))
+```
+
+### **3.3.2 Visualisation**
+
+```{r}
+export_bar_color <- "#0072B2"  # Deep Sky Blue
+import_bar_color <- "#E69F00"  # Burnt Orange
+export_trend_color <- "#009E73"  # Spring Green
+import_trend_color <- "#CC79A7"  # Soft Purple
+
+ggplot() +
+  geom_bar(data = data_long, aes(x = factor(Years), y = Value, fill = Category), stat = "identity") +
+  
+  geom_text(data = data_long, aes(x = factor(Years), y = Value, label = Value), 
+            position = position_stack(vjust = 0.5), size = 4, color = "white", fontface = "bold") +
+
+  
+  geom_line(data = data, aes(x = factor(Years), y = `Exports (S$ Bil)`, group = 1, color = "Exports"), 
+            size = 1.5, linetype = "solid") +
+  geom_point(data = data, aes(x = factor(Years), y = `Exports (S$ Bil)`, color = "Exports"), size = 3) +  
+
+  #import trend line
+  geom_line(data = data, aes(x = factor(Years), y = `Imports (S$ Bil)`, group = 1, color = "Imports"), 
+            size = 1.5, linetype = "solid") +
+  geom_point(data = data, aes(x = factor(Years), y = `Imports (S$ Bil)`, color = "Imports"), size = 3) +  
+
+  scale_fill_manual(values = c("Exports (S$ Bil)" = export_bar_color, 
+                               "Imports (S$ Bil)" = import_bar_color)) +
+  scale_color_manual(values = c("Exports" = export_trend_color, 
+                                "Imports" = import_trend_color)) +
+
+  labs(title = "Overall Exports and Imports of Services (2020-2024)",
+       x = "Year", y = "S$ Billion",
+       fill = "Category", color = "Trend") +
+  theme_minimal()
+
+```
+
+# **4. Time-series analysis**
+
+## **4.1 Getting Started**
+
+```{r}
+pacman::p_load(readr,tidyverse, tsibble, feasts, fable, seasonal)
+```
+
+## **4.2 Importing the data**
+
+First, `read_csv()` of **readr** package is used to import `Import_Export.csv` file into R environment.\
+The imported file is saved as a **tibble object** called `ts_data`.
+
+```{r}
+ts_data <- read_csv(
+  "Import_Export.csv")
+```
+
+In the code chunk below, **`parse_date_time()` of lubridate package** is used to convert the data type of **"Data Series"**field from Character to Date.
+
+```{r}
+library(lubridate)
+
+ts_data$`Data Series` <- parse_date_time(ts_data$`Data Series`, orders = "Y b")
+head(ts_data)
+```
+
+### **4.2.1 Conventional base `ts` object versus `tibble` object**
+
+```{r}
+ts_data
+```
+
+### **4.2.2 Conventional base `ts` object versus `tibble` object**
+
+```{r}
+ts_data_ts <- ts(ts_data)       
+head(ts_data_ts)
+```
+
+### **4.2.3 Converting `tibble` object to `tsibble`object**
+
+The code chunk below converting ts_data from tibble object into tsibble object by using [`as_tsibble()`](https://tsibble.tidyverts.org/reference/as-tsibble.html) of **tsibble** R package.
+
+```{r}
+ts_tsibble <- ts_data %>%
+  mutate(Month = yearmonth(`Data Series`)) %>%
+  as_tsibble(index = `Month`)
+```
+
+What can we learn from the code chunk above? + [`mutate()`](https://r4va.netlify.app/chap19) of **dplyr**package is used to derive a new field by transforming the data values in Month-Year field into month-year format. The transformation is performed by using [`yearmonth()`](https://tsibble.tidyverts.org/reference/year-month.html) of **tsibble** package. + [`as_tsibble()`](https://tsibble.tidyverts.org/reference/as-tibble.html) is used to convert the tibble data frame into tsibble data frame.
+
+### **4.2.4 tsibble object**
+
+```{r}
+ts_tsibble
+
+```
+
+## **4.3 Visualising Time-series Data**
+
+In order to visualise the time-series data effectively, we need to organise the data frame from wide to long format by using [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) of **tidyr** package as shown below.
+
+```{r}
+ts_longer <- ts_data %>%
+  pivot_longer(cols = c(2:34),
+               names_to = "Country",
+               values_to = "Trade")
+```
+
+### **4.3.1 Visualising single time-series: ggplot2 methods**
+
+The code chunk below demonstrates how to visualize the **trade trend of the United States** over time using `ggplot2`.
+
+```{r}
+ts_longer %>%
+  filter(Country == "United States") %>%
+  ggplot(aes(x = `Data Series`, 
+             y = Trade))+
+  geom_line(size = 0.5)
+```
+
+This visualization provides **insights into the trade volume fluctuations of the United States**, helping to identify trends, seasonality, and any significant changes over time.
+
+**Interpretation**: We observe an upward trend in import trade volume over time, although with considerable year-to-year volatility. The abrupt jumps and seasonal patterns indicate the influences of dynamics external to trade itself, such as global economic conditions, trade policies, and economic crises (e.g. COVID-19 influences on trade).
+
+More developed analysis to seasonal decomposition or time-series forecasting (ARIMA models) can be done for predicting the future trading and drivers causing such price variations.
+
+### **4.3.2 Plotting multiple time-series data with ggplot2 methods**
+
+```{r}
+ggplot(data = ts_longer, 
+       aes(x = `Data Series`, 
+           y = Trade,
+           color = Country)) +
+  geom_line(size = 0.5) +
+  theme(legend.position = "bottom", 
+        legend.box.spacing = unit(0.5, "cm"))
+
+```
+
+In order to provide effective comparison, [`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html) of **ggplot2**package is used to create small multiple line graph also known as trellis plot.
+
+```{r}
+ggplot(data = ts_longer, 
+       aes(x = `Data Series`, 
+           y = Trade)) +
+  geom_line(size = 0.5) +
+  facet_wrap(~ Country,  
+             ncol = 3,   
+             scales = "free_y") +  
+  theme_bw()
+
+```
+
+## **4.4 Visual Analysis of Time-series Data**
+
+Time-series datasets often exhibit seasonal components, where patterns repeat periodically (e.g., monthly or yearly cycles). These cycles can sometimes obscure the underlying trend when forecasting but can also serve as a strong signal for predictive models.
+
+In this section, we explore how to identify seasonality in time-series data using functions from the feasts package.
+
+To effectively visualize time-series data, we first need to reshape the dataset from a wide format to a long format using the `pivot_longer()` function from the tidyr package, as demonstrated in the following code:
+
+```{r}
+tsibble_longer <- ts_tsibble %>%
+  pivot_longer(cols = c(2:34),
+               names_to = "Country",
+               values_to = "Trade")
+```
+
+### **19.4.1 Visual Analysis of Seasonality with Seasonal Plot**
+
+A **seasonal plot** is similar to a time plot except that the data are plotted against the individual **seasons** in which the data were observed.
+
+```{r}
+tsibble_longer %>%
+  filter(Country == "United States" |
+         Country == "Malaysia") %>% 
+  gg_season(Trade)
+```
+
+```{r}
+tsibble_longer %>%
+  filter(Country %in% c("Total All Markets", "United States")) %>% 
+  gg_subseries(Trade)
+
+```
+
+```{r}
+```

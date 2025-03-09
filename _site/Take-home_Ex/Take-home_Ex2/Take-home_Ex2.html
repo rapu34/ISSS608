@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeounghyun Kim">
+<meta name="dcterms.date" content="2025-03-02">
+
+<title>Take-home Exercise 2 – ISSS608 Coursework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608 Coursework</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex01/Hands-On_Ex01.html">
+ <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex02/Hands-On_Ex02.html">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex03/Hands-On_Ex03.html">
+ <span class="dropdown-text">Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex04/Hands-On_Ex04.html">
+ <span class="dropdown-text">Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex05/Hands-On_Ex05.html">
+ <span class="dropdown-text">Hands-on Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex06/Hands-On_Ex06.html">
+ <span class="dropdown-text">Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex07/Hands-On_Ex07.html">
+ <span class="dropdown-text">Hands-on Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex08/Hands-On_Ex08.html">
+ <span class="dropdown-text">Hands-on Exercise 8</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex09/Hands-On_Ex09.html">
+ <span class="dropdown-text">Hands-on Exercise 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex10/Hands-On_Ex10.html">
+ <span class="dropdown-text">Hands-on Exercise 10</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex11/Hands-On_Ex11.html">
+ <span class="dropdown-text">Hands-on Exercise 11</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex12/Hands-On_Ex12.html">
+ <span class="dropdown-text">Hands-on Exercise 12</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex13/Hands-On_Ex13.html">
+ <span class="dropdown-text">Hands-on Exercise 13</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex14/Hands-On_Ex14.html">
+ <span class="dropdown-text">Hands-on Exercise 14</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex1.html">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex04/In-class_Ex04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex05/In-class_Ex05.html">
+ <span class="dropdown-text">In-class Exercise 5, 15 feb 2025</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#singapores-international-trade-analysis" id="toc-singapores-international-trade-analysis" class="nav-link active" data-scroll-target="#singapores-international-trade-analysis"><strong>Singapore’s International Trade Analysis</strong></a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>1. Overview</strong></a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>1.1 Introduction</strong></a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>1.2 The Data</strong></a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><strong>2. Getting started</strong></a>
+  <ul class="collapse">
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages"><strong>2.1 Load Packages</strong></a></li>
+  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data"><strong>2.2 Import data</strong></a></li>
+  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview"><strong>2.3 Data Overview</strong></a></li>
+  <li><a href="#export-data" id="toc-export-data" class="nav-link" data-scroll-target="#export-data">2.4 Export Data</a></li>
+  <li><a href="#re-import-data-for-first-visualisation" id="toc-re-import-data-for-first-visualisation" class="nav-link" data-scroll-target="#re-import-data-for-first-visualisation">2.5 Re-import Data for first Visualisation</a>
+  <ul class="collapse">
+  <li><a href="#check-missing-values" id="toc-check-missing-values" class="nav-link" data-scroll-target="#check-missing-values">2.5.1 <strong>Check missing values</strong></a></li>
+  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">2.5.2 Data Preprocessing</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">3. Data Visualization</a>
+  <ul class="collapse">
+  <li><a href="#total-merchandise-trade-at-current-prices-2020---2024" id="toc-total-merchandise-trade-at-current-prices-2020---2024" class="nav-link" data-scroll-target="#total-merchandise-trade-at-current-prices-2020---2024"><strong>3.1 TOTAL MERCHANDISE TRADE AT CURRENT PRICES, 2020 - 2024</strong></a>
+  <ul class="collapse">
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">3.1.2 Visualisation</a></li>
+  </ul></li>
+  <li><a href="#non-oil-domestic-exports-by-major-commodity-sections-2024" id="toc-non-oil-domestic-exports-by-major-commodity-sections-2024" class="nav-link" data-scroll-target="#non-oil-domestic-exports-by-major-commodity-sections-2024">3.2. NON-OIL DOMESTIC EXPORTS BY MAJOR COMMODITY SECTIONS, 2024</a>
+  <ul class="collapse">
+  <li><a href="#proposed-improvements-1" id="toc-proposed-improvements-1" class="nav-link" data-scroll-target="#proposed-improvements-1"><strong>Proposed Improvements</strong></a></li>
+  <li><a href="#implementation-1" id="toc-implementation-1" class="nav-link" data-scroll-target="#implementation-1"><strong>Implementation</strong></a></li>
+  <li><a href="#import-data-data-preprocessing" id="toc-import-data-data-preprocessing" class="nav-link" data-scroll-target="#import-data-data-preprocessing"><strong>3.2.1 Import data &amp; Data Preprocessing</strong></a></li>
+  <li><a href="#visualisation-1" id="toc-visualisation-1" class="nav-link" data-scroll-target="#visualisation-1"><strong>3.2.2 Visualisation</strong></a></li>
+  </ul></li>
+  <li><a href="#overall-exports-and-imports-of-services-2020-2024" id="toc-overall-exports-and-imports-of-services-2020-2024" class="nav-link" data-scroll-target="#overall-exports-and-imports-of-services-2020-2024"><strong>3.3</strong> Overall Exports and Imports of Services (2020-2024)</a>
+  <ul class="collapse">
+  <li><a href="#import-data-data-preprocessing-1" id="toc-import-data-data-preprocessing-1" class="nav-link" data-scroll-target="#import-data-data-preprocessing-1"><strong>3.3.1 Import data &amp; Data Preprocessing</strong></a></li>
+  <li><a href="#visualisation-2" id="toc-visualisation-2" class="nav-link" data-scroll-target="#visualisation-2"><strong>3.3.2 Visualisation</strong></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis"><strong>4. Time-series analysis</strong></a>
+  <ul class="collapse">
+  <li><a href="#getting-started-1" id="toc-getting-started-1" class="nav-link" data-scroll-target="#getting-started-1"><strong>4.1&nbsp;Getting Started</strong></a></li>
+  <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data"><strong>4.2 Importing the data</strong></a>
+  <ul class="collapse">
+  <li><a href="#conventional-base-ts-object-versus-tibble-object" id="toc-conventional-base-ts-object-versus-tibble-object" class="nav-link" data-scroll-target="#conventional-base-ts-object-versus-tibble-object"><strong>4.2.1&nbsp;Conventional base&nbsp;<code>ts</code>&nbsp;object versus&nbsp;<code>tibble</code>&nbsp;object</strong></a></li>
+  <li><a href="#conventional-base-ts-object-versus-tibble-object-1" id="toc-conventional-base-ts-object-versus-tibble-object-1" class="nav-link" data-scroll-target="#conventional-base-ts-object-versus-tibble-object-1"><strong>4.2.2&nbsp;Conventional base&nbsp;<code>ts</code>&nbsp;object versus&nbsp;<code>tibble</code>&nbsp;object</strong></a></li>
+  <li><a href="#converting-tibble-object-to-tsibbleobject" id="toc-converting-tibble-object-to-tsibbleobject" class="nav-link" data-scroll-target="#converting-tibble-object-to-tsibbleobject"><strong>4.2.3&nbsp;Converting&nbsp;<code>tibble</code>&nbsp;object to&nbsp;<code>tsibble</code>object</strong></a></li>
+  <li><a href="#tsibble-object" id="toc-tsibble-object" class="nav-link" data-scroll-target="#tsibble-object"><strong>4.2.4&nbsp;tsibble object</strong></a></li>
+  </ul></li>
+  <li><a href="#visualising-time-series-data" id="toc-visualising-time-series-data" class="nav-link" data-scroll-target="#visualising-time-series-data"><strong>4.3&nbsp;Visualising Time-series Data</strong></a>
+  <ul class="collapse">
+  <li><a href="#visualising-single-time-series-ggplot2-methods" id="toc-visualising-single-time-series-ggplot2-methods" class="nav-link" data-scroll-target="#visualising-single-time-series-ggplot2-methods"><strong>4.3.1 Visualising single time-series: ggplot2 methods</strong></a></li>
+  <li><a href="#plotting-multiple-time-series-data-with-ggplot2-methods" id="toc-plotting-multiple-time-series-data-with-ggplot2-methods" class="nav-link" data-scroll-target="#plotting-multiple-time-series-data-with-ggplot2-methods"><strong>4.3.2&nbsp;Plotting multiple time-series data with ggplot2 methods</strong></a></li>
+  </ul></li>
+  <li><a href="#visual-analysis-of-time-series-data" id="toc-visual-analysis-of-time-series-data" class="nav-link" data-scroll-target="#visual-analysis-of-time-series-data"><strong>4.4&nbsp;Visual Analysis of Time-series Data</strong></a>
+  <ul class="collapse">
+  <li><a href="#visual-analysis-of-seasonality-with-seasonal-plot" id="toc-visual-analysis-of-seasonality-with-seasonal-plot" class="nav-link" data-scroll-target="#visual-analysis-of-seasonality-with-seasonal-plot"><strong>19.4.1&nbsp;Visual Analysis of Seasonality with Seasonal Plot</strong></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take-home Exercise 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeounghyun Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 2, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 9, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="singapores-international-trade-analysis" class="level1">
+<h1><strong>Singapore’s International Trade Analysis</strong></h1>
+</section>
+<section id="overview" class="level1">
+<h1><strong>1. Overview</strong></h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction"><strong>1.1 Introduction</strong></h2>
+<p>Merchandise trade is one of the commonly used indicators of economic performance, for Singapore, international trade is crucial to its economy. In the context of shifting global dynamics of trade due to geopolitical events and economic policies, it becomes imperative to analyse and visualise trade trends in a meaningful manner.</p>
+<p>In this take-home piece, we aim to improve the understanding of Singapore’s merchandise trade data through the use of data graphics by checking three existing visualizations, and thereafter, proposing better ones utilizing ggplot2 and other R packages. By identifying the strengths and limitations of the original charts, we will apply appropriate visualization techniques to improve clarity, comparability, and insight generation.</p>
+<p>Additionally, we will conduct&nbsp;a time-series analysis or forecasting&nbsp;to uncover trade patterns over the years, offering a deeper understanding of Singapore’s trade performance. This exercise will not only refine data visualization skills but also provide valuable insights into Singapore’s trade landscape.</p>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data"><strong>1.2 The Data</strong></h2>
+<p>The data for this analysis is sourced from&nbsp;<strong>Singapore’s Merchandise Trade by Region/Market</strong>, retrieved from the&nbsp;<strong>Department of Statistics Singapore (DOS) via the SingStat website</strong>. This dataset captures Singapore’s trade activities across various sectors and time periods.</p>
+<p>In this study, we examine three major datasets:</p>
+<ul>
+<li><p>Total Merchandise Trade (2020-2024): Value of all imports and exports of goods at current prices, the monthly series measures long term trends in trade.</p></li>
+<li><p>Non-Oil Domestic Exports (2024) — DATA Export data by major commodity sections excluding oil-related trade; Used to Study the Composition of Singapore’s Exports</p></li>
+<li><p>Annual trade in services statistics until October 2023, with key trading partners and services transaction values for exports and imports</p></li>
+</ul>
+<p>To ensure data clarity and accuracy, additional computed columns and non-relevant metadata were removed during preprocessing.</p>
+</section>
+</section>
+<section id="getting-started" class="level1">
+<h1><strong>2. Getting started</strong></h1>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages"><strong>2.1 Load Packages</strong></h2>
+<p>Load the following R packages using the&nbsp;<code>pacman::p_load()</code>&nbsp;function to streamline the workflow:</p>
+<ul>
+<li><p><strong>readxl</strong>: Enables reading Excel files into R for data analysis.</p></li>
+<li><p><strong>tidyverse</strong>: A core collection of R packages for data science, including:</p>
+<ul>
+<li><p><strong>dplyr</strong>&nbsp;(data manipulation)</p></li>
+<li><p><strong>ggplot2</strong>&nbsp;(data visualization)</p></li>
+<li><p><strong>tidyr</strong>&nbsp;(data tidying)</p></li>
+</ul></li>
+<li><p><strong>tsibble</strong>: Provides tools for handling and analyzing time-series data.</p></li>
+<li><p><strong>feasts</strong>: A package for time series visualization and feature extraction.</p></li>
+<li><p><strong>fable</strong>: Used for forecasting time-series data using statistical models.</p></li>
+<li><p><strong>seasonal</strong>: Facilitates seasonal adjustment of time series data.</p></li>
+<li><p><strong>treemap</strong>: Creates treemap visualizations for hierarchical data.</p></li>
+<li><p><strong>plotly</strong>: Enables interactive visualizations for data exploration.</p></li>
+<li><p><strong>scales</strong>: Enhances ggplot2 with functions for formatting axes, labels, and colors.</p></li>
+<li><p><strong>RColorBrewer</strong>: Provides color palettes for visually appealing data visualizations.</p></li>
+</ul>
+<p>By leveraging these packages, we ensure efficient data handling, visualization, and analysis throughout this study.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readxl, tidyverse, tsibble, feasts, fable, seasonal, treemap, plotly, scales, RColorBrewer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-data"><strong>2.2 Import data</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 📂</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"outputFile-3.xlsx"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sheets <span class="ot">&lt;-</span> <span class="fu">excel_sheets</span>(file_path)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sheets)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Content" "T1"      "T2"      "T3"      "T4"      "T5"      "T6"     
+ [8] "T7"      "T8"      "T9"      "T10"    </code></pre>
+</div>
+</div>
+</section>
+<section id="data-overview" class="level2">
+<h2 class="anchored" data-anchor-id="data-overview"><strong>2.3 Data Overview</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_T1 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file_path, <span class="at">sheet =</span> <span class="st">"T1"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_T1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 734
+  ...1   ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9  ...10 ...11 ...12 ...13
+  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 Theme… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+2 Subje… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+3 Topic… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+4 Table… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+5 &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+6 Data … Chec… &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+# ℹ 721 more variables: ...14 &lt;chr&gt;, ...15 &lt;chr&gt;, ...16 &lt;chr&gt;, ...17 &lt;chr&gt;,
+#   ...18 &lt;chr&gt;, ...19 &lt;chr&gt;, ...20 &lt;chr&gt;, ...21 &lt;chr&gt;, ...22 &lt;chr&gt;,
+#   ...23 &lt;chr&gt;, ...24 &lt;chr&gt;, ...25 &lt;chr&gt;, ...26 &lt;chr&gt;, ...27 &lt;chr&gt;,
+#   ...28 &lt;chr&gt;, ...29 &lt;chr&gt;, ...30 &lt;chr&gt;, ...31 &lt;chr&gt;, ...32 &lt;chr&gt;,
+#   ...33 &lt;chr&gt;, ...34 &lt;chr&gt;, ...35 &lt;chr&gt;, ...36 &lt;chr&gt;, ...37 &lt;chr&gt;,
+#   ...38 &lt;chr&gt;, ...39 &lt;chr&gt;, ...40 &lt;chr&gt;, ...41 &lt;chr&gt;, ...42 &lt;chr&gt;,
+#   ...43 &lt;chr&gt;, ...44 &lt;chr&gt;, ...45 &lt;chr&gt;, ...46 &lt;chr&gt;, ...47 &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_T1 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file_path, <span class="at">sheet =</span> <span class="st">"T1"</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_selected <span class="ot">&lt;-</span> df_T1 <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">26</span>, <span class="dv">39</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 734
+  ...1   ...2  ...3  ...4  ...5  ...6  ...7  ...8  ...9  ...10 ...11 ...12 ...13
+  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 Total… 5474… 5613… 5180… 5141… 4906… 4994… 5296… 4884… 5268… 5290… 5133… 4500…
+2 Total… 5940… 6014… 5833… 5611… 5444… 5576… 5922… 5200… 5681… 5582… 5703… 5111…
+# ℹ 721 more variables: ...14 &lt;chr&gt;, ...15 &lt;chr&gt;, ...16 &lt;chr&gt;, ...17 &lt;chr&gt;,
+#   ...18 &lt;chr&gt;, ...19 &lt;chr&gt;, ...20 &lt;chr&gt;, ...21 &lt;chr&gt;, ...22 &lt;chr&gt;,
+#   ...23 &lt;chr&gt;, ...24 &lt;chr&gt;, ...25 &lt;chr&gt;, ...26 &lt;chr&gt;, ...27 &lt;chr&gt;,
+#   ...28 &lt;chr&gt;, ...29 &lt;chr&gt;, ...30 &lt;chr&gt;, ...31 &lt;chr&gt;, ...32 &lt;chr&gt;,
+#   ...33 &lt;chr&gt;, ...34 &lt;chr&gt;, ...35 &lt;chr&gt;, ...36 &lt;chr&gt;, ...37 &lt;chr&gt;,
+#   ...38 &lt;chr&gt;, ...39 &lt;chr&gt;, ...40 &lt;chr&gt;, ...41 &lt;chr&gt;, ...42 &lt;chr&gt;,
+#   ...43 &lt;chr&gt;, ...44 &lt;chr&gt;, ...45 &lt;chr&gt;, ...46 &lt;chr&gt;, ...47 &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="export-data" class="level2">
+<h2 class="anchored" data-anchor-id="export-data">2.4 Export Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"outputFile-3.xlsx"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_T1 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file_path, <span class="at">sheet =</span> <span class="st">"T1"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>, <span class="at">skip =</span> <span class="dv">10</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df_T1 <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Total Merchandise Imports, (At Current Prices)"</span> <span class="sc">|</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Total Merchandise Exports, (At Current Prices)"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_filtered)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Category"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 734
+  Category     `2025 Jan` `2024 Dec` `2024 Nov` `2024 Oct` `2024 Sep` `2024 Aug`
+  &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1 Total Merch…  54746366.  56135912.  51802132   51415560.  49068356.  49948953.
+2 Total Merch…  59407614.  60142882.  58330192.  56110400   54444104.  55760575 
+# ℹ 727 more variables: `2024 Jul` &lt;dbl&gt;, `2024 Jun` &lt;dbl&gt;, `2024 May` &lt;dbl&gt;,
+#   `2024 Apr` &lt;dbl&gt;, `2024 Mar` &lt;dbl&gt;, `2024 Feb` &lt;dbl&gt;, `2024 Jan` &lt;dbl&gt;,
+#   `2023 Dec` &lt;dbl&gt;, `2023 Nov` &lt;dbl&gt;, `2023 Oct` &lt;dbl&gt;, `2023 Sep` &lt;dbl&gt;,
+#   `2023 Aug` &lt;dbl&gt;, `2023 Jul` &lt;dbl&gt;, `2023 Jun` &lt;dbl&gt;, `2023 May` &lt;dbl&gt;,
+#   `2023 Apr` &lt;dbl&gt;, `2023 Mar` &lt;dbl&gt;, `2023 Feb` &lt;dbl&gt;, `2023 Jan` &lt;dbl&gt;,
+#   `2022 Dec` &lt;dbl&gt;, `2022 Nov` &lt;dbl&gt;, `2022 Oct` &lt;dbl&gt;, `2022 Sep` &lt;dbl&gt;,
+#   `2022 Aug` &lt;dbl&gt;, `2022 Jul` &lt;dbl&gt;, `2022 Jun` &lt;dbl&gt;, `2022 May` &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(df_filtered, <span class="st">"filtered_merchandise_trade.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="re-import-data-for-first-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="re-import-data-for-first-visualisation">2.5 Re-import Data for first Visualisation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"filtered_mechandise_trade.xlsx"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [2 × 61] (S3: tbl_df/tbl/data.frame)
+ $ Category: chr [1:2] "Total Merchandise Imports, (At Current Prices)" "Total Merchandise Exports, (At Current Prices)"
+ $ 2020 Jan: num [1:2] 41180224 44501656
+ $ 2020 Feb: num [1:2] 39472637 43512320
+ $ 2020 Mar: num [1:2] 40433029 45800019
+ $ 2020 Apr: num [1:2] 35878828 39946596
+ $ 2020 May: num [1:2] 31458238 36482259
+ $ 2020 Jun: num [1:2] 35120892 40640766
+ $ 2020 Jul: num [1:2] 37843646 42892684
+ $ 2020 Aug: num [1:2] 36472279 44333640
+ $ 2020 Sep: num [1:2] 38801413 43907435
+ $ 2020 Oct: num [1:2] 38173829 44088350
+ $ 2020 Nov: num [1:2] 38477878 43291938
+ $ 2020 Dec: num [1:2] 40154550 46246876
+ $ 2021 Jan: num [1:2] 3.9e+07 4.5e+07
+ $ 2021 Feb: num [1:2] 37643664 42602227
+ $ 2021 Mar: num [1:2] 47668437 55444082
+ $ 2021 Apr: num [1:2] 45169548 50591895
+ $ 2021 May: num [1:2] 41559697 47355225
+ $ 2021 Jun: num [1:2] 45039845 49618994
+ $ 2021 Jul: num [1:2] 46107788 49834010
+ $ 2021 Aug: num [1:2] 44714491 52038522
+ $ 2021 Sep: num [1:2] 4.6e+07 5.2e+07
+ $ 2021 Oct: num [1:2] 47945213 53639342
+ $ 2021 Nov: num [1:2] 50674908 56720130
+ $ 2021 Dec: num [1:2] 54349357 59213794
+ $ 2022 Jan: num [1:2] 50026788 54845697
+ $ 2022 Feb: num [1:2] 4.5e+07 5.2e+07
+ $ 2022 Mar: num [1:2] 58079982 63132579
+ $ 2022 Apr: num [1:2] 56116002 60237343
+ $ 2022 May: num [1:2] 57604263 59847424
+ $ 2022 Jun: num [1:2] 59649162 64177050
+ $ 2022 Jul: num [1:2] 61029374 64124991
+ $ 2022 Aug: num [1:2] 58466009 63363749
+ $ 2022 Sep: num [1:2] 55799312 62507132
+ $ 2022 Oct: num [1:2] 53182943 56576348
+ $ 2022 Nov: num [1:2] 50653907 54162780
+ $ 2022 Dec: num [1:2] 49869770 55000084
+ $ 2023 Jan: num [1:2] 44382920 49531162
+ $ 2023 Feb: num [1:2] 42748424 50276696
+ $ 2023 Mar: num [1:2] 51593268 59071769
+ $ 2023 Apr: num [1:2] 44966738 49309126
+ $ 2023 May: num [1:2] 45561963 50730664
+ $ 2023 Jun: num [1:2] 46726290 53074382
+ $ 2023 Jul: num [1:2] 46574586 52301574
+ $ 2023 Aug: num [1:2] 49259954 53562807
+ $ 2023 Sep: num [1:2] 48959187 54436596
+ $ 2023 Oct: num [1:2] 51889502 58070011
+ $ 2023 Nov: num [1:2] 49402365 55562400
+ $ 2023 Dec: num [1:2] 45253865 52476302
+ $ 2024 Jan: num [1:2] 49246627 57692265
+ $ 2024 Feb: num [1:2] 45008515 51112628
+ $ 2024 Mar: num [1:2] 51339878 57039195
+ $ 2024 Apr: num [1:2] 52900958 55823465
+ $ 2024 May: num [1:2] 52681450 56812950
+ $ 2024 Jun: num [1:2] 48845924 52008384
+ $ 2024 Jul: num [1:2] 52965176 59227986
+ $ 2024 Aug: num [1:2] 49948953 55760575
+ $ 2024 Sep: num [1:2] 49068356 54444104
+ $ 2024 Oct: num [1:2] 51415560 56110400
+ $ 2024 Nov: num [1:2] 51802132 58330192
+ $ 2024 Dec: num [1:2] 56135912 60142882</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 61
+  Category     `2020 Jan` `2020 Feb` `2020 Mar` `2020 Apr` `2020 May` `2020 Jun`
+  &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1 Total Merch…  41180224.  39472637.  40433029.  35878828.  31458238.  35120892.
+2 Total Merch…  44501656.  43512320.  45800019   39946596.  36482259.  40640766.
+# ℹ 54 more variables: `2020 Jul` &lt;dbl&gt;, `2020 Aug` &lt;dbl&gt;, `2020 Sep` &lt;dbl&gt;,
+#   `2020 Oct` &lt;dbl&gt;, `2020 Nov` &lt;dbl&gt;, `2020 Dec` &lt;dbl&gt;, `2021 Jan` &lt;dbl&gt;,
+#   `2021 Feb` &lt;dbl&gt;, `2021 Mar` &lt;dbl&gt;, `2021 Apr` &lt;dbl&gt;, `2021 May` &lt;dbl&gt;,
+#   `2021 Jun` &lt;dbl&gt;, `2021 Jul` &lt;dbl&gt;, `2021 Aug` &lt;dbl&gt;, `2021 Sep` &lt;dbl&gt;,
+#   `2021 Oct` &lt;dbl&gt;, `2021 Nov` &lt;dbl&gt;, `2021 Dec` &lt;dbl&gt;, `2022 Jan` &lt;dbl&gt;,
+#   `2022 Feb` &lt;dbl&gt;, `2022 Mar` &lt;dbl&gt;, `2022 Apr` &lt;dbl&gt;, `2022 May` &lt;dbl&gt;,
+#   `2022 Jun` &lt;dbl&gt;, `2022 Jul` &lt;dbl&gt;, `2022 Aug` &lt;dbl&gt;, `2022 Sep` &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Category" "2020 Jan" "2020 Feb" "2020 Mar" "2020 Apr" "2020 May"
+ [7] "2020 Jun" "2020 Jul" "2020 Aug" "2020 Sep" "2020 Oct" "2020 Nov"
+[13] "2020 Dec" "2021 Jan" "2021 Feb" "2021 Mar" "2021 Apr" "2021 May"
+[19] "2021 Jun" "2021 Jul" "2021 Aug" "2021 Sep" "2021 Oct" "2021 Nov"
+[25] "2021 Dec" "2022 Jan" "2022 Feb" "2022 Mar" "2022 Apr" "2022 May"
+[31] "2022 Jun" "2022 Jul" "2022 Aug" "2022 Sep" "2022 Oct" "2022 Nov"
+[37] "2022 Dec" "2023 Jan" "2023 Feb" "2023 Mar" "2023 Apr" "2023 May"
+[43] "2023 Jun" "2023 Jul" "2023 Aug" "2023 Sep" "2023 Oct" "2023 Nov"
+[49] "2023 Dec" "2024 Jan" "2024 Feb" "2024 Mar" "2024 Apr" "2024 May"
+[55] "2024 Jun" "2024 Jul" "2024 Aug" "2024 Sep" "2024 Oct" "2024 Nov"
+[61] "2024 Dec"</code></pre>
+</div>
+</div>
+<section id="check-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="check-missing-values">2.5.1 <strong>Check missing values</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Category 2020 Jan 2020 Feb 2020 Mar 2020 Apr 2020 May 2020 Jun 2020 Jul 
+       0        0        0        0        0        0        0        0 
+2020 Aug 2020 Sep 2020 Oct 2020 Nov 2020 Dec 2021 Jan 2021 Feb 2021 Mar 
+       0        0        0        0        0        0        0        0 
+2021 Apr 2021 May 2021 Jun 2021 Jul 2021 Aug 2021 Sep 2021 Oct 2021 Nov 
+       0        0        0        0        0        0        0        0 
+2021 Dec 2022 Jan 2022 Feb 2022 Mar 2022 Apr 2022 May 2022 Jun 2022 Jul 
+       0        0        0        0        0        0        0        0 
+2022 Aug 2022 Sep 2022 Oct 2022 Nov 2022 Dec 2023 Jan 2023 Feb 2023 Mar 
+       0        0        0        0        0        0        0        0 
+2023 Apr 2023 May 2023 Jun 2023 Jul 2023 Aug 2023 Sep 2023 Oct 2023 Nov 
+       0        0        0        0        0        0        0        0 
+2023 Dec 2024 Jan 2024 Feb 2024 Mar 2024 Apr 2024 May 2024 Jun 2024 Jul 
+       0        0        0        0        0        0        0        0 
+2024 Aug 2024 Sep 2024 Oct 2024 Nov 2024 Dec 
+       0        0        0        0        0 </code></pre>
+</div>
+</div>
+</section>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">2.5.2 Data Preprocessing</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>Category,  </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Month"</span>, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Value"</span> </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 120 × 3
+   Category                                       Month        Value
+   &lt;chr&gt;                                          &lt;chr&gt;        &lt;dbl&gt;
+ 1 Total Merchandise Imports, (At Current Prices) 2020 Jan 41180224.
+ 2 Total Merchandise Imports, (At Current Prices) 2020 Feb 39472637.
+ 3 Total Merchandise Imports, (At Current Prices) 2020 Mar 40433029.
+ 4 Total Merchandise Imports, (At Current Prices) 2020 Apr 35878828.
+ 5 Total Merchandise Imports, (At Current Prices) 2020 May 31458238.
+ 6 Total Merchandise Imports, (At Current Prices) 2020 Jun 35120892.
+ 7 Total Merchandise Imports, (At Current Prices) 2020 Jul 37843646.
+ 8 Total Merchandise Imports, (At Current Prices) 2020 Aug 36472279.
+ 9 Total Merchandise Imports, (At Current Prices) 2020 Sep 38801413.
+10 Total Merchandise Imports, (At Current Prices) 2020 Oct 38173829.
+# ℹ 110 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 전처리: 연도별 합산</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#df_long &lt;- df %&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  pivot_longer(cols = -Category, names_to = "Month", values_to = "Value") %&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(Year = as.integer(substr(Month, 1, 4))) %&gt;%  # 연도 추출</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  group_by(Year, Category) %&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  summarise(Total_Trade = sum(Value), .groups = "drop")</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(df_long, aes(x = Year, y = Total_Trade, fill = Category)) +</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  geom_bar(stat = "identity", position = "stack") +  # Stacked Bar Chart</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  geom_line(aes(group = 1, color = "Total Trade"), size = 1.2) + # Total Trade Line</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">#  geom_point(aes(color = "Total Trade"), size = 3) +</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co">#  scale_fill_manual(values = c("steelblue", "tomato")) +  # Exports/Imports 색상 설정</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co">#  scale_color_manual(values = c("black")) +  # Line 색상 설정</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co">#  labs(title = "Total Merchandise Trade (2020 - 2024)",</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co">#       x = "Year", y = "Trade Value (Million SGD)",</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co">#       fill = "Trade Type", color = "Trade Type") +</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  theme_minimal() +</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co">#  theme(legend.position = "right",</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co">#        text = element_text(size = 14),</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">#        axis.text.x = element_text(face = "bold"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="data-visualization" class="level1">
+<h1>3. Data Visualization</h1>
+<section id="total-merchandise-trade-at-current-prices-2020---2024" class="level2">
+<h2 class="anchored" data-anchor-id="total-merchandise-trade-at-current-prices-2020---2024"><strong>3.1 TOTAL MERCHANDISE TRADE AT CURRENT PRICES, 2020 - 2024</strong></h2>
+<p><img src="images/clipboard-2267507328.png" class="img-fluid" width="397"></p>
+<section id="current-chart-analysis-pros-and-cons" class="level4">
+<h4 class="anchored" data-anchor-id="current-chart-analysis-pros-and-cons"><strong>Current Chart Analysis Pros and Cons</strong></h4>
+<p>The original visualization used a horizontal bar chart to display annual trade values, making year-to-year comparisons clear. However, it lacked a clear representation of trade trends and balance over time.</p>
+</section>
+<section id="proposed-improvements" class="level4">
+<h4 class="anchored" data-anchor-id="proposed-improvements"><strong>Proposed Improvements</strong></h4>
+<p>The revised chart combines a stacked bar chart with trend lines to provide a clearer overview of trade patterns. The stacked bars maintain the distinction between exports and imports, while the trend lines enhance visibility of trade fluctuations. This approach improves interpretability and makes it easier to identify trade growth and balance.</p>
+</section>
+<section id="implementation" class="level4">
+<h4 class="anchored" data-anchor-id="implementation"><strong>Implementation</strong></h4>
+<p>The new visualization was created using&nbsp;<strong>ggplot2</strong>&nbsp;in R.&nbsp;<strong>geom_bar()</strong>&nbsp;was used for the stacked bars, while&nbsp;<strong>geom_line()</strong>&nbsp;and&nbsp;<strong>geom_point()</strong>&nbsp;were added to highlight trade trends. This method i</p>
+</section>
+<section id="visualisation" class="level3">
+<h3 class="anchored" data-anchor-id="visualisation">3.1.2 Visualisation</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Category, <span class="at">names_to =</span> <span class="st">"Month"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">as.integer</span>(<span class="fu">substr</span>(Month, <span class="dv">1</span>, <span class="dv">4</span>))) <span class="sc">%&gt;%</span>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year, Category) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Trade =</span> <span class="fu">sum</span>(Value), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total_Trade, <span class="at">fill =</span> Category)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span>  </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"Total Trade"</span>), <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span> <span class="co"># Total Trade Line</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Total Trade"</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"steelblue"</span>, <span class="st">"tomato"</span>), </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Exports"</span>, <span class="st">"Imports"</span>)) <span class="sc">+</span>  </span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>), </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Exports Trend"</span>, <span class="st">"Imports Trend"</span>)) <span class="sc">+</span>  </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_comma</span>(<span class="at">scale =</span> <span class="fl">1e-6</span>)) <span class="sc">+</span>  </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Merchandise Trade (2020 - 2024)"</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Trade Value (Million SGD)"</span>, </span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Trade Type"</span>, <span class="at">color =</span> <span class="st">"Trend Line"</span>) <span class="sc">+</span>  </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))  </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co"># plotly를 사용하여 인터랙티브 그래프로 변환</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>p_interactive <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(p)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 인터랙티브 그래프 출력</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>p_interactive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-ce394fda9e9d6ac4ed4a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-ce394fda9e9d6ac4ed4a">{"x":{"data":[{"orientation":"v","width":[0.90000000000009095,0.90000000000009095,0.90000000000009095,0.90000000000009095,0.90000000000009095],"base":[453467443.89999998,545881937.10000002,655435883.60000002,567319061.80000007,611359440.4000001],"x":[2020,2021,2022,2023,2024],"y":[515644538.99999988,614081093.69999993,709966635.10000002,638403489.19999993,674505026.5999999],"text":["Year: 2020<br />Total_Trade: 515644539<br />Category: Total Merchandise Exports, (At Current Prices)","Year: 2021<br />Total_Trade: 614081094<br />Category: Total Merchandise Exports, (At Current Prices)","Year: 2022<br />Total_Trade: 709966635<br />Category: Total Merchandise Exports, (At Current Prices)","Year: 2023<br />Total_Trade: 638403489<br />Category: Total Merchandise Exports, (At Current Prices)","Year: 2024<br />Total_Trade: 674505027<br />Category: Total Merchandise Exports, (At Current Prices)"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(70,130,180,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"(Total Merchandise Exports, (At Current Prices),1)","legendgroup":"(Total Merchandise Exports, (At Current Prices),1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","mode":"","frame":null},{"orientation":"v","width":[0.90000000000009095,0.90000000000009095,0.90000000000009095,0.90000000000009095,0.90000000000009095],"base":[0,0,0,0,0],"x":[2020,2021,2022,2023,2024],"y":[453467443.89999998,545881937.10000002,655435883.60000002,567319061.80000007,611359440.4000001],"text":["Year: 2020<br />Total_Trade: 453467444<br />Category: Total Merchandise Imports, (At Current Prices)","Year: 2021<br />Total_Trade: 545881937<br />Category: Total Merchandise Imports, (At Current Prices)","Year: 2022<br />Total_Trade: 655435884<br />Category: Total Merchandise Imports, (At Current Prices)","Year: 2023<br />Total_Trade: 567319062<br />Category: Total Merchandise Imports, (At Current Prices)","Year: 2024<br />Total_Trade: 611359440<br />Category: Total Merchandise Imports, (At Current Prices)"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,99,71,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"(Total Merchandise Imports, (At Current Prices),1)","legendgroup":"(Total Merchandise Imports, (At Current Prices),1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","mode":"","frame":null},{"x":[2020,2021,2022,2023,2024],"y":[515644538.99999994,614081093.69999993,709966635.10000002,638403489.20000005,674505026.5999999],"text":["Year: 2020<br />Total_Trade: 515644539<br />Category: Total Merchandise Exports, (At Current Prices)<br />colour: Total Trade","Year: 2021<br />Total_Trade: 614081094<br />Category: Total Merchandise Exports, (At Current Prices)<br />colour: Total Trade","Year: 2022<br />Total_Trade: 709966635<br />Category: Total Merchandise Exports, (At Current Prices)<br />colour: Total Trade","Year: 2023<br />Total_Trade: 638403489<br />Category: Total Merchandise Exports, (At Current Prices)<br />colour: Total Trade","Year: 2024<br />Total_Trade: 674505027<br />Category: Total Merchandise Exports, (At Current Prices)<br />colour: Total Trade"],"type":"scatter","mode":"lines+markers","line":{"width":4.5354330708661417,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","name":"(Total Merchandise Exports, (At Current Prices),Total Trade)","legendgroup":"(Total Merchandise Exports, (At Current Prices),Total Trade)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(70,130,180,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"}},"frame":null},{"x":[2020,2021,2022,2023,2024],"y":[453467443.89999998,545881937.10000002,655435883.60000002,567319061.80000007,611359440.4000001],"text":["Year: 2020<br />Total_Trade: 453467444<br />Category: Total Merchandise Imports, (At Current Prices)<br />colour: Total Trade","Year: 2021<br />Total_Trade: 545881937<br />Category: Total Merchandise Imports, (At Current Prices)<br />colour: Total Trade","Year: 2022<br />Total_Trade: 655435884<br />Category: Total Merchandise Imports, (At Current Prices)<br />colour: Total Trade","Year: 2023<br />Total_Trade: 567319062<br />Category: Total Merchandise Imports, (At Current Prices)<br />colour: Total Trade","Year: 2024<br />Total_Trade: 611359440<br />Category: Total Merchandise Imports, (At Current Prices)<br />colour: Total Trade"],"type":"scatter","mode":"lines+markers","line":{"width":4.5354330708661417,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","name":"(Total Merchandise Imports, (At Current Prices),Total Trade)","legendgroup":"(Total Merchandise Imports, (At Current Prices),Total Trade)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(255,99,71,1)","opacity":1,"size":11.338582677165356,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"}},"frame":null}],"layout":{"margin":{"t":48.54462432544625,"r":7.3059360730593621,"b":47.355749273557493,"l":66.749688667496912},"font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969279},"title":{"text":"Total Merchandise Trade (2020 - 2024)","font":{"color":"rgba(0,0,0,1)","family":"","size":22.316313823163139},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2019.3049999999998,2024.6950000000002],"tickmode":"array","ticktext":["2020","2021","2022","2023","2024"],"tickvals":[2020,2021,2022,2023,2024],"categoryorder":"array","categoryarray":["2020","2021","2022","2023","2024"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":14.877542548775427},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969279}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-68270125.935000002,1433672644.635],"tickmode":"array","ticktext":["0","500","1,000"],"tickvals":[0,499999999.99999994,1000000000],"categoryorder":"array","categoryarray":["0","500","1,000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":14.87754254877543},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Trade Value (Million SGD)","font":{"color":"rgba(0,0,0,1)","family":"","size":18.596928185969279}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835205},"title":{"text":"Trend Line<br />Trade Type","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"167b1fa52c4f":{"x":{},"y":{},"fill":{},"type":"bar"},"167b150006c4":{"x":{},"y":{},"fill":{},"colour":{}},"167b34bc38a1":{"x":{},"y":{},"fill":{},"colour":{}}},"cur_data":"167b1fa52c4f","visdat":{"167b1fa52c4f":["function (y) ","x"],"167b150006c4":["function (y) ","x"],"167b34bc38a1":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="non-oil-domestic-exports-by-major-commodity-sections-2024" class="level2">
+<h2 class="anchored" data-anchor-id="non-oil-domestic-exports-by-major-commodity-sections-2024">3.2. NON-OIL DOMESTIC EXPORTS BY MAJOR COMMODITY SECTIONS, 2024</h2>
+<p><img src="images/clipboard-723475948.png" class="img-fluid" width="381"></p>
+<section id="current-chart-analysis-pros-and-cons-1" class="level4">
+<h4 class="anchored" data-anchor-id="current-chart-analysis-pros-and-cons-1"><strong>Current Chart Analysis Pros and Cons</strong></h4>
+<p>The original chart is ship-based infographic, so the idea of an export is visually intuitive. Different commodity categories are distinguished by unique icons and color-coded sections. However, the ratios of export values are not represented accurately and hence it is difficult to make comparisons. Label placement is also cluttered, making it non-readable.</p>
+</section>
+<section id="proposed-improvements-1" class="level3">
+<h3 class="anchored" data-anchor-id="proposed-improvements-1"><strong>Proposed Improvements</strong></h3>
+<p>As such, a treemap guarantees that each category is simultaneously represented in proportion to the area it occupies, enabling greater accuracy in comparison. This also decreases visual clutter and still keeps a structured layout.</p>
+</section>
+<section id="implementation-1" class="level3">
+<h3 class="anchored" data-anchor-id="implementation-1"><strong>Implementation</strong></h3>
+<p>The revised chart was created using&nbsp;ggplot2&nbsp;and&nbsp;treemapify&nbsp;in R.&nbsp;Each category is represented proportionally, with labels placed inside for clarity. A&nbsp;color gradient enhances readability, making larger export categories stand out.</p>
+</section>
+<section id="import-data-data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="import-data-data-preprocessing"><strong>3.2.1 Import data &amp; Data Preprocessing</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"non_oil_domestic_exports_2024.xlsx"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file_path)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Value <span class="ot">&lt;-</span> data<span class="sc">$</span><span class="st">`</span><span class="at">2024 Total</span><span class="st">`</span> <span class="sc">/</span> <span class="fl">1e6</span>  </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data<span class="sc">$</span>Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1749  2.6732 10.5734 19.2890 28.6450 70.3791 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Percentage <span class="ot">&lt;-</span> <span class="fu">round</span>((data<span class="sc">$</span>Value <span class="sc">/</span> <span class="fu">sum</span>(data<span class="sc">$</span>Value)) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(data<span class="sc">$</span>Category, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">round</span>(data<span class="sc">$</span>Value, <span class="dv">1</span>), <span class="st">"B S$ ("</span>, <span class="fu">round</span>(data<span class="sc">$</span>Percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualisation-1" class="level3">
+<h3 class="anchored" data-anchor-id="visualisation-1"><strong>3.2.2 Visualisation</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">treemap</span>(data,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">index =</span> <span class="st">"Label"</span>,          </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">vSize =</span> <span class="st">"Value"</span>,          </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">vColor =</span> <span class="st">"Value"</span>,         </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"manual"</span>,          </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">palette =</span> <span class="fu">brewer.pal</span>(<span class="dv">9</span>, <span class="st">"Blues"</span>),  </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">algorithm =</span> <span class="st">"pivotSize"</span>,  </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">sortID =</span> <span class="st">"Value"</span>,         </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Singapore Non-Oil Domestic Exports (2024)"</span>,  </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title.legend =</span> <span class="st">"Export Value (B S$)"</span>,  </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">fontsize.labels =</span> <span class="dv">12</span>,     </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">fontcolor.labels =</span> <span class="st">"white"</span>, </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">align.labels =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"center"</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="overall-exports-and-imports-of-services-2020-2024" class="level2">
+<h2 class="anchored" data-anchor-id="overall-exports-and-imports-of-services-2020-2024"><strong>3.3</strong> Overall Exports and Imports of Services (2020-2024)</h2>
+<p><img src="images/clipboard-1418604782.png" class="img-fluid" width="464"></p>
+<section id="current-chart-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="current-chart-analysis">Current Chart Analysis</h4>
+<p>The original visualization uses horizontal bars with container-themed elements to represent exports and imports over time. Althought great looking, the design fails at communicating trends in trade. Having one bar for every year makes visibility of patterns over time difficult, and the decorative lines add nothing of value.</p>
+</section>
+<section id="proposed-improvements-2" class="level4">
+<h4 class="anchored" data-anchor-id="proposed-improvements-2">Proposed Improvements</h4>
+<p>Instead, a stacked bar chart with trend lines is a better option. This format allows for both explicit year-on-year comparisons and emphasizes the international relationship of exports to imports. Interpretability is further improved by trend lines that show global growth tendencies.</p>
+</section>
+<section id="implementation-2" class="level4">
+<h4 class="anchored" data-anchor-id="implementation-2">Implementation</h4>
+<p>The revised chart was created using&nbsp;<code>ggplot2</code>&nbsp;in R.&nbsp;<code>geom_bar()</code>&nbsp;was used for stacked bars, with&nbsp;<code>geom_line()</code>&nbsp;and&nbsp;<code>geom_point()</code>&nbsp;overlaying trade trends. Custom colors and labels improve readability while maintaining a clean, data-focused design.</p>
+</section>
+<section id="import-data-data-preprocessing-1" class="level3">
+<h3 class="anchored" data-anchor-id="import-data-data-preprocessing-1"><strong>3.3.1 Import data &amp; Data Preprocessing</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"Exports_Imports_2020_2024.xlsx"</span>  </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(file_path)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  Years `Exports (S$ Bil)` `Imports (S$ Bil)`
+  &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;
+1  2020               300                290 
+2  2021               382.               333.
+3  2022               468.               409.
+4  2023               482.               438.
+5  2024               529.               469.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [5 × 3] (S3: tbl_df/tbl/data.frame)
+ $ Years           : num [1:5] 2020 2021 2022 2023 2024
+ $ Exports (S$ Bil): num [1:5] 300 382 468 482 529
+ $ Imports (S$ Bil): num [1:5] 290 333 409 438 469</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Exports (S$ Bil)"</span>, <span class="st">"Imports (S$ Bil)"</span>), </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Category"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(data_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  Years Category         Value
+  &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+1  2020 Exports (S$ Bil)  300 
+2  2020 Imports (S$ Bil)  290 
+3  2021 Exports (S$ Bil)  382.
+4  2021 Imports (S$ Bil)  333.
+5  2022 Exports (S$ Bil)  468.
+6  2022 Imports (S$ Bil)  409.</code></pre>
+</div>
+</div>
+</section>
+<section id="visualisation-2" class="level3">
+<h3 class="anchored" data-anchor-id="visualisation-2"><strong>3.3.2 Visualisation</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>export_bar_color <span class="ot">&lt;-</span> <span class="st">"#0072B2"</span>  <span class="co"># Deep Sky Blue</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>import_bar_color <span class="ot">&lt;-</span> <span class="st">"#E69F00"</span>  <span class="co"># Burnt Orange</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>export_trend_color <span class="ot">&lt;-</span> <span class="st">"#009E73"</span>  <span class="co"># Spring Green</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>import_trend_color <span class="ot">&lt;-</span> <span class="st">"#CC79A7"</span>  <span class="co"># Soft Purple</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> data_long, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Years), <span class="at">y =</span> Value, <span class="at">fill =</span> Category), <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> data_long, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Years), <span class="at">y =</span> Value, <span class="at">label =</span> Value), </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Years), <span class="at">y =</span> <span class="st">`</span><span class="at">Exports (S$ Bil)</span><span class="st">`</span>, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"Exports"</span>), </span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>) <span class="sc">+</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Years), <span class="at">y =</span> <span class="st">`</span><span class="at">Exports (S$ Bil)</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">"Exports"</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#import trend line</span></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Years), <span class="at">y =</span> <span class="st">`</span><span class="at">Imports (S$ Bil)</span><span class="st">`</span>, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"Imports"</span>), </span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>) <span class="sc">+</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Years), <span class="at">y =</span> <span class="st">`</span><span class="at">Imports (S$ Bil)</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">"Imports"</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Exports (S$ Bil)"</span> <span class="ot">=</span> export_bar_color, </span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Imports (S$ Bil)"</span> <span class="ot">=</span> import_bar_color)) <span class="sc">+</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Exports"</span> <span class="ot">=</span> export_trend_color, </span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Imports"</span> <span class="ot">=</span> import_trend_color)) <span class="sc">+</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Overall Exports and Imports of Services (2020-2024)"</span>,</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"S$ Billion"</span>,</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Category"</span>, <span class="at">color =</span> <span class="st">"Trend"</span>) <span class="sc">+</span></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="time-series-analysis" class="level1">
+<h1><strong>4. Time-series analysis</strong></h1>
+<section id="getting-started-1" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-1"><strong>4.1&nbsp;Getting Started</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readr,tidyverse, tsibble, feasts, fable, seasonal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-the-data"><strong>4.2 Importing the data</strong></h2>
+<p>First,&nbsp;<code>read_csv()</code>&nbsp;of&nbsp;<strong>readr</strong>&nbsp;package is used to import&nbsp;<code>Import_Export.csv</code>&nbsp;file into R environment.<br>
+The imported file is saved as a&nbsp;<strong>tibble object</strong>&nbsp;called&nbsp;<code>ts_data</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ts_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Import_Export.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the code chunk below,&nbsp;<strong><code>parse_date_time()</code>&nbsp;of lubridate package</strong>&nbsp;is used to convert the data type of&nbsp;<strong>“Data Series”</strong>field from Character to Date.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>ts_data<span class="sc">$</span><span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">parse_date_time</span>(ts_data<span class="sc">$</span><span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, <span class="at">orders =</span> <span class="st">"Y b"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ts_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 161
+  `Data Series`       `Total All Markets` America `Antigua And Barbuda`
+  &lt;dttm&gt;                            &lt;dbl&gt;   &lt;dbl&gt;                 &lt;dbl&gt;
+1 2025-01-01 00:00:00              54746.   6923.                     0
+2 2024-12-01 00:00:00              56136.   7874.                     0
+3 2024-11-01 00:00:00              51802.   7880.                     0
+4 2024-10-01 00:00:00              51416.   8078.                     0
+5 2024-09-01 00:00:00              49068.   9112                      0
+6 2024-08-01 00:00:00              49949    8581.                     0
+# ℹ 157 more variables: Argentina &lt;dbl&gt;, Bahamas &lt;dbl&gt;, Bermuda &lt;dbl&gt;,
+#   Brazil &lt;dbl&gt;, Canada &lt;dbl&gt;, Chile &lt;dbl&gt;, Colombia &lt;dbl&gt;,
+#   `Costa Rica` &lt;dbl&gt;, Cuba &lt;dbl&gt;, `Dominican Rep` &lt;dbl&gt;, Ecuador &lt;dbl&gt;,
+#   `El Salvador` &lt;dbl&gt;, Guatemala &lt;dbl&gt;, Guyana &lt;dbl&gt;, Honduras &lt;dbl&gt;,
+#   Jamaica &lt;dbl&gt;, Mexico &lt;dbl&gt;, `Netherlands Antilles` &lt;dbl&gt;, Panama &lt;dbl&gt;,
+#   Paraguay &lt;dbl&gt;, Peru &lt;dbl&gt;, `Puerto Rico` &lt;dbl&gt;,
+#   `St. Vincent And The Grenadines` &lt;dbl&gt;, `Trinidad And Tobago` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<section id="conventional-base-ts-object-versus-tibble-object" class="level3">
+<h3 class="anchored" data-anchor-id="conventional-base-ts-object-versus-tibble-object"><strong>4.2.1&nbsp;Conventional base&nbsp;<code>ts</code>&nbsp;object versus&nbsp;<code>tibble</code>&nbsp;object</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ts_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 265 × 161
+   `Data Series`       `Total All Markets` America `Antigua And Barbuda`
+   &lt;dttm&gt;                            &lt;dbl&gt;   &lt;dbl&gt;                 &lt;dbl&gt;
+ 1 2025-01-01 00:00:00              54746.   6923.                     0
+ 2 2024-12-01 00:00:00              56136.   7874.                     0
+ 3 2024-11-01 00:00:00              51802.   7880.                     0
+ 4 2024-10-01 00:00:00              51416.   8078.                     0
+ 5 2024-09-01 00:00:00              49068.   9112                      0
+ 6 2024-08-01 00:00:00              49949    8581.                     0
+ 7 2024-07-01 00:00:00              52965.   8462                      0
+ 8 2024-06-01 00:00:00              48846.   7611.                     0
+ 9 2024-05-01 00:00:00              52681.   8388                      0
+10 2024-04-01 00:00:00              52901    8972.                     0
+# ℹ 255 more rows
+# ℹ 157 more variables: Argentina &lt;dbl&gt;, Bahamas &lt;dbl&gt;, Bermuda &lt;dbl&gt;,
+#   Brazil &lt;dbl&gt;, Canada &lt;dbl&gt;, Chile &lt;dbl&gt;, Colombia &lt;dbl&gt;,
+#   `Costa Rica` &lt;dbl&gt;, Cuba &lt;dbl&gt;, `Dominican Rep` &lt;dbl&gt;, Ecuador &lt;dbl&gt;,
+#   `El Salvador` &lt;dbl&gt;, Guatemala &lt;dbl&gt;, Guyana &lt;dbl&gt;, Honduras &lt;dbl&gt;,
+#   Jamaica &lt;dbl&gt;, Mexico &lt;dbl&gt;, `Netherlands Antilles` &lt;dbl&gt;, Panama &lt;dbl&gt;,
+#   Paraguay &lt;dbl&gt;, Peru &lt;dbl&gt;, `Puerto Rico` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="conventional-base-ts-object-versus-tibble-object-1" class="level3">
+<h3 class="anchored" data-anchor-id="conventional-base-ts-object-versus-tibble-object-1"><strong>4.2.2&nbsp;Conventional base&nbsp;<code>ts</code>&nbsp;object versus&nbsp;<code>tibble</code>&nbsp;object</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ts_data_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(ts_data)       </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ts_data_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Data Series Total All Markets America Antigua And Barbuda Argentina
+[1,]  1735689600           54746.4  6923.3                   0       4.0
+[2,]  1733011200           56135.9  7873.7                   0      12.5
+[3,]  1730419200           51802.1  7879.6                   0     116.2
+[4,]  1727740800           51415.6  8077.6                   0       4.1
+[5,]  1725148800           49068.4  9112.0                   0       8.1
+[6,]  1722470400           49949.0  8581.4                   0       7.2
+     Bahamas Bermuda Brazil Canada Chile Colombia Costa Rica Cuba Dominican Rep
+[1,]     0.0       0  870.2  267.5  12.6     17.6       40.0  0.6           5.7
+[2,]     8.1       0  586.8  212.7   5.7     19.4       72.5  0.8           6.1
+[3,]     0.0       0  942.4  221.6   8.0      9.2       70.2  1.3           5.9
+[4,]     0.0       0  639.9  323.8   7.1      2.4       58.0  0.8           7.4
+[5,]     0.0       0  786.6  236.5   2.3      3.3       50.1  1.0           7.4
+[6,]     0.0       0  550.6  224.4   5.0      5.7       59.9  0.5           7.8
+     Ecuador El Salvador Guatemala Guyana Honduras Jamaica Mexico
+[1,]    15.2         1.2       0.2    0.3      0.9     0.1  267.6
+[2,]     8.8         2.5       0.3    0.0      0.5     0.1  263.7
+[3,]     7.7         1.2       0.3    0.1      0.3     0.0  426.6
+[4,]     9.7         1.4       1.3    0.3      1.0     0.1  897.9
+[5,]     3.7         1.5       0.9    0.1      0.3     0.1 1486.9
+[6,]     8.7         1.5       1.1    0.2      0.3     0.1  394.2
+     Netherlands Antilles Panama Paraguay Peru Puerto Rico
+[1,]                    0    0.3      0.3  9.4        15.9
+[2,]                    0    0.3      0.7  8.1        10.2
+[3,]                    0    0.1      0.4 18.3         9.8
+[4,]                    0    0.3      0.4 14.6         9.7
+[5,]                    0   43.7      0.7  1.8         7.4
+[6,]                    0    0.4      0.2  2.6         8.8
+     St. Vincent And The Grenadines Trinidad And Tobago United States
+[1,]                              0                 1.3        5388.6
+[2,]                              0                 0.1        6651.8
+[3,]                              0                49.6        5988.7
+[4,]                              0                 0.0        6092.8
+[5,]                              0                 1.9        6449.3
+[6,]                              0                41.8        7258.3
+     United States Virgin Islands Uruguay Venezuela Other Markets America
+[1,]                            0     2.7       0.0                   0.8
+[2,]                            0     0.7       0.0                   1.4
+[3,]                            0     0.9       0.0                   0.7
+[4,]                            0     2.0       0.1                   2.3
+[5,]                            0    17.4       0.0                   1.0
+[6,]                            0     0.9       0.2                   0.9
+        Asia Afghanistan Bahrain Bangladesh Brunei Cambodia  China
+[1,] 39520.8         0.0    86.0       16.3  205.5     87.8 6801.2
+[2,] 39721.8         0.0    81.4       18.1   94.7     50.1 7168.0
+[3,] 35194.8         0.0     2.1       16.6   93.7    120.3 6841.2
+[4,] 34284.1         0.0   115.9       15.4   94.7     15.0 6070.1
+[5,] 31828.7         0.0    23.0       27.3   83.9     26.6 5716.2
+[6,] 32760.4         0.1    53.6       21.1  107.5     76.0 6249.9
+     Christmas Island Hong Kong  India Indonesia Iran  Iraq Israel  Japan
+[1,]              0.0     696.0 1098.7    1765.7  1.6 201.9   64.0 2600.1
+[2,]              0.0     769.2  857.0    2006.9  4.0 459.2   76.6 2790.1
+[3,]              0.0     442.4  909.9    1940.8  2.3 164.8   69.5 2879.8
+[4,]              0.0     386.8  989.6    1973.1  1.0 203.8   83.2 2943.2
+[5,]              0.1     476.6  774.4    1650.2  0.0 133.3   90.1 2381.9
+[6,]              0.0     379.7 1047.1    1826.1  0.2 145.7   85.8 2377.9
+     Jordan Kazakhstan Korea, Dem Peo Rep Of Korea, Rep Of Kuwait Lao Lebanon
+[1,]    2.9       12.8                     0        3775.0  100.3 7.9     0.3
+[2,]    5.4        7.6                     0        3675.7  152.5 6.0     0.2
+[3,]    4.9       26.9                     0        2793.8  223.6 1.1     0.6
+[4,]    4.0        0.0                     0        3000.3   55.7 0.7     0.3
+[5,]    2.2        0.7                     0        3041.7    2.4 0.5     0.3
+[6,]    5.9        0.0                     0        2950.2   51.9 0.7     0.2
+     Macao Malaysia Maldives Mongolia Myanmar Nepal  Oman Pakistan Philippines
+[1,]   0.3   6445.1      0.1      0.0     4.3   0.3 140.6     58.6       539.6
+[2,]   0.4   6569.9      3.9      0.0     5.5   0.1  41.4     17.3       654.4
+[3,]   1.0   5778.2      3.6      0.0     8.7   0.5  39.1      6.4       496.0
+[4,]   1.9   5574.0      0.5      0.1     7.0   0.8  66.4     56.5       462.4
+[5,]   0.1   5462.0      0.1      0.2    10.3   0.6  37.1     19.0       458.0
+[6,]   0.6   5234.6      0.4      0.0     6.4   0.2  94.5     44.0       451.9
+     Qatar Saudi Arabia Sri Lanka Syria  Taiwan Thailand Turkiye
+[1,] 507.1        658.1      10.0     0 10152.7   1139.7    96.2
+[2,] 507.5        838.9      11.2     0  8847.7   1421.6    67.0
+[3,] 441.7        973.2      12.9     0  7360.0   1228.3    41.0
+[4,] 551.2        881.1       9.4     0  6976.4   1517.2    50.2
+[5,] 460.4        507.6       8.7     0  7195.8   1250.2    98.4
+[6,] 515.8        443.7       7.7     0  6813.1   1202.7    65.5
+     United Arab Emirates Viet Nam Yemen Other Markets Asia Europe Austria
+[1,]               1340.2    794.0   0.0              109.7 6931.2    91.3
+[2,]               1659.5    781.2   0.1               71.5 7373.9    77.4
+[3,]               1538.8    717.1   0.3               13.6 7666.3   104.5
+[4,]               1371.3    803.6   0.0                1.3 7204.6   100.8
+[5,]               1193.1    694.4   0.3                1.2 6825.8   104.3
+[6,]               1622.0    876.3   0.0                1.0 7162.9    89.6
+     Belarus Belgium Bulgaria Croatia Cyprus Czech Rep Denmark Estonia Finland
+[1,]     3.1   191.5      5.1     1.9    3.1     126.9   134.6    29.6    41.0
+[2,]     0.3   134.9      8.3     2.6    2.4     133.3    77.4     5.6    49.1
+[3,]     3.3   132.9     10.2     2.2    5.4     100.8   105.5    26.4    29.9
+[4,]     1.2   208.0      4.6     2.7    1.6     114.2    51.1     4.1    35.9
+[5,]     6.2   101.0      4.4     3.2    1.5     228.1    66.1    31.9    46.7
+[6,]     2.0   120.1      5.6     1.6    4.4     136.0    54.3    30.8    42.6
+     France Germany Greece Hungary Ireland Italy Latvia Lithuania Luxembourg
+[1,] 1248.2   902.9   21.3    45.4   327.0 636.0    1.4       7.8        3.4
+[2,] 1355.9  1108.3   43.7    56.7   449.3 633.1    2.0       9.3        3.0
+[3,] 1549.4  1070.4   12.0    59.9   494.0 671.4    1.9      11.7        3.2
+[4,] 1393.9  1103.5   13.3    48.3   199.9 644.9    3.8      10.8        1.4
+[5,] 1325.7  1081.3  134.6    59.6   502.2 603.3    2.1      10.1        4.2
+[6,] 1293.5  1163.3   96.1    48.0   302.6 597.7    1.8      11.2        2.8
+     Malta Netherlands Norway Poland Portugal Romania Russia Slovakia Slovenia
+[1,]  10.9       294.2   78.1   80.0     32.3    31.3  494.8     10.6      8.5
+[2,]  71.0       331.4   53.7   71.6     41.0    19.8  367.1     11.5      7.2
+[3,]  13.4       274.5   66.6   75.8     34.5    24.8  432.5     12.1      9.3
+[4,]  14.4       537.3   54.4   83.3     33.3    31.0  535.5      8.4      6.6
+[5,]  28.8       270.6   42.7   78.9     32.5    26.4  186.2     10.6      7.3
+[6,] 114.8       263.6   72.6   88.2     39.6    24.9  638.2     12.1      5.3
+     Spain Svalbard And Jan Mayen Islands Sweden Switzerland Ukraine
+[1,] 113.3                              0  132.8       725.1     3.2
+[2,] 179.5                              0  172.8       702.6    14.1
+[3,] 351.7                              0  123.9       684.6    11.4
+[4,] 124.2                              0  131.2       743.8     7.0
+[5,] 153.5                              0  147.8       571.3     3.2
+[6,] 307.4                              0  118.3       555.4     2.1
+     United Kingdom Other Markets Europe Oceania Antarctica Australia Fiji
+[1,]         1086.5                  8.1   666.1          0     574.5  0.6
+[2,]         1166.6                 11.6   751.8          0     671.1  0.4
+[3,]         1146.9                  9.2   404.5          0     338.7  0.2
+[4,]          940.7                  9.6  1097.3          0    1002.6  0.3
+[5,]          942.5                  6.9   566.9          0     449.6  0.8
+[6,]          905.9                 10.7  1003.6          0     909.9  0.1
+     French Polynesia Guam Marshall Islands New Caledonia New Zealand
+[1,]              0.0  0.0                0           0.0        80.3
+[2,]              2.5  0.0                0           0.4        60.0
+[3,]              0.0  0.0                0           0.0        55.7
+[4,]              0.0  1.0                0           0.5        64.9
+[5,]              0.2  0.1                0           0.1        97.6
+[6,]              0.1  0.0                0           0.1        71.2
+     Northern Mariana Islands Papua New Guinea Samoa Solomon Islands Vanuatu
+[1,]                      0.0             10.1   0.0             0.0     0.0
+[2,]                      0.0             15.5   0.0             0.1     0.1
+[3,]                      0.0              9.0   0.0             0.0     0.0
+[4,]                      0.0             27.7   0.0             0.0     0.0
+[5,]                      0.0             17.8   0.1             0.0     0.0
+[6,]                      0.5             20.8   0.0             0.0     0.0
+     Other Markets Oceania Africa Algeria Angola Benin Cameroon Cape Verde
+[1,]                   0.4  705.1     0.0   68.5     0     36.6        0.3
+[2,]                   1.7  414.7    19.7    0.0     0     15.0        0.0
+[3,]                   0.9  656.9    47.6  152.9     0      7.2        0.0
+[4,]                   0.3  751.9   117.5    0.5     0     16.5        0.2
+[5,]                   0.6  735.0     0.0  217.8     0     11.1        0.0
+[6,]                   0.9  440.6    17.6    0.0     0      7.3        0.0
+     Comoros Congo, Dem Rep Of Cote D'ivoire Djibouti Egypt Ethiopia Gabon
+[1,]     0.0              20.2           5.5      0.8  82.8      8.2   0.0
+[2,]     0.0               5.5           9.3      0.0   3.5      4.8   0.0
+[3,]     0.0               1.5          12.4      0.5  37.5     11.8   0.0
+[4,]     0.3               2.9          18.9      0.5   1.7     29.7   0.0
+[5,]     1.2               0.1          12.4      0.0  24.8      6.3   0.0
+[6,]     0.0               3.1          11.1      0.3   2.6      6.6   0.2
+     Ghana Guinea Kenya Liberia Libya Madagascar Mauritius Morocco Mozambique
+[1,]  18.2      0   1.6       0     0        2.8       0.6    18.5       14.4
+[2,]  12.8      0   1.3       0     0        2.2       1.0    23.9       89.0
+[3,]  24.7      0   1.3       0     0        2.0       0.9    15.9       59.8
+[4,]  14.0      0   0.8       0     0        0.5       0.7    15.3      130.6
+[5,]   6.0      0   0.6       0     0        2.6       0.4    19.6      141.7
+[6,]   6.9      0   0.8       0     0        1.0       0.4    18.4       59.9
+     Nigeria Reunion Seychelles Sierra Leone Somalia South Africa Sudan
+[1,]   118.9     0.0        0.1          0.0       0        103.5   0.0
+[2,]    72.3     0.0        0.1          0.0       0         40.1   0.0
+[3,]    17.2     0.0        0.0          0.2       0         51.2   0.0
+[4,]   183.7     0.2        0.1          0.0       0         88.1  42.4
+[5,]   160.0     3.5        0.0          0.0       0         44.7   0.0
+[6,]   132.5     0.0        0.3          0.0       0         45.1   0.0
+     Swaziland Tanzania Tunisia Zambia Zimbabwe Other Markets Africa
+[1,]       0.1      1.8    12.0   18.8      1.5                169.1
+[2,]       0.4     22.8    11.2    0.2      0.1                 79.4
+[3,]       0.0      4.1    12.0   23.6      1.2                171.4
+[4,]       0.0      0.5    12.0    0.0      1.4                 72.8
+[5,]       0.1      1.2     7.1    0.2      1.9                 71.4
+[6,]       1.9      1.5    11.8    0.6      1.2                109.6</code></pre>
+</div>
+</div>
+</section>
+<section id="converting-tibble-object-to-tsibbleobject" class="level3">
+<h3 class="anchored" data-anchor-id="converting-tibble-object-to-tsibbleobject"><strong>4.2.3&nbsp;Converting&nbsp;<code>tibble</code>&nbsp;object to&nbsp;<code>tsibble</code>object</strong></h3>
+<p>The code chunk below converting ts_data from tibble object into tsibble object by using&nbsp;<a href="https://tsibble.tidyverts.org/reference/as-tsibble.html"><code>as_tsibble()</code></a>&nbsp;of&nbsp;<strong>tsibble</strong>&nbsp;R package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ts_tsibble <span class="ot">&lt;-</span> ts_data <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">yearmonth</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> <span class="st">`</span><span class="at">Month</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What can we learn from the code chunk above? +&nbsp;<a href="https://r4va.netlify.app/chap19"><code>mutate()</code></a>&nbsp;of&nbsp;<strong>dplyr</strong>package is used to derive a new field by transforming the data values in Month-Year field into month-year format. The transformation is performed by using&nbsp;<a href="https://tsibble.tidyverts.org/reference/year-month.html"><code>yearmonth()</code></a>&nbsp;of&nbsp;<strong>tsibble</strong>&nbsp;package. +&nbsp;<a href="https://tsibble.tidyverts.org/reference/as-tibble.html"><code>as_tsibble()</code></a>&nbsp;is used to convert the tibble data frame into tsibble data frame.</p>
+</section>
+<section id="tsibble-object" class="level3">
+<h3 class="anchored" data-anchor-id="tsibble-object"><strong>4.2.4&nbsp;tsibble object</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ts_tsibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 265 x 162 [1M]
+   `Data Series`       `Total All Markets` America `Antigua And Barbuda`
+   &lt;dttm&gt;                            &lt;dbl&gt;   &lt;dbl&gt;                 &lt;dbl&gt;
+ 1 2003-01-01 00:00:00              18539.   2385.                     0
+ 2 2003-02-01 00:00:00              17163.   2755.                     0
+ 3 2003-03-01 00:00:00              20442.   3455.                     0
+ 4 2003-04-01 00:00:00              19325    2826.                     0
+ 5 2003-05-01 00:00:00              18136    2460.                     0
+ 6 2003-06-01 00:00:00              19774.   2853.                     0
+ 7 2003-07-01 00:00:00              19832.   2670.                     0
+ 8 2003-08-01 00:00:00              19534.   3088.                     0
+ 9 2003-09-01 00:00:00              20630.   3061.                     0
+10 2003-10-01 00:00:00              22247.   3430                      0
+# ℹ 255 more rows
+# ℹ 158 more variables: Argentina &lt;dbl&gt;, Bahamas &lt;dbl&gt;, Bermuda &lt;dbl&gt;,
+#   Brazil &lt;dbl&gt;, Canada &lt;dbl&gt;, Chile &lt;dbl&gt;, Colombia &lt;dbl&gt;,
+#   `Costa Rica` &lt;dbl&gt;, Cuba &lt;dbl&gt;, `Dominican Rep` &lt;dbl&gt;, Ecuador &lt;dbl&gt;,
+#   `El Salvador` &lt;dbl&gt;, Guatemala &lt;dbl&gt;, Guyana &lt;dbl&gt;, Honduras &lt;dbl&gt;,
+#   Jamaica &lt;dbl&gt;, Mexico &lt;dbl&gt;, `Netherlands Antilles` &lt;dbl&gt;, Panama &lt;dbl&gt;,
+#   Paraguay &lt;dbl&gt;, Peru &lt;dbl&gt;, `Puerto Rico` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="visualising-time-series-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-time-series-data"><strong>4.3&nbsp;Visualising Time-series Data</strong></h2>
+<p>In order to visualise the time-series data effectively, we need to organise the data frame from wide to long format by using&nbsp;<a href="https://tidyr.tidyverse.org/reference/pivot_longer.html"><code>pivot_longer()</code></a>&nbsp;of&nbsp;<strong>tidyr</strong>&nbsp;package as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ts_longer <span class="ot">&lt;-</span> ts_data <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">34</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Country"</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Trade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="visualising-single-time-series-ggplot2-methods" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-single-time-series-ggplot2-methods"><strong>4.3.1 Visualising single time-series: ggplot2 methods</strong></h3>
+<p>The code chunk below demonstrates how to visualize the&nbsp;<strong>trade trend of the United States</strong>&nbsp;over time using&nbsp;<code>ggplot2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"United States"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Trade))<span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This visualization provides&nbsp;<strong>insights into the trade volume fluctuations of the United States</strong>, helping to identify trends, seasonality, and any significant changes over time.</p>
+<p><strong>Interpretation</strong>: We observe an upward trend in import trade volume over time, although with considerable year-to-year volatility. The abrupt jumps and seasonal patterns indicate the influences of dynamics external to trade itself, such as global economic conditions, trade policies, and economic crises (e.g.&nbsp;COVID-19 influences on trade).</p>
+<p>More developed analysis to seasonal decomposition or time-series forecasting (ARIMA models) can be done for predicting the future trading and drivers causing such price variations.</p>
+</section>
+<section id="plotting-multiple-time-series-data-with-ggplot2-methods" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-multiple-time-series-data-with-ggplot2-methods"><strong>4.3.2&nbsp;Plotting multiple time-series data with ggplot2 methods</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ts_longer, </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Trade,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.box.spacing =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to provide effective comparison,&nbsp;<a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html"><code>facet_wrap()</code></a>&nbsp;of&nbsp;<strong>ggplot2</strong>package is used to create small multiple line graph also known as trellis plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ts_longer, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Trade)) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Country,  </span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">3</span>,   </span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span>  </span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="visual-analysis-of-time-series-data" class="level2">
+<h2 class="anchored" data-anchor-id="visual-analysis-of-time-series-data"><strong>4.4&nbsp;Visual Analysis of Time-series Data</strong></h2>
+<p>Time-series datasets often exhibit&nbsp;seasonal components, where patterns repeat periodically (e.g., monthly or yearly cycles). These cycles can sometimes&nbsp;obscure the underlying trend&nbsp;when forecasting but can also serve as a&nbsp;strong signal for predictive models.</p>
+<p>In this section, we explore&nbsp;how to identify seasonality&nbsp;in time-series data using functions from the&nbsp;feasts package.</p>
+<p>To effectively visualize time-series data, we first need to&nbsp;reshape the dataset&nbsp;from a&nbsp;wide format to a long format&nbsp;using the&nbsp;<code>pivot_longer()</code>&nbsp;function from the&nbsp;tidyr package, as demonstrated in the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>tsibble_longer <span class="ot">&lt;-</span> ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">34</span>),</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Country"</span>,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Trade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="visual-analysis-of-seasonality-with-seasonal-plot" class="level3">
+<h3 class="anchored" data-anchor-id="visual-analysis-of-seasonality-with-seasonal-plot"><strong>19.4.1&nbsp;Visual Analysis of Seasonality with Seasonal Plot</strong></h3>
+<p>A&nbsp;<strong>seasonal plot</strong>&nbsp;is similar to a time plot except that the data are plotted against the individual&nbsp;<strong>seasons</strong>&nbsp;in which the data were observed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>tsibble_longer <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>         Country <span class="sc">==</span> <span class="st">"China"</span> <span class="sc">|</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>         Country <span class="sc">==</span> <span class="st">"Malaysia"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_season</span>(Trade)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>tsibble_longer <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>         Country <span class="sc">==</span> <span class="st">"China"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(Trade) <span class="sc">+</span> </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Country <span class="sc">~</span> ., <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex2_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

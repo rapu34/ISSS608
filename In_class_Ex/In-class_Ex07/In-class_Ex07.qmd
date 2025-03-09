@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "In-class_Ex07"
 ---
 
 ```{r}
@@ -164,7 +164,7 @@ vietnam_ts <- tsibble_longer %>%
     "Hold-out", "Training"))
 
 vietnam_train <- vietnam_ts %>%
-  filter(`Month-Year` < "2019-01-01)
+  filter(`Month-Year` < "2019-01-01")
 ```
 
 ### **`Exploratory Data Analysis (EDA): Time Series Data`**
