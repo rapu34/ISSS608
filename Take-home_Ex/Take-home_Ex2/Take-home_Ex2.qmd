@@ -28,11 +28,11 @@ The data for this analysis is sourced from **Singapore’s Merchandise Trade by
 
 In this study, we examine three major datasets:
 
--   Total Merchandise Trade (2020-2024): Value of all imports and exports of goods at current prices, the monthly series measures long term trends in trade.
+-   **Total Merchandise Trade (2020-2024)**: Value of all imports and exports of goods at current prices, the monthly series measures long term trends in trade.
 
--   Non-Oil Domestic Exports (2024) — DATA Export data by major commodity sections excluding oil-related trade; Used to Study the Composition of Singapore’s Exports
+-   **Non-Oil Domestic Exports (2024)**: DATA Export data by major commodity sections excluding oil-related trade; Used to Study the Composition of Singapore’s Exports
 
--   Annual trade in services statistics until October 2023, with key trading partners and services transaction values for exports and imports
+-   **Overall Exports and Imports of Services (2020-2024):** Tracks the total value of traded services, offering insights into Singapore’s trade performance over the past five years.
 
 To ensure data clarity and accuracy, additional computed columns and non-relevant metadata were removed during preprocessing.
 
@@ -101,7 +101,7 @@ df_selected <- df_T1 %>%
 print(df_selected)
 ```
 
-## 2.4 Export Data
+## **2.4 Export Data**
 
 ```{r}
 file_path <- "outputFile-3.xlsx"
@@ -116,7 +116,7 @@ print(df_filtered)
 write_csv(df_filtered, "filtered_merchandise_trade.csv")
 ```
 
-## 2.5 Re-import Data for first Visualisation
+## **2.5 Re-import Data for first Visualisation**
 
 ```{r}
 library(readxl)
@@ -128,13 +128,13 @@ head(df)
 print(colnames(df))
 ```
 
-### 2.5.1 **Check missing values**
+### **2.5.1 Check missing values**
 
 ```{r}
 colSums(is.na(df))
 ```
 
-### 2.5.2 Data Preprocessing
+### **2.5.2 Data Preprocessing**
 
 ```{r}
 library(tidyverse)
@@ -167,7 +167,7 @@ The revised chart combines a stacked bar chart with trend lines to provide a cle
 
 The new visualization was created using **ggplot2** in R. **geom_bar()** was used for the stacked bars, while **geom_line()** and **geom_point()** were added to highlight trade trends. This method i
 
-### 3.1.2 Visualisation
+### **3.1.2 Visualisation**
 
 ```{r}
 df_long <- df %>%
@@ -207,7 +207,7 @@ p_interactive
 
 ![](images/clipboard-723475948.png){width="381"}
 
-#### **Current Chart Analysis Pros and Cons**
+### **Current Chart Analysis Pros and Cons**
 
 The original chart is ship-based infographic, so the idea of an export is visually intuitive. Different commodity categories are distinguished by unique icons and color-coded sections. However, the ratios of export values are not represented accurately and hence it is difficult to make comparisons. Label placement is also cluttered, making it non-readable.
 
@@ -253,7 +253,7 @@ treemap(data,
 
 ```
 
-## 3.3 Overall Exports and Imports of Services (2020-2024)
+## **3.3 Overall Exports and Imports of Services (2020-2024)**
 
 ![](images/clipboard-1418604782.png){width="464"}
 
