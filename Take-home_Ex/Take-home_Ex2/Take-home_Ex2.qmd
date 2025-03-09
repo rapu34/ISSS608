@@ -165,7 +165,7 @@ The revised chart combines a stacked bar chart with trend lines to provide a cle
 
 #### **Implementation**
 
-The new visualization was created using **ggplot2** in R. **geom_bar()** was used for the stacked bars, while **geom_line()** and **geom_point()** were added to highlight trade trends. This method i
+The new visualization was created using **ggplot2** in R. **geom_bar()** was used for the stacked bars, while **geom_line()** and **geom_point()** were added to highlight trade trends.
 
 ### **3.1.2 Visualisation**
 
@@ -444,10 +444,6 @@ ggplot(data = ts_longer,
 
 Time-series datasets often exhibit seasonal components, where patterns repeat periodically (e.g., monthly or yearly cycles). These cycles can sometimes obscure the underlying trend when forecasting but can also serve as a strong signal for predictive models.
 
-In this section, we explore how to identify seasonality in time-series data using functions from the feasts package.
-
-To effectively visualize time-series data, we first need to reshape the dataset from a wide format to a long format using the `pivot_longer()` function from the tidyr package, as demonstrated in the following code:
-
 ```{r}
 tsibble_longer <- ts_tsibble %>%
   pivot_longer(cols = c(2:34),
@@ -516,8 +512,8 @@ tsibble_longer %>%
 
 # **5. Conclusion**
 
-The restructuring of global trade, especially during the Trump era, has had a notable impact on Singapore’s trade with the U.S. Protectionist measures and configuration of supply chains have added to the volatility of trade flows during events such as COVID-19.
+The trade restructuring cum globalisation, especially against the backdrop of the Trump administration, has huge impact on Singapore trade with the U. Protectionist measures including increased tariffs and reconfiguration of supply chains are making trade flows more volatile, which has been exacerbated by external shocks like COVID-19.
 
-Over a longer period, the time series typically increases, but a time series analysis can also show seasonal behaviour and short-term deviations caused by external factors. The PACF analysis indicates strong correlations at shorter lags, consistent with the idea that previous trade volumes directly inform the trends in upcoming trades.
+While a time-series analysis shows a general upward trend in Singapore’s trade with the U.S. over the long term, there are also clear seasonal patterns and short-term fluctuations. STL decomposition highlights a recurrent seasonal cycle, indicating that trade volumes follow a predictable annual pattern. The PACF analysis shows strong correlations at shorter lags, reinforcing the idea that prior trade volumes significantly impact future trends. These findings suggest that Singapore’s trade performance remains highly sensitive to external economic conditions and policy changes.
 
-To remain resilient, Singapore must diversify trade partnerships and adapt policies to navigate uncertainties, ensuring sustainable growth in an evolving global trade landscape. 
+To build economic resilience, Singapore must diversify its trade relationships beyond its major trading partners, notably the United States. By diversifying its portfolio to more emerging markets and investing in high-value sectors including digital trade and financial services, Singapore should be able to solidify its comparative advantage. The factors influencing trade have shifted dramatically over the last 15 years or so, due to rapid advances in technology and changing worker demographics.
