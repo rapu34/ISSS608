@@ -44,12 +44,13 @@ website:
         href: In_class_Ex/In-class_Ex04/In-class_Ex04.html
       - text: "In-class Exercise 5, 15 feb 2025"
         href: In_class_Ex/In-class_Ex05/In-class_Ex05.html
+        
     - text: "Take-home Exercise"
       menu:
-      - text: "Take-home Exercise 1"
-        href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html
       - text: "Take-home Exercise 2"
-        href: Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html  
+        href: Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html
+      - text: "Take-home Exercise 1"
+        href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html  
     right:
       - href: index.qmd
         text: Home

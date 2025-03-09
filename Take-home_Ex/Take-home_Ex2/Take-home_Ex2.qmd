@@ -149,7 +149,7 @@ df_long <- df %>%
 print(df_long)
 ```
 
-# 3. Data Visualization
+# **3. Data Visualization**
 
 ## **3.1 Total Merchandise Trade at Current Prices, 2020 - 2024**
 
@@ -203,7 +203,7 @@ p_interactive
 
 ```
 
-## 3.2. Non-Oil domestic Exports by Major Commodity Sections, 2024
+## **3.2. Non-Oil domestic Exports by Major Commodity Sections, 2024**
 
 ![](images/clipboard-723475948.png){width="381"}
 
@@ -253,7 +253,7 @@ treemap(data,
 
 ```
 
-## **3.3** Overall Exports and Imports of Services (2020-2024)
+## 3.3 Overall Exports and Imports of Services (2020-2024)
 
 ![](images/clipboard-1418604782.png){width="464"}
 
