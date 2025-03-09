@@ -195,12 +195,8 @@ p <- ggplot(df_long, aes(x = Year, y = Total_Trade, fill = Category)) +
         legend.title = element_text(size = 12),  
         legend.text = element_text(size = 10))  
 
-# plotly를 사용하여 인터랙티브 그래프로 변환
 p_interactive <- ggplotly(p)
-
-# 인터랙티브 그래프 출력
 p_interactive
-
 ```
 
 ## **3.2. Non-Oil domestic Exports by Major Commodity Sections, 2024**
