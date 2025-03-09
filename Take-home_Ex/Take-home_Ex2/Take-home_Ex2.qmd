@@ -512,7 +512,7 @@ tsibble_longer %>%
 
 # **5. Conclusion**
 
-The trade restructuring cum globalisation, especially against the backdrop of the Trump administration, has huge impact on Singapore trade with the U. Protectionist measures including increased tariffs and reconfiguration of supply chains are making trade flows more volatile, which has been exacerbated by external shocks like COVID-19.
+The trade restructuring cum globalisation, especially against the backdrop of the Trump administration, has huge impact on Singapore trade. Protectionist measures including increased tariffs and reconfiguration of supply chains are making trade flows more volatile, which has been exacerbated by external shocks like COVID-19.
 
 While a time-series analysis shows a general upward trend in Singapore’s trade with the U.S. over the long term, there are also clear seasonal patterns and short-term fluctuations. STL decomposition highlights a recurrent seasonal cycle, indicating that trade volumes follow a predictable annual pattern. The PACF analysis shows strong correlations at shorter lags, reinforcing the idea that prior trade volumes significantly impact future trends. These findings suggest that Singapore’s trade performance remains highly sensitive to external economic conditions and policy changes.
 
