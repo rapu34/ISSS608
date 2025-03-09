@@ -1005,13 +1005,13 @@
     "href": "Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html#time-series-decomposition",
     "title": "Take-home Exercise 2",
     "section": "4.5 Time series decomposition",
-    "text": "4.5 Time series decomposition\n\ntsibble_longer %&gt;%\n  filter(`Country` == \"United States\") %&gt;%\n  PACF(Trade) %&gt;% \n  autoplot()\n\n\n\n\n\n\n\n\n\nPartial Autocorrelation Function (PACF) Plot\n\nThe PACF plot shows significant spikes at lag 1 and lag 2, indicating that the previous month’s trade values strongly influence the current month’s trade volume.\nA gradual decline in PACF suggests the potential need for an AR(1) or AR(2) component in an ARIMA model.\nThe presence of seasonal lags (e.g., around lag 12) suggests a possible yearly seasonality effect in trade data."
+    "text": "4.5 Time series decomposition\n\n4.5.1 Single time series decomposition\n\ntsibble_longer %&gt;%\n  filter(`Country` == \"United States\") %&gt;%\n  PACF(Trade) %&gt;% \n  autoplot()\n\n\n\n\n\n\n\n\nInterpretation:\n\nThe PACF plot shows significant spikes at lag 1 and lag 2, indicating that the previous month’s trade values strongly influence the current month’s trade volume.\nA gradual decline in PACF suggests the potential need for an AR(1) or AR(2) component in an ARIMA model.\nThe presence of seasonal lags (e.g., around lag 12) suggests a possible yearly seasonality effect in trade data."
   },
   {
     "objectID": "Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html#visual-stl-diagnostics",
     "href": "Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html#visual-stl-diagnostics",
     "title": "Take-home Exercise 2",
-    "section": "19.6 Visual STL Diagnostics",
-    "text": "19.6 Visual STL Diagnostics\n\ntsibble_longer %&gt;%\n  filter(`Country` == \"United States\") %&gt;%\n  model(stl = STL(Trade)) %&gt;%\n  components() %&gt;%\n  autoplot()\n\n\n\n\n\n\n\n\n\nThe trend component shows a long-term increasing trend, with notable fluctuations over the years.\nThe seasonal component reveals a consistent repeating pattern, indicating that trade volume follows a predictable seasonal cycle each year.\nThe remainder component represents unexplained variations (residuals), with some spikes likely due to external economic events or policy changes affecting trade."
+    "section": "4.6 Visual STL Diagnostics",
+    "text": "4.6 Visual STL Diagnostics\n\ntsibble_longer %&gt;%\n  filter(`Country` == \"United States\") %&gt;%\n  model(stl = STL(Trade)) %&gt;%\n  components() %&gt;%\n  autoplot()\n\n\n\n\n\n\n\n\nInterpretation:\n\nThe trend component shows a long-term increasing trend, with notable fluctuations over the years.\nThe seasonal component reveals a consistent repeating pattern, indicating that trade volume follows a predictable seasonal cycle each year.\nThe remainder component represents unexplained variations (residuals), with some spikes likely due to external economic events or policy changes affecting trade."
   }
 ]

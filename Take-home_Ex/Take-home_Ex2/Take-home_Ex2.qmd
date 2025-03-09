@@ -515,3 +515,9 @@ tsibble_longer %>%
 -   The remainder component represents unexplained variations (residuals), with some spikes likely due to external economic events or policy changes affecting trade.
 
 # **5. Conclusion**
+
+The restructuring of global trade, especially during the Trump era, has had a notable impact on Singapore’s trade with the U.S. Protectionist measures and configuration of supply chains have added to the volatility of trade flows during events such as COVID-19.
+
+Over a longer period, the time series typically increases, but a time series analysis can also show seasonal behaviour and short-term deviations caused by external factors. The PACF analysis indicates strong correlations at shorter lags, consistent with the idea that previous trade volumes directly inform the trends in upcoming trades.
+
+To remain resilient, Singapore must diversify trade partnerships and adapt policies to navigate uncertainties, ensuring sustainable growth in an evolving global trade landscape. 
