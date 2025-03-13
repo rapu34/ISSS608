@@ -227,9 +227,9 @@ Notice that the planning subzones are shared according to the respective depende
 To add the boundary of the planning subzones, tm_borders will be used as shown in the code chunk below.
 
 ```{r}
-tm_shape(mpsz_pop2020)+
+tm_shape(mpsz_pop2020) +
   tm_fill("DEPENDENCY") +
-  tm_borders(lwd = 0.1,  alpha = 1)
+  tm_borders(lwd = 0.1, fill_alpha = 1) 
 ```
 
 ### **15.4.3 Data classification methods of tmap**
