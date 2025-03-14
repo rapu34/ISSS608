@@ -50,6 +50,8 @@ website:
         href: In_class_Ex/In-class_Ex04/In-class_Ex04.html
       - text: "In-class Exercise 5, 15 feb 2025"
         href: In_class_Ex/In-class_Ex05/In-class_Ex05.html
+      - text: "In-class Exercise 7"
+        href: In_class_Ex/In-class_Ex07/In-class_Ex07.html
         
     - text: "Take-home Exercise"
       menu:
