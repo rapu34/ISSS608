@@ -42,7 +42,7 @@ website:
       - text: "Hands-on Exercise 17"
         href: Hands-on_Ex/Hands_on_Ex17/Hands-On_Ex17.html
       - text: "Hands-on Exercise 18"
-        href: Hands-on_Ex/Hands_on_Ex18/Hands-On_Ex18.html
+        href: Hands-on_Ex/Hands_on_Ex18/Hands-on_Ex18.html
  
     - text: "In-class Exercise"
       menu:
@@ -61,7 +61,7 @@ website:
         href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html
       - text: "Take-home Exercise 2"
         href: Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html
-    
+        
     
     right:
       - href: index.qmd
