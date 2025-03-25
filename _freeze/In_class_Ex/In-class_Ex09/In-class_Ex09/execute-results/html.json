@@ -1,0 +1,15 @@
+{
+  "hash": "9dea1a893cefc05e37a9abe07c61a6c4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-class_Ex09\"\nauthor: \"Jeounghyun Kim\"\ndate-modified: \"last-modified\" \nexecute:\n  echo: true\n  eval: true\n  warning: false\n  freeze: true\n---\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(igraph, tidygraph, ggraph, \n               visNetwork, lubridate, clock,\n               tidyverse, graphlayouts)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nGAStech_nodes <- read_csv(\"data/GAStech_email_node.csv\")\nGAStech_edges <- read_csv(\"data/GAStech_email_edge-v2.csv\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
