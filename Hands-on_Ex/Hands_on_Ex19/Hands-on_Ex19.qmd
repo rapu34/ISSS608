@@ -465,5 +465,3 @@ reactable(
   )
 )
 ```
-
-## **31.8 Reference**
