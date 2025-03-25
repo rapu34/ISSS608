@@ -19,7 +19,7 @@ By the end of this hands-on exercise, you will be able to:
 
 -   build industry standard dashboard by using R Shiny.
 
-## **31.2 Getting started**
+## **19.2 Getting started**
 
 For the purpose of this hands-on exercise, the following R packages will be used.
 
@@ -248,7 +248,7 @@ report %>%
     decimals = 2)
 ```
 
-### **31.6.3 Combining the data.frame**
+### **19.6.3 Combining the data.frame**
 
 Next, use the code chunk below to add the statistics on the table.
 
@@ -272,7 +272,7 @@ sales <- report %>%
 sales_data = left_join(sales, spark)
 ```
 
-### **31.6.4 Plotting the updated data.table**
+### **19.6.4 Plotting the updated data.table**
 
 ```{r}
 sales_data %>%
