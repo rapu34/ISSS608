@@ -16,11 +16,11 @@ execute:
 
 This project focuses on analyzing road accident data in Thailand from 2019 to 2022. With thousands of incidents recorded across various provinces, weather conditions, vehicle types, and times of day, the goal is to gain meaningful insights into when and where fatal accidents are more likely to occur.
 
-The analysis combines **exploratory visualizations** with a **predictive model** to understand patterns and estimate the number of fatalities under different accident scenarios. A final prototype in the form of a **Shiny app** was developed to allow interactive simulations of fatality risk.
+The analysis combines exploratory visualizations with a predictive model to understand patterns and estimate the number of fatalities under different accident scenarios. A final prototype in the form of a Shiny app was developed to allow interactive simulations of fatality risk.
 
 ## 2. Objective
 
-The main objective of this exercise is to build a **standalone predictive module** that takes user input — such as location, time, weather, and vehicle type — and returns an estimate of the expected number of fatalities using Poisson regression.
+The main objective of this exercise is to build a standalone predictive module that takes user input — such as location, time, weather, and vehicle type — and returns an estimate of the expected number of fatalities using Poisson regression.
 
 In addition, the project aims to:
 
@@ -263,7 +263,7 @@ accident_data %>%
 
 ### 4.5 Predictive Modeling using Poisson Regression
 
-This section presents a predictive model built using **Poisson regression**, which is suitable for modeling count-based target variables like the number of fatalities. The model is trained using key accident-related factors to estimate expected fatalities under a given scenario.
+This section presents a predictive model built using Poisson regression, which is suitable for modeling count-based target variables like the number of fatalities. The model is trained using key accident-related factors to estimate expected fatalities under a given scenario.
 
 ```{r}
 # Load dataset and preprocess
