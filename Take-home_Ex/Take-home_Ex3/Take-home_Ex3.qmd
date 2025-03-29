@@ -157,7 +157,7 @@ province_summary <- accident_data %>%
 
 ```
 
-In this step, I calculated the **mean number of fatalities per province** and manually assigned latitude and longitude values for selected provinces. This allowed accurate placement of markers on the map.
+In this step, I calculated the mean number of fatalities per province and manually assigned latitude and longitude values for selected provinces. This allowed accurate placement of markers on the map.
 
 #### 4.1.2 Step 2: Create Interactive Heatmap
 
@@ -223,9 +223,9 @@ accident_data %>%
 
 ### 4.3 Average Fatalities by Hour and Day
 
-This line plot shows how the average number of fatalities varies throughout the day across different days of the week. By incorporating both **hour of day** and **day of week**, the visualization uncovers temporal patterns that may be linked to traffic volume, human behavior, or policy enforcement timing.
+This line plot shows how the average number of fatalities varies throughout the day across different days of the week. By incorporating both hour of day and day of week, the visualization uncovers temporal patterns that may be linked to traffic volume, human behavior, or policy enforcement timing.
 
-We can observe two main peaks in the evening hours (around **18:00 to 21:00**), especially on weekends, which may reflect higher accident risks due to **increased social activity or fatigue**. The early morning hours also show relatively higher fatality rates on certain days.
+We can observe two main peaks in the evening hours (around 18:00 to 21:00), especially on weekends, which may reflect higher accident risks due to increased social activity or fatigue. The early morning hours also show relatively higher fatality rates on certain days.
 
 ```{r}
 accident_data %>%
@@ -246,7 +246,7 @@ accident_data %>%
 
 This chart highlights the average number of fatalities per accident across different types of road users. By examining which categories are associated with higher fatality rates, we can better understand vulnerable road user groups and inform safety measures.
 
-The bar chart below shows the **top 10 vehicle types** (including pedestrians) with the highest average fatalities. Notably, **pedestrians** and **bicycle-related incidents** are among the most fatal on average.
+The bar chart below shows the top 10 vehicle types (including pedestrians) with the highest average fatalities. Notably, pedestrians and bicycle-related incidents are among the most fatal on average.
 
 ```{r}
 accident_data %>%
@@ -270,8 +270,6 @@ accident_data %>%
 This section presents a predictive model built using **Poisson regression**, which is suitable for modeling count-based target variables like the number of fatalities. The model is trained using key accident-related factors to estimate expected fatalities under a given scenario.
 
 ```{r}
-library(tidyverse)
-
 # Load dataset and preprocess
 accident_data <- read_csv("data/thai_road_accident_2019_2022.csv", show_col_types = FALSE) %>%
   mutate(
