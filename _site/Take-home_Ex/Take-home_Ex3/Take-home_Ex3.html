@@ -472,78 +472,74 @@ $ slope_description           &lt;chr&gt; "no slope", "no slope", "slope area", 
 <section id="step-1-prepare-summary-data-with-coordinates" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-prepare-summary-data-with-coordinates">4.1.1 Step 1: Prepare Summary Data with Coordinates</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate average fatalities per province</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>province_summary <span class="ot">&lt;-</span> accident_data <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(province_en) <span class="sc">%&gt;%</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_fatalities =</span> <span class="fu">mean</span>(number_of_fatalities),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add lat/lon for each province</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Bangkok"</span> <span class="sc">~</span> <span class="fl">13.7563</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chiang Mai"</span> <span class="sc">~</span> <span class="fl">18.7883</span>,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Phuket"</span> <span class="sc">~</span> <span class="fl">7.8804</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Udon Thani"</span> <span class="sc">~</span> <span class="fl">17.4138</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Khon Kaen"</span> <span class="sc">~</span> <span class="fl">16.4419</span>,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Nakhon Ratchasima"</span> <span class="sc">~</span> <span class="fl">14.9799</span>,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chon Buri"</span> <span class="sc">~</span> <span class="fl">13.3611</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Songkhla"</span> <span class="sc">~</span> <span class="fl">7.1897</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Bangkok"</span> <span class="sc">~</span> <span class="fl">100.5018</span>,</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chiang Mai"</span> <span class="sc">~</span> <span class="fl">98.9853</span>,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Phuket"</span> <span class="sc">~</span> <span class="fl">98.3923</span>,</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Udon Thani"</span> <span class="sc">~</span> <span class="fl">102.7859</span>,</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Khon Kaen"</span> <span class="sc">~</span> <span class="fl">102.8350</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Nakhon Ratchasima"</span> <span class="sc">~</span> <span class="fl">102.0977</span>,</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chon Buri"</span> <span class="sc">~</span> <span class="fl">100.9847</span>,</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Songkhla"</span> <span class="sc">~</span> <span class="fl">100.5954</span>,</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(lat, lon) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate average fatalities per province</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>province_summary <span class="ot">&lt;-</span> accident_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(province_en) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_fatalities =</span> <span class="fu">mean</span>(number_of_fatalities),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add lat/lon for each province</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Bangkok"</span> <span class="sc">~</span> <span class="fl">13.7563</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chiang Mai"</span> <span class="sc">~</span> <span class="fl">18.7883</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Phuket"</span> <span class="sc">~</span> <span class="fl">7.8804</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Udon Thani"</span> <span class="sc">~</span> <span class="fl">17.4138</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Khon Kaen"</span> <span class="sc">~</span> <span class="fl">16.4419</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Nakhon Ratchasima"</span> <span class="sc">~</span> <span class="fl">14.9799</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chon Buri"</span> <span class="sc">~</span> <span class="fl">13.3611</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Songkhla"</span> <span class="sc">~</span> <span class="fl">7.1897</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Bangkok"</span> <span class="sc">~</span> <span class="fl">100.5018</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chiang Mai"</span> <span class="sc">~</span> <span class="fl">98.9853</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Phuket"</span> <span class="sc">~</span> <span class="fl">98.3923</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Udon Thani"</span> <span class="sc">~</span> <span class="fl">102.7859</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Khon Kaen"</span> <span class="sc">~</span> <span class="fl">102.8350</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Nakhon Ratchasima"</span> <span class="sc">~</span> <span class="fl">102.0977</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chon Buri"</span> <span class="sc">~</span> <span class="fl">100.9847</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Songkhla"</span> <span class="sc">~</span> <span class="fl">100.5954</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(lat, lon) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In this step, I calculated the&nbsp;<strong>mean number of fatalities per province</strong>&nbsp;and manually assigned latitude and longitude values for selected provinces. This allowed accurate placement of markers on the map.</p>
+<p>In this step, I calculated the&nbsp;mean number of fatalities per province&nbsp;and manually assigned latitude and longitude values for selected provinces. This allowed accurate placement of markers on the map.</p>
 </section>
 <section id="step-2-create-interactive-heatmap" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-create-interactive-heatmap">4.1.2 Step 2: Create Interactive Heatmap</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">colorNumeric</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Reds"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">domain =</span> province_summary<span class="sc">$</span>avg_fatalities</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(province_summary) <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>lon, <span class="sc">~</span>lat,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="sc">~</span><span class="fu">sqrt</span>(avg_fatalities) <span class="sc">*</span> <span class="dv">50</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span><span class="fu">pal</span>(avg_fatalities),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.8</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;strong&gt;"</span>, province_en, <span class="st">"&lt;/strong&gt;&lt;br&gt;"</span>,</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Avg Fatalities: "</span>, <span class="fu">round</span>(avg_fatalities, <span class="dv">2</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bottomright"</span>,</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">pal =</span> pal,</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="sc">~</span>avg_fatalities,</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Avg Fatalities"</span>,</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">colorNumeric</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Reds"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">domain =</span> province_summary<span class="sc">$</span>avg_fatalities</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(province_summary) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>lon, <span class="sc">~</span>lat,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="sc">~</span><span class="fu">sqrt</span>(avg_fatalities) <span class="sc">*</span> <span class="dv">50</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span><span class="fu">pal</span>(avg_fatalities),</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.8</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;strong&gt;"</span>, province_en, <span class="st">"&lt;/strong&gt;&lt;br&gt;"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Avg Fatalities: "</span>, <span class="fu">round</span>(avg_fatalities, <span class="dv">2</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bottomright"</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">pal =</span> pal,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="sc">~</span>avg_fatalities,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Avg Fatalities"</span>,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-1545e80c518123d3e299" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-1545e80c518123d3e299">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[13.7563,18.7883,13.3611,16.4419,14.9799,7.8804,7.1897,17.4138],[100.5018,98.9853,100.9847,102.835,102.0977,98.39230000000001,100.5954,102.7859],[7.022029542614047,15.60820567944456,10.70908334169723,23.35258309598535,18.48219661164738,14.43375672974065,18.90589805632103,25.95939258582424],null,null,{"interactive":true,"className":"","stroke":false,"color":["#FFF5F0","#FDA78A","#FEE3D7","#BD151A","#FC7554","#FCBA9F","#FB6C4C","#67000D"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#FFF5F0","#FDA78A","#FEE3D7","#BD151A","#FC7554","#FCBA9F","#FB6C4C","#67000D"],"fillOpacity":0.8},null,null,["<strong>Bangkok<\/strong><br>Avg Fatalities: 0.02","<strong>Chiang Mai<\/strong><br>Avg Fatalities: 0.1","<strong>Chon Buri<\/strong><br>Avg Fatalities: 0.05","<strong>Khon Kaen<\/strong><br>Avg Fatalities: 0.22","<strong>Nakhon Ratchasima<\/strong><br>Avg Fatalities: 0.14","<strong>Phuket<\/strong><br>Avg Fatalities: 0.08","<strong>Songkhla<\/strong><br>Avg Fatalities: 0.14","<strong>Udon Thani<\/strong><br>Avg Fatalities: 0.27"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#FFF5F0 , #FEE1D3 12.1186973609593%, #FDA486 32.1321090837645%, #F96345 52.1455208065696%, #D32120 72.1589325293748%, #8D0812 92.17234425218%, #67000D "],"labels":["0.05","0.10","0.15","0.20","0.25"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"numeric","title":"Avg Fatalities","extra":{"p_1":0.1211869736095934,"p_n":0.9217234425217996},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[7.1897,18.7883],"lng":[98.39230000000001,102.835]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-77b6ce6118374d8597f8" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-77b6ce6118374d8597f8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[13.7563,18.7883,13.3611,16.4419,14.9799,7.8804,7.1897,17.4138],[100.5018,98.9853,100.9847,102.835,102.0977,98.39230000000001,100.5954,102.7859],[7.022029542614047,15.60820567944456,10.70908334169723,23.35258309598535,18.48219661164738,14.43375672974065,18.90589805632103,25.95939258582424],null,null,{"interactive":true,"className":"","stroke":false,"color":["#FFF5F0","#FDA78A","#FEE3D7","#BD151A","#FC7554","#FCBA9F","#FB6C4C","#67000D"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#FFF5F0","#FDA78A","#FEE3D7","#BD151A","#FC7554","#FCBA9F","#FB6C4C","#67000D"],"fillOpacity":0.8},null,null,["<strong>Bangkok<\/strong><br>Avg Fatalities: 0.02","<strong>Chiang Mai<\/strong><br>Avg Fatalities: 0.1","<strong>Chon Buri<\/strong><br>Avg Fatalities: 0.05","<strong>Khon Kaen<\/strong><br>Avg Fatalities: 0.22","<strong>Nakhon Ratchasima<\/strong><br>Avg Fatalities: 0.14","<strong>Phuket<\/strong><br>Avg Fatalities: 0.08","<strong>Songkhla<\/strong><br>Avg Fatalities: 0.14","<strong>Udon Thani<\/strong><br>Avg Fatalities: 0.27"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#FFF5F0 , #FEE1D3 12.1186973609593%, #FDA486 32.1321090837645%, #F96345 52.1455208065696%, #D32120 72.1589325293748%, #8D0812 92.17234425218%, #67000D "],"labels":["0.05","0.10","0.15","0.20","0.25"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"numeric","title":"Avg Fatalities","extra":{"p_1":0.1211869736095934,"p_n":0.9217234425217996},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[7.1897,18.7883],"lng":[98.39230000000001,102.835]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -583,8 +579,8 @@ $ slope_description           &lt;chr&gt; "no slope", "no slope", "slope area", 
 </section>
 <section id="average-fatalities-by-hour-and-day" class="level3">
 <h3 class="anchored" data-anchor-id="average-fatalities-by-hour-and-day">4.3 Average Fatalities by Hour and Day</h3>
-<p>This line plot shows how the average number of fatalities varies throughout the day across different days of the week. By incorporating both&nbsp;<strong>hour of day</strong>&nbsp;and&nbsp;<strong>day of week</strong>, the visualization uncovers temporal patterns that may be linked to traffic volume, human behavior, or policy enforcement timing.</p>
-<p>We can observe two main peaks in the evening hours (around&nbsp;<strong>18:00 to 21:00</strong>), especially on weekends, which may reflect higher accident risks due to&nbsp;<strong>increased social activity or fatigue</strong>. The early morning hours also show relatively higher fatality rates on certain days.</p>
+<p>This line plot shows how the average number of fatalities varies throughout the day across different days of the week. By incorporating both&nbsp;hour of day&nbsp;and&nbsp;day of week, the visualization uncovers temporal patterns that may be linked to traffic volume, human behavior, or policy enforcement timing.</p>
+<p>We can observe two main peaks in the evening hours (around&nbsp;18:00 to 21:00), especially on weekends, which may reflect higher accident risks due to&nbsp;increased social activity or fatigue. The early morning hours also show relatively higher fatality rates on certain days.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day_of_week, hour) <span class="sc">%&gt;%</span></span>
@@ -609,7 +605,7 @@ $ slope_description           &lt;chr&gt; "no slope", "no slope", "slope area", 
 <section id="average-fatalities-by-road-user-type" class="level3">
 <h3 class="anchored" data-anchor-id="average-fatalities-by-road-user-type">4.4 Average Fatalities by Road User Type</h3>
 <p>This chart highlights the average number of fatalities per accident across different types of road users. By examining which categories are associated with higher fatality rates, we can better understand vulnerable road user groups and inform safety measures.</p>
-<p>The bar chart below shows the&nbsp;<strong>top 10 vehicle types</strong>&nbsp;(including pedestrians) with the highest average fatalities. Notably,&nbsp;<strong>pedestrians</strong>&nbsp;and&nbsp;<strong>bicycle-related incidents</strong>&nbsp;are among the most fatal on average.</p>
+<p>The bar chart below shows the&nbsp;top 10 vehicle types&nbsp;(including pedestrians) with the highest average fatalities. Notably,&nbsp;pedestrians&nbsp;and&nbsp;bicycle-related incidents&nbsp;are among the most fatal on average.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vehicle_type) <span class="sc">%&gt;%</span></span>
@@ -637,24 +633,22 @@ $ slope_description           &lt;chr&gt; "no slope", "no slope", "slope area", 
 <h3 class="anchored" data-anchor-id="predictive-modeling-using-poisson-regression">4.5 Predictive Modeling using Poisson Regression</h3>
 <p>This section presents a predictive model built using&nbsp;<strong>Poisson regression</strong>, which is suitable for modeling count-based target variables like the number of fatalities. The model is trained using key accident-related factors to estimate expected fatalities under a given scenario.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset and preprocess</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>accident_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/thai_road_accident_2019_2022.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">incident_datetime =</span> <span class="fu">as.POSIXct</span>(incident_datetime),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">weekdays</span>(incident_datetime),</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">hour =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(incident_datetime, <span class="st">"%H"</span>))</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(number_of_fatalities, province_en, vehicle_type,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>          weather_condition, number_of_vehicles_involved,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          day_of_week, hour) <span class="sc">%&gt;%</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">province_en =</span> <span class="fu">factor</span>(province_en),</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">vehicle_type =</span> <span class="fu">factor</span>(vehicle_type),</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">weather_condition =</span> <span class="fu">factor</span>(weather_condition),</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">factor</span>(day_of_week)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset and preprocess</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>accident_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/thai_road_accident_2019_2022.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">incident_datetime =</span> <span class="fu">as.POSIXct</span>(incident_datetime),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">weekdays</span>(incident_datetime),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">hour =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(incident_datetime, <span class="st">"%H"</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(number_of_fatalities, province_en, vehicle_type,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>          weather_condition, number_of_vehicles_involved,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>          day_of_week, hour) <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">province_en =</span> <span class="fu">factor</span>(province_en),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">vehicle_type =</span> <span class="fu">factor</span>(vehicle_type),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">weather_condition =</span> <span class="fu">factor</span>(weather_condition),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">factor</span>(day_of_week)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="train-model" class="level4">
 <h4 class="anchored" data-anchor-id="train-model">4.5.1 Train Model</h4>
@@ -777,7 +771,7 @@ Note
 <li><p>Risk summary text (relative to overall average)</p></li>
 <li><p>Bar chart: predicted value vs.&nbsp;overall average</p></li>
 </ul>
-<p><img src="images/clipboard-1002224488.png" class="img-fluid"></p>
+<p><img src="images/clipboard-1426362403.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="appendix" class="level2">
