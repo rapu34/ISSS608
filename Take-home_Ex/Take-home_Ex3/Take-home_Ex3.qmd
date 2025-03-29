@@ -405,7 +405,7 @@ This Shiny application provides an interactive interface for users to estimate t
 
 -   Bar chart: predicted value vs. overall average
 
-![](images/clipboard-1002224488.png)
+![](images/clipboard-1426362403.png)
 
 ## 8. Appendix
 
