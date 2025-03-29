@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeounghyun Kim">
+<meta name="dcterms.date" content="2025-03-29">
+
+<title>Take-home_Ex3 – ISSS608 Coursework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="../../site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608 Coursework</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex01/Hands-On_Ex01.html">
+ <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex02/Hands-On_Ex02.html">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex03/Hands-On_Ex03.html">
+ <span class="dropdown-text">Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex04/Hands-On_Ex04.html">
+ <span class="dropdown-text">Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex05/Hands-On_Ex05.html">
+ <span class="dropdown-text">Hands-on Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex06/Hands-On_Ex06.html">
+ <span class="dropdown-text">Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex07/Hands-On_Ex07.html">
+ <span class="dropdown-text">Hands-on Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex08/Hands-On_Ex08.html">
+ <span class="dropdown-text">Hands-on Exercise 8</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex09/Hands-On_Ex09.html">
+ <span class="dropdown-text">Hands-on Exercise 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex10/Hands-On_Ex10.html">
+ <span class="dropdown-text">Hands-on Exercise 10</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex11/Hands-On_Ex11.html">
+ <span class="dropdown-text">Hands-on Exercise 11</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex12/Hands-On_Ex12.html">
+ <span class="dropdown-text">Hands-on Exercise 12</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex13/Hands-On_Ex13.html">
+ <span class="dropdown-text">Hands-on Exercise 13</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex14/Hands-On_Ex14.html">
+ <span class="dropdown-text">Hands-on Exercise 14</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex15/Hands-On_Ex15.html">
+ <span class="dropdown-text">Hands-on Exercise 15</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex16/Hands-On_Ex16.html">
+ <span class="dropdown-text">Hands-on Exercise 16</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex17/Hands-On_Ex17.html">
+ <span class="dropdown-text">Hands-on Exercise 17</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex18/Hands-On_Ex18.html">
+ <span class="dropdown-text">Hands-on Exercise 18</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands_on_Ex19/Hands-On_Ex19.html">
+ <span class="dropdown-text">Hands-on Exercise 19</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex1.html">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex04/In-class_Ex04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex05/In-class_Ex05.html">
+ <span class="dropdown-text">In-class Exercise 5, 15 feb 2025</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex07/In-class_Ex07.html">
+ <span class="dropdown-text">In-class Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_class_Ex/In-class_Ex09/In-class_Ex09.html">
+ <span class="dropdown-text">In-class Exercise 9</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex3/Take-home_Ex3.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#thailand-road-accidents-visual-exploration-and-predictive-modeling" id="toc-thailand-road-accidents-visual-exploration-and-predictive-modeling" class="nav-link active" data-scroll-target="#thailand-road-accidents-visual-exploration-and-predictive-modeling">Thailand Road Accidents: Visual Exploration and Predictive Modeling</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1. Overview</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">2. Objective</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">3. Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">3.2 Data Source</a></li>
+  <li><a href="#data-overview-pre-processing" id="toc-data-overview-pre-processing" class="nav-link" data-scroll-target="#data-overview-pre-processing">3.3 Data Overview &amp; Pre-processing</a></li>
+  <li><a href="#pre-processing" id="toc-pre-processing" class="nav-link" data-scroll-target="#pre-processing">3.2 Pre-processing</a></li>
+  </ul></li>
+  <li><a href="#thailand-road-accidents-visual-exploration-and-predictive-modeling-1" id="toc-thailand-road-accidents-visual-exploration-and-predictive-modeling-1" class="nav-link" data-scroll-target="#thailand-road-accidents-visual-exploration-and-predictive-modeling-1">4. Thailand Road Accidents: Visual Exploration and Predictive Modeling</a>
+  <ul class="collapse">
+  <li><a href="#heatmap-of-average-fatalities-by-province" id="toc-heatmap-of-average-fatalities-by-province" class="nav-link" data-scroll-target="#heatmap-of-average-fatalities-by-province">4.1 Heatmap of Average Fatalities by Province</a></li>
+  <li><a href="#average-fatalities-by-day-of-week" id="toc-average-fatalities-by-day-of-week" class="nav-link" data-scroll-target="#average-fatalities-by-day-of-week">4.2 Average Fatalities by Day of Week</a></li>
+  <li><a href="#average-fatalities-by-hour-and-day" id="toc-average-fatalities-by-hour-and-day" class="nav-link" data-scroll-target="#average-fatalities-by-hour-and-day">4.3 Average Fatalities by Hour and Day</a></li>
+  <li><a href="#average-fatalities-by-road-user-type" id="toc-average-fatalities-by-road-user-type" class="nav-link" data-scroll-target="#average-fatalities-by-road-user-type">4.4 Average Fatalities by Road User Type</a></li>
+  <li><a href="#predictive-modeling-using-poisson-regression" id="toc-predictive-modeling-using-poisson-regression" class="nav-link" data-scroll-target="#predictive-modeling-using-poisson-regression">4.5 Predictive Modeling using Poisson Regression</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">5. Key Takeaways</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">6. Future Work</a></li>
+  <li><a href="#prototype-design-shiny-app-predictive-analysis-module" id="toc-prototype-design-shiny-app-predictive-analysis-module" class="nav-link" data-scroll-target="#prototype-design-shiny-app-predictive-analysis-module">7. Prototype Design (Shiny App – Predictive Analysis Module)</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">8. Appendix</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take-home_Ex3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeounghyun Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 29, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 30, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="thailand-road-accidents-visual-exploration-and-predictive-modeling" class="level2">
+<h2 class="anchored" data-anchor-id="thailand-road-accidents-visual-exploration-and-predictive-modeling">Thailand Road Accidents: Visual Exploration and Predictive Modeling</h2>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1. Overview</h2>
+<p>This project focuses on analyzing road accident data in Thailand from 2019 to 2022. With thousands of incidents recorded across various provinces, weather conditions, vehicle types, and times of day, the goal is to gain meaningful insights into when and where fatal accidents are more likely to occur.</p>
+<p>The analysis combines&nbsp;<strong>exploratory visualizations</strong>&nbsp;with a&nbsp;<strong>predictive model</strong>&nbsp;to understand patterns and estimate the number of fatalities under different accident scenarios. A final prototype in the form of a&nbsp;<strong>Shiny app</strong>&nbsp;was developed to allow interactive simulations of fatality risk.</p>
+</section>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">2. Objective</h2>
+<p>The main objective of this exercise is to build a&nbsp;<strong>standalone predictive module</strong>&nbsp;that takes user input — such as location, time, weather, and vehicle type — and returns an estimate of the expected number of fatalities using Poisson regression.</p>
+<p>In addition, the project aims to:</p>
+<ul>
+<li><p>Explore temporal and regional patterns of accidents using visual analytics</p></li>
+<li><p>Identify high-risk vehicle types and conditions</p></li>
+<li><p>Develop a user-friendly interface to simulate and visualize fatality predictions</p></li>
+</ul>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">3. Data Preparation</h2>
+<p>Used the following R packages in this project and loaded them using the&nbsp;<code>pacman::p_load()</code>&nbsp;function for convenience:</p>
+<ul>
+<li><p><strong>shiny</strong>: For building interactive web applications.</p></li>
+<li><p><strong>tidyverse</strong>: A collection of packages for data wrangling and visualization, including&nbsp;<code>dplyr</code>,&nbsp;<code>ggplot2</code>, and&nbsp;<code>readr</code>.</p></li>
+<li><p><strong>leaflet</strong>: To build interactive geospatial heatmaps for province-level accident data.</p></li>
+<li><p><strong><code>ggplot2</code></strong>&nbsp;for visual summaries</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(shiny, tidyverse, leaflet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+<section id="data-source" class="level3">
+<h3 class="anchored" data-anchor-id="data-source">3.2 Data Source</h3>
+<p>The dataset was originally collected from&nbsp;<a href="https://www.kaggle.com/datasets/thaweewatboy/thailand-road-accident-2019-2022/data">Kaggle</a>, which compiles official accident data released by Thai government agencies. It contains accident records between 2019 and 2022, including variables such as:</p>
+<ul>
+<li><code>province_en</code>: Province where the accident occurred</li>
+</ul>
+<!-- -->
+<ul>
+<li><p><code>vehicle_type</code>: Type of vehicle involved</p></li>
+<li><p><code>weather_condition</code>: Weather at the time of the accident</p></li>
+<li><p><code>incident_datetime</code>: Timestamp of the incident</p></li>
+<li><p><code>number_of_vehicles_involved</code>: Total number of vehicles</p></li>
+<li><p><code>number_of_fatalities</code>: Fatalities resulting from the accident</p></li>
+</ul>
+</section>
+<section id="data-overview-pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-overview-pre-processing">3.3 Data Overview &amp; Pre-processing</h3>
+<section id="import-data" class="level4">
+<h4 class="anchored" data-anchor-id="import-data">3.3.1Import Data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/thai_road_accident_2019_2022.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-overview" class="level4">
+<h4 class="anchored" data-anchor-id="data-overview">3.3.2 Data Overview</h4>
+<p>This output from&nbsp;<code>glimpse(accident_data)</code>&nbsp;provides a summary of the dataset’s structure, offering an overview of the number of rows, columns, and the types of variables included.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(accident_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 81,735
+Columns: 18
+$ acc_code                    &lt;dbl&gt; 571905, 3790870, 599075, 571924, 599523, 5…
+$ incident_datetime           &lt;dttm&gt; 2019-01-01 00:00:00, 2019-01-01 00:03:00,…
+$ report_datetime             &lt;dttm&gt; 2019-01-02 06:11:00, 2020-02-20 13:48:00,…
+$ province_th                 &lt;chr&gt; "ลพบุรี", "อุบลราชธานี", "ประจวบคีรีขันธ์", "เชียงใ…
+$ province_en                 &lt;chr&gt; "Loburi", "Ubon Ratchathani", "Prachuap Kh…
+$ agency                      &lt;chr&gt; "department of rural roads", "department o…
+$ route                       &lt;chr&gt; "แยกทางหลวงหมายเลข 21 (กม.ที่ 31+000) - บ้านวั…
+$ vehicle_type                &lt;chr&gt; "motorcycle", "private/passenger car", "mo…
+$ presumed_cause              &lt;chr&gt; "driving under the influence of alcohol", …
+$ accident_type               &lt;chr&gt; "other", "rollover/fallen on straight road…
+$ number_of_vehicles_involved &lt;dbl&gt; 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, …
+$ number_of_fatalities        &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 1, 3, 0, 0, 1, 0, 0, …
+$ number_of_injuries          &lt;dbl&gt; 2, 2, 0, 1, 0, 2, 2, 0, 0, 1, 1, 0, 1, 1, …
+$ weather_condition           &lt;chr&gt; "clear", "clear", "clear", "clear", "clear…
+$ latitude                    &lt;dbl&gt; 14.959105, 15.210738, 12.374259, 18.601721…
+$ longitude                   &lt;dbl&gt; 100.87346, 104.86269, 99.90795, 98.80420, …
+$ road_description            &lt;chr&gt; "straight road", "straight road", "wide cu…
+$ slope_description           &lt;chr&gt; "no slope", "no slope", "slope area", "no …</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="pre-processing" class="level3">
+<h3 class="anchored" data-anchor-id="pre-processing">3.2 Pre-processing</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/thai_road_accident_2019_2022.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">incident_datetime =</span> <span class="fu">as.POSIXct</span>(incident_datetime),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">weekdays</span>(incident_datetime),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hour =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(incident_datetime, <span class="st">"%H"</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(number_of_fatalities, province_en, vehicle_type,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>          weather_condition, number_of_vehicles_involved,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>          day_of_week, hour) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">province_en =</span> <span class="fu">factor</span>(province_en),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">vehicle_type =</span> <span class="fu">factor</span>(vehicle_type),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">weather_condition =</span> <span class="fu">factor</span>(weather_condition),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">factor</span>(day_of_week)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I converted the timestamp to POSIXct format and extracted&nbsp;<code>day_of_week</code>&nbsp;and&nbsp;<code>hour</code>&nbsp;for temporal analysis. Then, I removed rows with missing values in key variables and converted categorical fields to factors for modeling compatibility.</p>
+</section>
+</section>
+<section id="thailand-road-accidents-visual-exploration-and-predictive-modeling-1" class="level2">
+<h2 class="anchored" data-anchor-id="thailand-road-accidents-visual-exploration-and-predictive-modeling-1">4. Thailand Road Accidents: Visual Exploration and Predictive Modeling</h2>
+<section id="heatmap-of-average-fatalities-by-province" class="level3">
+<h3 class="anchored" data-anchor-id="heatmap-of-average-fatalities-by-province">4.1 Heatmap of Average Fatalities by Province</h3>
+<p>To explore the&nbsp;geographic distribution of road accident severity, I created a heatmap that visualizes the&nbsp;average number of fatalities per province&nbsp;in Thailand. This visualization helps highlight provinces with higher fatality rates, allowing for better understanding of regional accident patterns.</p>
+<p>The heatmap was built using the&nbsp;<code>leaflet</code>&nbsp;package. Provinces are represented by circular markers, where:</p>
+<ul>
+<li><p><strong>Radius</strong>&nbsp;indicates the magnitude of average fatalities (larger circle = higher fatality).</p></li>
+<li><p><strong>Color intensity</strong>&nbsp;(from light to dark red) represents the severity.</p></li>
+<li><p><strong>Interactive popups</strong>&nbsp;provide province names and average fatality values.</p></li>
+</ul>
+<section id="step-1-prepare-summary-data-with-coordinates" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-prepare-summary-data-with-coordinates">4.1.1 Step 1: Prepare Summary Data with Coordinates</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate average fatalities per province</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>province_summary <span class="ot">&lt;-</span> accident_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(province_en) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_fatalities =</span> <span class="fu">mean</span>(number_of_fatalities),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add lat/lon for each province</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Bangkok"</span> <span class="sc">~</span> <span class="fl">13.7563</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chiang Mai"</span> <span class="sc">~</span> <span class="fl">18.7883</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Phuket"</span> <span class="sc">~</span> <span class="fl">7.8804</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Udon Thani"</span> <span class="sc">~</span> <span class="fl">17.4138</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Khon Kaen"</span> <span class="sc">~</span> <span class="fl">16.4419</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Nakhon Ratchasima"</span> <span class="sc">~</span> <span class="fl">14.9799</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chon Buri"</span> <span class="sc">~</span> <span class="fl">13.3611</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Songkhla"</span> <span class="sc">~</span> <span class="fl">7.1897</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Bangkok"</span> <span class="sc">~</span> <span class="fl">100.5018</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chiang Mai"</span> <span class="sc">~</span> <span class="fl">98.9853</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Phuket"</span> <span class="sc">~</span> <span class="fl">98.3923</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Udon Thani"</span> <span class="sc">~</span> <span class="fl">102.7859</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Khon Kaen"</span> <span class="sc">~</span> <span class="fl">102.8350</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Nakhon Ratchasima"</span> <span class="sc">~</span> <span class="fl">102.0977</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Chon Buri"</span> <span class="sc">~</span> <span class="fl">100.9847</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>      province_en <span class="sc">==</span> <span class="st">"Songkhla"</span> <span class="sc">~</span> <span class="fl">100.5954</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(lat, lon) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this step, I calculated the&nbsp;<strong>mean number of fatalities per province</strong>&nbsp;and manually assigned latitude and longitude values for selected provinces. This allowed accurate placement of markers on the map.</p>
+</section>
+<section id="step-2-create-interactive-heatmap" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-create-interactive-heatmap">4.1.2 Step 2: Create Interactive Heatmap</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">colorNumeric</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Reds"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">domain =</span> province_summary<span class="sc">$</span>avg_fatalities</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># visualization</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(province_summary) <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>lon, <span class="sc">~</span>lat,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="sc">~</span><span class="fu">sqrt</span>(avg_fatalities) <span class="sc">*</span> <span class="dv">50</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span><span class="fu">pal</span>(avg_fatalities),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.8</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;strong&gt;"</span>, province_en, <span class="st">"&lt;/strong&gt;&lt;br&gt;"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Avg Fatalities: "</span>, <span class="fu">round</span>(avg_fatalities, <span class="dv">2</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bottomright"</span>,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">pal =</span> pal,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="sc">~</span>avg_fatalities,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Avg Fatalities"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-62e9cf14a3643275a45d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-62e9cf14a3643275a45d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[13.7563,18.7883,13.3611,16.4419,14.9799,7.8804,7.1897,17.4138],[100.5018,98.9853,100.9847,102.835,102.0977,98.39230000000001,100.5954,102.7859],[7.022029542614047,15.60820567944456,10.70908334169723,23.35258309598535,18.48219661164738,14.43375672974065,18.90589805632103,25.95939258582424],null,null,{"interactive":true,"className":"","stroke":false,"color":["#FFF5F0","#FDA78A","#FEE3D7","#BD151A","#FC7554","#FCBA9F","#FB6C4C","#67000D"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#FFF5F0","#FDA78A","#FEE3D7","#BD151A","#FC7554","#FCBA9F","#FB6C4C","#67000D"],"fillOpacity":0.8},null,null,["<strong>Bangkok<\/strong><br>Avg Fatalities: 0.02","<strong>Chiang Mai<\/strong><br>Avg Fatalities: 0.1","<strong>Chon Buri<\/strong><br>Avg Fatalities: 0.05","<strong>Khon Kaen<\/strong><br>Avg Fatalities: 0.22","<strong>Nakhon Ratchasima<\/strong><br>Avg Fatalities: 0.14","<strong>Phuket<\/strong><br>Avg Fatalities: 0.08","<strong>Songkhla<\/strong><br>Avg Fatalities: 0.14","<strong>Udon Thani<\/strong><br>Avg Fatalities: 0.27"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#FFF5F0 , #FEE1D3 12.1186973609593%, #FDA486 32.1321090837645%, #F96345 52.1455208065696%, #D32120 72.1589325293748%, #8D0812 92.17234425218%, #67000D "],"labels":["0.05","0.10","0.15","0.20","0.25"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"numeric","title":"Avg Fatalities","extra":{"p_1":0.1211869736095934,"p_n":0.9217234425217996},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[7.1897,18.7883],"lng":[98.39230000000001,102.835]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="average-fatalities-by-day-of-week" class="level3">
+<h3 class="anchored" data-anchor-id="average-fatalities-by-day-of-week">4.2 Average Fatalities by Day of Week</h3>
+<p>To explore potential&nbsp;temporal patterns&nbsp;in road fatalities, I analyzed the average number of deaths by&nbsp;day of the week. This visualization helps identify whether weekends or weekdays are more prone to severe accidents.</p>
+<p>The chart below shows that&nbsp;Sunday and Saturday&nbsp;have relatively higher average fatalities, suggesting increased risk during weekends—likely due to higher traffic volumes or longer travel distances during leisure periods.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="ot">&lt;-</span> accident_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">incident_datetime =</span> <span class="fu">as.POSIXct</span>(incident_datetime),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">weekdays</span>(incident_datetime),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hour =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(incident_datetime, <span class="st">"%H"</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(number_of_fatalities, province_en, vehicle_type,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>          weather_condition, number_of_vehicles_involved,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>          day_of_week, hour)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Average Fatalities by Day of Week</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>accident_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day_of_week) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fatalities =</span> <span class="fu">mean</span>(number_of_fatalities), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> day_of_week, <span class="at">y =</span> avg_fatalities, <span class="at">fill =</span> day_of_week)) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Fatalities by Day of Week"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Day of Week"</span>, <span class="at">y =</span> <span class="st">"Average Fatalities"</span>) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="average-fatalities-by-hour-and-day" class="level3">
+<h3 class="anchored" data-anchor-id="average-fatalities-by-hour-and-day">4.3 Average Fatalities by Hour and Day</h3>
+<p>This line plot shows how the average number of fatalities varies throughout the day across different days of the week. By incorporating both&nbsp;<strong>hour of day</strong>&nbsp;and&nbsp;<strong>day of week</strong>, the visualization uncovers temporal patterns that may be linked to traffic volume, human behavior, or policy enforcement timing.</p>
+<p>We can observe two main peaks in the evening hours (around&nbsp;<strong>18:00 to 21:00</strong>), especially on weekends, which may reflect higher accident risks due to&nbsp;<strong>increased social activity or fatigue</strong>. The early morning hours also show relatively higher fatality rates on certain days.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day_of_week, hour) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fatalities =</span> <span class="fu">mean</span>(number_of_fatalities), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> avg_fatalities, <span class="at">color =</span> day_of_week)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Fatalities by Hour and Day"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Hour of Day"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Fatalities"</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="average-fatalities-by-road-user-type" class="level3">
+<h3 class="anchored" data-anchor-id="average-fatalities-by-road-user-type">4.4 Average Fatalities by Road User Type</h3>
+<p>This chart highlights the average number of fatalities per accident across different types of road users. By examining which categories are associated with higher fatality rates, we can better understand vulnerable road user groups and inform safety measures.</p>
+<p>The bar chart below shows the&nbsp;<strong>top 10 vehicle types</strong>&nbsp;(including pedestrians) with the highest average fatalities. Notably,&nbsp;<strong>pedestrians</strong>&nbsp;and&nbsp;<strong>bicycle-related incidents</strong>&nbsp;are among the most fatal on average.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>accident_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vehicle_type) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_fatalities =</span> <span class="fu">mean</span>(number_of_fatalities), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(avg_fatalities, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span>  <span class="co"># Select top 10 for better readability</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(vehicle_type, avg_fatalities), <span class="at">y =</span> avg_fatalities, <span class="at">fill =</span> vehicle_type)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Fatalities by Road User Type"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Vehicle Type"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Fatalities"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="predictive-modeling-using-poisson-regression" class="level3">
+<h3 class="anchored" data-anchor-id="predictive-modeling-using-poisson-regression">4.5 Predictive Modeling using Poisson Regression</h3>
+<p>This section presents a predictive model built using&nbsp;<strong>Poisson regression</strong>, which is suitable for modeling count-based target variables like the number of fatalities. The model is trained using key accident-related factors to estimate expected fatalities under a given scenario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dataset and preprocess</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>accident_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/thai_road_accident_2019_2022.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">incident_datetime =</span> <span class="fu">as.POSIXct</span>(incident_datetime),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">weekdays</span>(incident_datetime),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">hour =</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(incident_datetime, <span class="st">"%H"</span>))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(number_of_fatalities, province_en, vehicle_type,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>          weather_condition, number_of_vehicles_involved,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          day_of_week, hour) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">province_en =</span> <span class="fu">factor</span>(province_en),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">vehicle_type =</span> <span class="fu">factor</span>(vehicle_type),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">weather_condition =</span> <span class="fu">factor</span>(weather_condition),</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">day_of_week =</span> <span class="fu">factor</span>(day_of_week)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="train-model" class="level4">
+<h4 class="anchored" data-anchor-id="train-model">4.5.1 Train Model</h4>
+<p>To estimate the number of fatalities, I trained a Poisson regression model using the&nbsp;<code>glm()</code>&nbsp;function. The target variable is&nbsp;<code>number_of_fatalities</code>, and the predictors include location, vehicle type, weather, time, and number of vehicles involved.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(number_of_fatalities <span class="sc">~</span> province_en <span class="sc">+</span> vehicle_type <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>               weather_condition <span class="sc">+</span> day_of_week <span class="sc">+</span> hour <span class="sc">+</span> number_of_vehicles_involved,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> <span class="fu">poisson</span>(), <span class="at">data =</span> accident_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="scenario-prediction-and-interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="scenario-prediction-and-interpretation">4.5.2 Scenario Prediction and Interpretation</h4>
+<p>A hypothetical accident scenario is created using the following values:</p>
+<ul>
+<li><p>Province: Bangkok</p></li>
+<li><p>Vehicle Type: Private/Passenger Car</p></li>
+<li><p>Weather: Clear</p></li>
+<li><p>Day: Monday</p></li>
+<li><p>Hour: 14</p></li>
+<li><p>Number of Vehicles Involved: 2</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">province_en =</span> <span class="fu">factor</span>(<span class="st">"Bangkok"</span>, <span class="at">levels =</span> <span class="fu">levels</span>(accident_data<span class="sc">$</span>province_en)),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vehicle_type =</span> <span class="fu">factor</span>(<span class="st">"private/passenger car"</span>, <span class="at">levels =</span> <span class="fu">levels</span>(accident_data<span class="sc">$</span>vehicle_type)),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weather_condition =</span> <span class="fu">factor</span>(<span class="st">"clear"</span>, <span class="at">levels =</span> <span class="fu">levels</span>(accident_data<span class="sc">$</span>weather_condition)),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">day_of_week =</span> <span class="fu">factor</span>(<span class="st">"Monday"</span>, <span class="at">levels =</span> <span class="fu">levels</span>(accident_data<span class="sc">$</span>day_of_week)),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">hour =</span> <span class="dv">14</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">number_of_vehicles_involved =</span> <span class="dv">2</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> newdata, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>avg_pred <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">predict</span>(model, <span class="at">type =</span> <span class="st">"response"</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred <span class="sc">&gt;</span> avg_pred, <span class="st">"higher than"</span>, <span class="st">"lower than"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>summary_text <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Predicted: "</span>, <span class="fu">round</span>(pred, <span class="dv">3</span>),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                       <span class="st">" ("</span>, comparison, <span class="st">" avg: "</span>, <span class="fu">round</span>(avg_pred, <span class="dv">3</span>), <span class="st">")"</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>summary_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Predicted: 0.017 (lower than avg: 0.146)"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The model returns an estimated fatality count for the defined scenario and compares it with the overall average. The result allows the user to understand whether this scenario poses a higher or lower risk compared to typical cases.</p>
+</div>
+</div>
+</section>
+<section id="visualizing-the-prediction" class="level4">
+<h4 class="anchored" data-anchor-id="visualizing-the-prediction">4.5.3 Visualizing the Prediction</h4>
+<p>The chart below compares the predicted value for the given scenario against the overall average:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bar_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Scenario =</span> <span class="fu">c</span>(<span class="st">"This Scenario"</span>, <span class="st">"Overall Avg"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(pred, avg_pred)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bar_data, <span class="fu">aes</span>(<span class="at">x =</span> Scenario, <span class="at">y =</span> Value, <span class="at">fill =</span> Scenario)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fatality Prediction vs Overall Average"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Estimated Fatalities"</span>, <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"This Scenario"</span> <span class="ot">=</span> <span class="st">"firebrick"</span>, <span class="st">"Overall Avg"</span> <span class="ot">=</span> <span class="st">"gray"</span>)) <span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fu">max</span>(<span class="dv">1</span>, pred, avg_pred) <span class="sc">*</span> <span class="fl">1.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The model estimates approximately&nbsp;0.017 fatalities&nbsp;for this situation, which is&nbsp;lower than the overall average of 0.146 across all accidents.</p>
+<p>This suggests that the specified conditions (time, location, weather, and vehicle type) are relatively&nbsp;less severe&nbsp;compared to other combinations observed in the dataset. It demonstrates the model’s capability to provide data-driven risk estimation under customized inputs.</p>
+</section>
+</section>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">5. Key Takeaways</h2>
+<ul>
+<li><p>Predictive model provides interpretable results based on user input</p></li>
+<li><p>Visual context improves understanding of scenario-based risks</p></li>
+<li><p>Shiny allows for fast prototyping and feedback-driven development</p></li>
+</ul>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">6. Future Work</h2>
+<ul>
+<li><p>Integrate module into full team project</p></li>
+<li><p>Extend model to include severity levels or accident types</p></li>
+<li><p>Refine geospatial accuracy for heatmap with real coordinates</p></li>
+</ul>
+</section>
+<section id="prototype-design-shiny-app-predictive-analysis-module" class="level2">
+<h2 class="anchored" data-anchor-id="prototype-design-shiny-app-predictive-analysis-module">7. Prototype Design (Shiny App – Predictive Analysis Module)</h2>
+<p>This Shiny application provides an interactive interface for users to estimate the expected number of fatalities under different traffic accident scenarios using a trained Poisson regression model.</p>
+<section id="inputs" class="level4">
+<h4 class="anchored" data-anchor-id="inputs"><strong>Inputs</strong></h4>
+<ul>
+<li><p>Province</p></li>
+<li><p>Vehicle Type</p></li>
+<li><p>Weather Condition</p></li>
+<li><p>Day of Week</p></li>
+<li><p>Hour</p></li>
+<li><p>Number of Vehicles Involved</p></li>
+</ul>
+</section>
+<section id="outputs" class="level4">
+<h4 class="anchored" data-anchor-id="outputs"><strong>Outputs</strong></h4>
+<ul>
+<li><p>Predicted fatality count</p></li>
+<li><p>Risk summary text (relative to overall average)</p></li>
+<li><p>Bar chart: predicted value vs.&nbsp;overall average</p></li>
+</ul>
+<p><img src="images/clipboard-1002224488.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">8. Appendix</h2>
+<ul>
+<li><p><strong>Reference Dashboards and Storyboards</strong></p>
+<ul>
+<li><p><a href="https://giniceseah.netlify.app/posts/2021-07-31-storyboard/">Storyboard Example – Airline Stock Market Analysis</a></p></li>
+<li><p><a href="https://habaritanzania.netlify.app/analysis/decision_tree">Predictive Modeling – Road Accidents in Tanzania</a></p></li>
+<li><p><a href="https://isss608-ay2024-25jan.netlify.app/vaproject">ISSS608 Visual Analytics Project Gallery (AY2024/25 Jan)</a></p></li>
+</ul></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

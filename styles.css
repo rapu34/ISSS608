@@ -1,1 +1,28 @@
 /* css styles */
+/* 네비게이션 바 배경 */
+.navbar {
+  background-color: #3BAFDA !important;
+}
+
+/* 네비게이션 바 글자색 */
+.navbar a {
+  color: white !important;
+}
+
+/* 드롭다운 메뉴 배경 */
+.dropdown-menu {
+  background-color: white !important;
+}
+
+/* 드롭다운 항목 글자색 */
+.dropdown-item,
+.dropdown-menu a {
+  color: black !important;
+}
+
+/* 드롭다운 항목 hover 효과 */
+.dropdown-item:hover,
+.dropdown-menu a:hover {
+  background-color: #e0e0e0 !important;
+  color: black !important;
+}
