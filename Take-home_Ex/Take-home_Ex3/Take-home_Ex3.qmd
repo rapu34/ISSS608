@@ -43,7 +43,10 @@ Used the following R packages in this project and loaded them using the `pacman
 -   **`ggplot2`** for visual summaries
 
     ```{r}
-    pacman::p_load(shiny, tidyverse, leaflet)
+    #| echo: false
+    #| message: false
+    #| warning: false
+    pacman::p_load(shiny, tidyverse, leaflet, gglopt2)
     ```
 
 ### 3.2 Data Source
@@ -378,6 +381,17 @@ This suggests that the specified conditions (time, location, weather, and vehicl
 ## 7. Prototype Design (Shiny App – Predictive Analysis Module)
 
 This Shiny application provides an interactive interface for users to estimate the expected number of fatalities under different traffic accident scenarios using a trained Poisson regression model.
+
+The following R packages from CRAN are required to build and run this Shiny application module:
+
+-   **shiny**: For building the interactive web application
+-   **tidyverse**: A collection of packages used for data manipulation and visualization, including `dplyr`, `ggplot2`, and `readr`
+
+All packages are supported by CRAN and can be installed via:
+
+::: callout-note
+install.packages(c("shiny", "tidyverse"))
+:::
 
 #### **Inputs**
 
