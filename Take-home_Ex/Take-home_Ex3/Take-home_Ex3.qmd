@@ -1,5 +1,5 @@
 ---
-title: "Take-home_Ex3"
+title: "Take-home_Exercise 3"
 author: "Jeounghyun Kim"
 date: "March 29, 2025"
 date-modified: "last-modified"
