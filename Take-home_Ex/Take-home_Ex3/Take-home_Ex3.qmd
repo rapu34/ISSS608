@@ -40,13 +40,11 @@ Used the following R packages in this project and loaded them using the `pacman
 
 -   **leaflet**: To build interactive geospatial heatmaps for province-level accident data.
 
--   **`ggplot2`** for visual summaries
-
     ```{r}
     #| echo: false
     #| message: false
     #| warning: false
-    pacman::p_load(shiny, tidyverse, leaflet, gglopt2)
+    pacman::p_load(shiny, tidyverse, leaflet)
     ```
 
 ### 3.2 Data Source
