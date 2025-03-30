@@ -191,9 +191,9 @@ leaflet(province_summary) %>%
 
 ### 4.2 Average Fatalities by Day of Week
 
-To explore potential temporal patterns in road fatalities, I analyzed the average number of deaths by day of the week. This visualization helps identify whether weekends or weekdays are more prone to severe accidents.
-
-The chart below shows that Sunday and Saturday have relatively higher average fatalities, suggesting increased risk during weekends—likely due to higher traffic volumes or longer travel distances during leisure periods.
+To verify potential temporal patterns in road fatalities, I plotted the average fatalities by day of the week. The graph shows if weekends or weekdays are more prone to fatal accidents. \
+\
+The chart below shows that Sunday and Saturday have relatively higher average fatalities, which suggests heightened danger during weekends—likely due to higher traffic volume or longer travel distance during leisure times.
 
 ```{r}
 accident_data <- accident_data %>%
@@ -219,9 +219,9 @@ accident_data %>%
 
 ### 4.3 Average Fatalities by Hour and Day
 
-This line plot shows how the average number of fatalities varies throughout the day across different days of the week. By incorporating both hour of day and day of week, the visualization uncovers temporal patterns that may be linked to traffic volume, human behavior, or policy enforcement timing.
+This line plot shows how the average number of fatalities varies throughout the day for each day of the week. By incorporating both dayof week and hour of day, the graph shows temporal patterns that canbe linked to traffic volume, human activity, or enforcement time of regulations.
 
-We can observe two main peaks in the evening hours (around 18:00 to 21:00), especially on weekends, which may reflect higher accident risks due to increased social activity or fatigue. The early morning hours also show relatively higher fatality rates on certain days.
+We can observe two main peaks in the evening (around 18:00 to 21:00), especially on weekends, which may reflect higher accident risk due to increased social activity or tiredness. Early morning hours also show relatively higher fatalities on certain days.
 
 ```{r}
 accident_data %>%
@@ -240,9 +240,9 @@ accident_data %>%
 
 ### 4.4 Average Fatalities by Road User Type
 
-This chart highlights the average number of fatalities per accident across different types of road users. By examining which categories are associated with higher fatality rates, we can better understand vulnerable road user groups and inform safety measures.
+This chart shows the average number of fatalities per crash by roaduser type. By examining which groups have more fatalities, we can determine vulnerable road user groups and direct safety measures.
 
-The bar chart below shows the top 10 vehicle types (including pedestrians) with the highest average fatalities. Notably, pedestrians and bicycle-related incidents are among the most fatal on average.
+The following bar chart shows the top 10 vehicle types (including pedestrians) with the highest average fatalities. Notably, pedestrians and bicycle crashes are among the most fatal on average.
 
 ```{r}
 accident_data %>%
@@ -263,7 +263,7 @@ accident_data %>%
 
 ### 4.5 Predictive Modeling using Poisson Regression
 
-This section presents a predictive model built using Poisson regression, which is suitable for modeling count-based target variables like the number of fatalities. The model is trained using key accident-related factors to estimate expected fatalities under a given scenario.
+This part builds a predictive model based on Poisson regressionsuitable for count target variables like the number of fatalities. It trains the model on significant accident variables to estimate expected fatalities in a given situation.
 
 ```{r}
 # Load dataset and preprocess
