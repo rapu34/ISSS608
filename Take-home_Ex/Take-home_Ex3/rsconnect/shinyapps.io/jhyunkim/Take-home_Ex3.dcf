@@ -1,0 +1,12 @@
+name: Take-home_Ex3
+title: Take-home_Ex3
+username: jhyunkim
+account: jhyunkim
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14431628
+bundleId: 10060632
+url: https://jhyunkim.shinyapps.io/Take-home_Ex3/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

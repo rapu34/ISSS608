@@ -3,7 +3,6 @@ library(shiny)
 library(tidyverse)
 library(leaflet)
 
-# 데이터 불러오기 및 전처리
 accident_data <- read_csv("data/thai_road_accident_2019_2022.csv", show_col_types = FALSE) %>%
   mutate(
     incident_datetime = as.POSIXct(incident_datetime),
@@ -12,7 +11,8 @@ accident_data <- read_csv("data/thai_road_accident_2019_2022.csv", show_col_type
   ) %>%
   drop_na(number_of_fatalities, province_en, vehicle_type,
           weather_condition, number_of_vehicles_involved,
-          day_of_week, hour)
+          day_of_week, hour) %>%
+  filter(province_en != "unknown")
 
 # UI 구성
 ui <- navbarPage("Thailand Road Accident Analytics",
@@ -63,13 +63,11 @@ ui <- navbarPage("Thailand Road Accident Analytics",
 # Server
 server <- function(input, output) {
   
-  # Poisson Regression 모델
   model <- glm(number_of_fatalities ~ province_en + vehicle_type +
                  weather_condition + day_of_week + hour +
                  number_of_vehicles_involved,
                family = poisson(), data = accident_data)
   
-  # 예측값 텍스트 출력
   output$prediction <- renderText({
     newdata <- data.frame(
       province_en = input$province,
@@ -83,7 +81,6 @@ server <- function(input, output) {
     paste0("Estimated fatalities: ", round(pred, 3))
   })
   
-  # 예측 vs 평균 비교 barplot
   output$riskPlot <- renderPlot({
     newdata <- data.frame(
       province_en = input$province,
@@ -116,7 +113,6 @@ server <- function(input, output) {
     }
   })
   
-  # 예측값 요약 텍스트
   output$riskSummary <- renderText({
     newdata <- data.frame(
       province_en = input$province,
@@ -138,7 +134,6 @@ server <- function(input, output) {
            " the overall average (", round(avg_pred, 3), ").")
   })
   
-  # 전체 평균 사망자 트렌드 (현재 선택한 hour 강조)
   output$trendPlot <- renderPlot({
     trend_data <- accident_data %>%
       group_by(day_of_week, hour) %>%
@@ -153,7 +148,6 @@ server <- function(input, output) {
       theme_minimal(base_size = 14)
   })
   
-  # 요일별 평균
   output$byDayPlot <- renderPlot({
     accident_data %>%
       group_by(day_of_week) %>%
@@ -164,7 +158,6 @@ server <- function(input, output) {
       theme_minimal(base_size = 14)
   })
   
-  # 차량 유형별 평균
   output$byVehiclePlot <- renderPlot({
     accident_data %>%
       group_by(vehicle_type) %>%
@@ -176,7 +169,6 @@ server <- function(input, output) {
       coord_flip()
   })
   
-  # Province Heatmap (초기 중심 설정 및 위험도 색상 설정)
   output$provinceMap <- renderLeaflet({
     province_summary <- accident_data %>%
       group_by(province_en) %>%
@@ -203,5 +195,4 @@ server <- function(input, output) {
   })
 }
 
-# 앱 실행
 shinyApp(ui = ui, server = server)
