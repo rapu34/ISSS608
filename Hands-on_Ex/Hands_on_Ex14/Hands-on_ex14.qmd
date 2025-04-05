@@ -355,7 +355,7 @@ By the end of this section, you will be able to:
 -   Effectively communicate insights using visualizations.
 
 ```{r}
-str(Vietnam$month)  # month 변수가 factor인지 확인
+# str(Vietnam$month)  
 
 ```
 
